@@ -5,13 +5,14 @@ const themeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('dbz');
+  const [difficulty, setDifficulty] = useState('Standard');
 
   const contextValue = useMemo(
     () => ({
-        theme, setTheme
+        theme, setTheme, difficulty, setDifficulty
     }),
     [
-        theme, setTheme
+        theme, setTheme, difficulty, setDifficulty
     ]
   );
 

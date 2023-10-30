@@ -3,9 +3,7 @@ import themeContext from '../Contexts/themeContext'
 import Player from '../components/Player';
 
 function Home() {
-    const {theme} = useContext(themeContext);
-
-    console.log("theme dans home :", theme)
+    const {theme, difficulty} = useContext(themeContext);
 
   return (
     <body className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:h-[calc(100vh-40px)]'>
@@ -13,7 +11,9 @@ function Home() {
           <header className='text-center w-full -mt-2'>
             <h1 className='text-3xl font-bold'>Magic Match</h1>
           </header>
-          <Player theme={theme}/>
+          <Player 
+          theme={theme}
+          difficulty={difficulty}/>
       </main>
     </body>
   )

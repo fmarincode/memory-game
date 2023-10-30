@@ -2,9 +2,7 @@ import React, {useState, useEffect} from 'react'
 import SingleCards from './SingleCards'
 
 
-function Player({theme}) {
-
-  console.log("theme dans player :", theme)
+function Player({theme, difficulty}) {
 
   const [cards, setCards] = useState([])
   const [turns, setTurns] = useState(0)
@@ -35,8 +33,15 @@ function Player({theme}) {
   // mix all imgs of json's file
   const shuffledData = themeDataArray.sort(() => Math.random() - 0.5);
 
-  // Select the first 6 elements
-  const selectedData = shuffledData.slice(0, 6);
+  // Select the nb elements with difficulty choice
+  let selectedData
+  if (difficulty === "Standard"){
+    selectedData = shuffledData.slice(0, 6);
+  } else if (difficulty === "Middle"){
+    selectedData = shuffledData.slice(0, 8);
+  } else if (difficulty === "Hard"){
+    selectedData = shuffledData.slice(0, 10);
+  }
 
   // duplicated the selectedData (2x6) & mix
   const mixedCards = [...selectedData, ...selectedData]
@@ -54,7 +59,7 @@ function Player({theme}) {
     const backCardTheme = require(`../themes/backCards/${theme}Back.json`)
     setBackCard(backCardTheme)
     mixCards()
-  }, [theme])
+  }, [theme, difficulty])
 
   // handle a choice
   const handleChoice = (card) => {
@@ -104,27 +109,29 @@ function Player({theme}) {
 
 
   return (
-    
-    <>
-      <button
-          type='button'
-          className='border-2 w-32 rounded-md px-4 py-1 hover:bg-green-500 mt-2'
-          onClick={mixCards}>NEW GAME
-        </button>
+      <section className='flex flex-col w-full items-center'>
+        <button
+            type='button'
+            className='border-2 w-32 rounded-md px-4 py-1 hover:bg-green-500 mt-2'
+            onClick={mixCards}>NEW GAME
+          </button>
 
-      <div className='flex flex-col justify-center items-center w-full mt-5 md:w-6/12 md:grid md:grid-cols-4 md:grid-rows-3'>
-            {cards.map(card => (
-             <SingleCards 
-             key={card.id} 
-             card={card}
-             backCard={backCard[0]}
-             handleChoice={handleChoice}
-             flipped={card === choiceOne || card === choiceTwo || card.matched}
-             disabled={disabled}/>
-            ) )}
-      </div>
-              <p className='text-xl font-bold'>Turns : {turns}</p>
-    </>
+        <div className='flex flex-col justify-center items-center w-full mt-5 md:w-6/12 md:grid md:grid-cols-4 md:grid-rows-3'>
+              {cards.map(card => (
+              <SingleCards 
+              key={card.id} 
+              card={card}
+              backCard={backCard[0]}
+              handleChoice={handleChoice}
+              flipped={card === choiceOne || card === choiceTwo || card.matched}
+              disabled={disabled}/>
+              ) )}
+        </div>
+        
+                <p className='text-xl font-bold text-center'>Turns : {turns}</p>
+      </section>
+
+    
   )
 }
 
