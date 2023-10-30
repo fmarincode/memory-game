@@ -24,15 +24,22 @@ function Player({theme}) {
     } else if (theme === 'succession') {
       themeData = require('../themes/succession.json');
 
-    } else if (theme === 'movies') {
-      themeData = require('../themes/dbz.json');
+    } else if (theme === 'onepiece') {
+      themeData = require('../themes/onepiece.json');
     }
 
 
      // Convert themeData to an array
   const themeDataArray = Object.values(themeData);
 
-    const mixedCards = [...themeDataArray, ...themeDataArray]
+  // mix all imgs of json's file
+  const shuffledData = themeDataArray.sort(() => Math.random() - 0.5);
+
+  // Select the first 6 elements
+  const selectedData = shuffledData.slice(0, 6);
+
+  // duplicated the selectedData (2x6) & mix
+  const mixedCards = [...selectedData, ...selectedData]
     .sort(() => Math.random() - 0.5)
     .map((card) => ({ ...card, id: Math.random() }))
 
