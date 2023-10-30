@@ -2,8 +2,8 @@ import React from 'react'
 
 function Copyright() {
   return (
-    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-20 pt-20 md:h-[calc(100vh-40px)]'>
-        <article className='space-y-5'>
+    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-20 pt-20 md:min-h-[calc(100vh-40px)]'>
+        <article className='space-y-5 '>
             <h1 className='text-2xl font-bold'> # Copyright</h1>
             <p>Les images utilisées sur ce site ne sont pas de notre propriété, mais sont la propriété de leurs détenteurs de droits respectifs. Ces images ont été obtenues à partir de diverses sources, notamment Pinterest.</p>
             <p>Ces images sont protégées par des droits d'auteur, et nous respectons pleinement ces droits. Nous croyons en la création et le partage responsables de contenu visuel sur Internet.</p>
@@ -61,13 +61,13 @@ function Copyright() {
                 <summary>Succession</summary>
 
                 <ul className='list-disc pl-10 bg-[--secondColor] text-[--firstColor] font-semibold text-md rounded-xl py-5'>
-                    <li>Connor :<a href='https://www.vulture.com/2019/08/succession-connor-roy-hyperdecanting-wine.html' target='blank'>Vulture</a></li>
-                    <li>Siobhan :<a href='https://www.pinterest.fr/mastriannimel/' target='blank'>Melinda Jeanne Mastrianni</a></li>
-                    <li>Kendall :<a href='https://www.pinterest.fr/misslucyfleur/' target='blank'>Lucy</a></li>
-                    <li>Roman :<a href='https://www.pinterest.fr/darlnglucy/' target='blank'>lucy !</a></li>
-                    <li>Logan :<a href='https://www.eonline.com/news/1346466/lessigreatersuccessionlessigreater' target='blank'>E! News</a></li>
-                    <li>Greg & Tom :<a href='https://www.pinterest.fr/gingermiller8645/' target='blank'>Ellie Norman</a></li>
-                    <li>Succession Back Card :<a href='https://www.hbomax.com/geo-availability' target='blank'>HBO Max</a></li>
+                    <li>Connor : <a href='https://www.vulture.com/2019/08/succession-connor-roy-hyperdecanting-wine.html' target='blank'>Vulture</a></li>
+                    <li>Siobhan : <a href='https://www.pinterest.fr/mastriannimel/' target='blank'>Melinda Jeanne Mastrianni</a></li>
+                    <li>Kendall : <a href='https://www.pinterest.fr/misslucyfleur/' target='blank'>Lucy</a></li>
+                    <li>Roman : <a href='https://www.pinterest.fr/darlnglucy/' target='blank'>lucy !</a></li>
+                    <li>Logan : <a href='https://www.eonline.com/news/1346466/lessigreatersuccessionlessigreater' target='blank'>E! News</a></li>
+                    <li>Greg & Tom : <a href='https://www.pinterest.fr/gingermiller8645/' target='blank'>Ellie Norman</a></li>
+                    <li>Succession Back Card : <a href='https://www.hbomax.com/geo-availability' target='blank'>HBO Max</a></li>
                 </ul>
             </details>
 
