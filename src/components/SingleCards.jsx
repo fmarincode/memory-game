@@ -12,8 +12,7 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled}) {
 
     }
 
-    console.log("backCard dans single card :", backCard.src)
-    console.log("card dans single card :", card.src)
+
   return (
     <div key={card.id} className='bg-[#cccccc] border-2 border-white rounded-lg shadow-md my-5 mx-5 cursor-pointer hover:scale-105 hover:shadow-xl w-3/4 flex justify-center md:w-48'>
     <div className='relative flex justify-center items-center w-[188px] h-[188px]'>
