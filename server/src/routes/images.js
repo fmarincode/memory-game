@@ -63,7 +63,6 @@ router.post("/add", upload.single("image"), async (req, res) => {
 
 
   // Get images by title
-// Route "/:title"
 router.get("/:title", async (req, res) => {
   const title = req.params.title;
 
