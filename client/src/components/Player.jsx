@@ -10,6 +10,31 @@ function Player({theme, difficulty}) {
   const [choiceTwo, setChoiceTwo] = useState(null)
   const [disabled, setDisabled] = useState(false)
   const [backCard, setBackCard]= useState()
+  const [dataImgs, setDataImgs] = useState()
+
+  useEffect(() => {
+    const fetchThemeData = async () => {
+      try {
+        const normalizedTheme = theme.toLowerCase().replace(/[\s-]/g, '');
+        const response = await axios.get(`http://localhost:8000/images/${normalizedTheme}`);
+        setDataImgs(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchThemeData();
+  }, [theme]);
+
+  useEffect(() => {
+    if (dataImgs) {
+      const themeLowerCase = theme.toLowerCase().replace(/[-\s]/g, '');
+      const backCardTheme = require(`../themes/backCards/${themeLowerCase}Back.json`);
+      setBackCard(backCardTheme);
+      mixCards();
+    }
+  }, [theme, difficulty, dataImgs]);
+
 
   // mix cards
   const mixCards = () => {
