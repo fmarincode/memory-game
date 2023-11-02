@@ -15,7 +15,6 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled}) {
     }
 
 
-
   return (
 
     <div key={card.id} className='bg-[#cccccc] border-2 border-white rounded-lg shadow-md my-5 mx-5 cursor-pointer hover:scale-105 hover:shadow-xl w-3/4 flex justify-center md:w-48'>
@@ -29,7 +28,7 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled}) {
         ) :
         (
             <>
-                <img src={backCard[0].src} alt='card front' className='[transform:rotateY(90deg)] ease-in duration-200 rounded-lg filter blur-2xl'/>
+                <img src={backCard[0].src} alt='card front' className='[transform:rotateY(90deg) scale-50] ease-in duration-500 rounded-lg filter blur-2xl'/>
                 <img src={backCard[0].src} alt='card back' className='[transform:rotateY(0deg)] delay-200 ease-in duration-200 absolute h-full w-full' onClick={handleClick}/>
             </>
         )}
