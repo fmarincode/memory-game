@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import SingleCards from './SingleCards'
-
+import axios from "axios"
 
 function Player({theme, difficulty}) {
 
@@ -38,52 +38,37 @@ function Player({theme, difficulty}) {
 
   // mix cards
   const mixCards = () => {
-    // check the theme
-    let themeData;
-
-    if (theme === 'dbz') {
-      themeData = require('../themes/dbz.json');
-
-    } else if (theme === 'succession') {
-      themeData = require('../themes/succession.json');
-
-    } else if (theme === 'onepiece') {
-      themeData = require('../themes/onepiece.json');
+    if (dataImgs) {
+      const shuffledData = dataImgs.sort(() => Math.random() - 0.5);
+  
+      // Sélectionnez le nombre d'éléments en fonction de la difficulté
+      let selectedData;
+      if (difficulty === "Standard") {
+        selectedData = shuffledData.slice(0, 6);
+      } else if (difficulty === "Middle") {
+        selectedData = shuffledData.slice(0, 8);
+      } else if (difficulty === "Hard") {
+        selectedData = shuffledData.slice(0, 10);
+      }
+  
+      // Doublez les données sélectionnées (2x6) et mélangez-les
+      const mixedCards = [...selectedData, ...selectedData]
+        .sort(() => Math.random() - 0.5)
+        .map((card, index) => ({ ...card, id: index }));
+  
+      setChoiceOne(null);
+      setChoiceTwo(null);
+      setCards(mixedCards);
+      setTurns(0);
     }
-
-
-     // Convert themeData to an array
-  const themeDataArray = Object.values(themeData);
-
-  // mix all imgs of json's file
-  const shuffledData = themeDataArray.sort(() => Math.random() - 0.5);
-
-  // Select the nb elements with difficulty choice
-  let selectedData
-  if (difficulty === "Standard"){
-    selectedData = shuffledData.slice(0, 6);
-  } else if (difficulty === "Middle"){
-    selectedData = shuffledData.slice(0, 8);
-  } else if (difficulty === "Hard"){
-    selectedData = shuffledData.slice(0, 10);
-  }
-
-  // duplicated the selectedData (2x6) & mix
-  const mixedCards = [...selectedData, ...selectedData]
-    .sort(() => Math.random() - 0.5)
-    .map((card) => ({ ...card, id: Math.random() }))
-
-    setChoiceOne(null)
-    setChoiceTwo(null)
-    setCards(mixedCards)
-    setTurns(0)
-  }
-
+  };
+  
 
   useEffect(() => {
-    const backCardTheme = require(`../themes/backCards/${theme}Back.json`)
-    setBackCard(backCardTheme)
-    mixCards()
+    const themeLowerCase = theme.toLowerCase().replace(/[-\s]/g, '');
+    const backCardTheme = require(`../themes/backCards/${themeLowerCase}Back.json`);  
+    setBackCard(backCardTheme) 
+    mixCards() 
   }, [theme, difficulty])
 
   // handle a choice
@@ -140,13 +125,12 @@ function Player({theme, difficulty}) {
             className='border-2 w-32 rounded-md px-4 py-1 hover:bg-green-500 mt-2'
             onClick={mixCards}>NEW GAME
           </button>
-
         <div className='flex flex-col justify-center items-center w-full mt-5 md:w-6/12 md:grid md:grid-cols-4 md:grid-rows-3'>
               {cards.map(card => (
               <SingleCards 
               key={card.id} 
               card={card}
-              backCard={backCard[0]}
+              backCard={backCard}
               handleChoice={handleChoice}
               flipped={card === choiceOne || card === choiceTwo || card.matched}
               disabled={disabled}/>
