@@ -29,7 +29,7 @@ function Copyright() {
                     <li>Vegeta : <a href='https://villains.fandom.com/wiki/Vegeta' target='blank'>Villains Wiki</a></li>
                     <li>Chaozu : <a href='https://dragonball.fandom.com/es/wiki/Chaoz' target='blank'>Dragonball Fandom</a></li>
                     <li>Oolong : <a href='https://www.pinterest.fr/pin/423619908714641056/' target='blank'>Pinterest</a></li>
-                    <li>Chi-Chi : <a href='https://heroes-unite.fandom.com/wiki/Chi-Chi_(Dragon_Ball_Series)' target='blank'>Heroes-Unite Fandom </a></li>
+                    <li>Chi-Chi : <a href='https://heroes-unite.fandom.com/wiki/Chi-Chi_(Dragon_Ball_Series)' target='blank'>Heroes-Unite Fandom</a></li>
                     <li>M. Popo : <a href='https://www.pinterest.fr/liquid_Jayy/' target='blank'>Liquid Jayy</a></li>
                     <li>Dragon Ball Back Card : <a href='https://www.pngitem.com/middle/owiTmx_dragon-ball-clipart-4-star-bola-dragon-ball/' target='blank'> Hanufanurhafifah</a></li>
                                 

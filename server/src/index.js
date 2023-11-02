@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
+
 const app = express()
 
 app.use(express.json())
@@ -20,6 +21,5 @@ app.use("/", adminRouter)
 
 
 mongoose.connect(process.env.MONGODB_URI);
-
 
 app.listen(8000, () => console.log("SERVER STARTED!"))
