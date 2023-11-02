@@ -12,6 +12,7 @@ function Navbar() {
             <li><button onClick={() => setTheme("succession")}>Succession</button></li>
             <li><button onClick={() => setTheme("dbz")}>DBZ</button></li>
             <li><button onClick={() => setTheme("onepiece")}>One Piece</button></li>              
+            <li><button onClick={() => setTheme("Peaky Blinders")}>Peaky Blinders</button></li>              
           </ul>
           <form >
             <label for="difficulty" > Difficulty : </label>
