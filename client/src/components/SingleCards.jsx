@@ -1,9 +1,17 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 
 function SingleCards({card, backCard, handleChoice, flipped, disabled}) {
 
     const [cardSrc, setCardSrc] = useState(null);
+    const [backCardSrc, setBackCardSrc] = useState(null);
+
+    useEffect(() => {
+        if (backCard && backCard.length > 0) {
+          setBackCardSrc(backCard[0].src);
+        }
+      }, [backCard]);
+
 
     const handleClick = () => {
         // dès qu'on clique sur une carte, on va keep la card et l'utiliser pour lancer la fonction handleChoice de app.js
@@ -14,6 +22,8 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled}) {
         }
     }
 
+console.log("backCard c'est ", backCard)
+console.log("backCardSrc c'est ", backCardSrc)
 
   return (
 
@@ -23,13 +33,13 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled}) {
         {flipped ? (
             <>
                 <img src={cardSrc} alt='card front' className='[transform:rotateY(0deg)] delay-0 rounded-lg h-full w-full'/>
-                <img src={backCard[0].src} alt='card back' className='[transform:rotateY(90deg)] delay-0 absolute' onClick={handleClick}/>
+                <img src={backCardSrc} alt='card back' className='[transform:rotateY(90deg)] delay-0 absolute' onClick={handleClick}/>
             </>
         ) :
         (
             <>
-                <img src={backCard[0].src} alt='card front' className='[transform:rotateY(90deg) scale-50] ease-in duration-500 rounded-lg filter blur-2xl'/>
-                <img src={backCard[0].src} alt='card back' className='[transform:rotateY(0deg)] delay-200 ease-in duration-200 absolute h-full w-full' onClick={handleClick}/>
+                <img src={backCardSrc} alt='card front' className='[transform:rotateY(90deg) scale-50] ease-in duration-500 rounded-lg filter blur-2xl'/>
+                <img src={backCardSrc} alt='card back' className='[transform:rotateY(0deg)] delay-200 ease-in duration-200 absolute h-full w-full' onClick={handleClick}/>
             </>
         )}
 

@@ -26,11 +26,21 @@ function Player({theme, difficulty}) {
     fetchThemeData();
   }, [theme]);
 
+ 
+  
   useEffect(() => {
     if (dataImgs) {
-      const themeLowerCase = theme.toLowerCase().replace(/[-\s]/g, '');
-      const backCardTheme = require(`../themes/backCards/${themeLowerCase}Back.json`);
-      setBackCard(backCardTheme);
+      const fetchBackImg = async () => {
+        try {
+          const normalizedTheme = theme.toLowerCase().replace(/[\s-]/g, '');
+          const response = await axios.get(`http://localhost:8000/backImages/${normalizedTheme}`);
+          setBackCard(response.data);
+
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchBackImg()
       mixCards();
     }
   }, [theme, difficulty, dataImgs]);
@@ -117,7 +127,7 @@ function Player({theme, difficulty}) {
     }
   }, [choiceOne, choiceTwo])
 
-
+console.log(backCard)
   return (
       <section className='flex flex-col w-full items-center'>
         <button
