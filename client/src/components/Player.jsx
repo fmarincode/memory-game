@@ -132,7 +132,10 @@ console.log(theme)
             className='border-2 w-32 rounded-md px-4 py-1 hover:bg-green-500 mt-2'
             onClick={mixCards}>NEW GAME
           </button>
-        <div className='flex flex-col justify-center items-center w-full mt-5 md:w-6/12 md:grid md:grid-cols-4 md:grid-rows-3'>
+        <div className={`flex mt-5 md:grid md:gap-5
+        ${difficulty === "Standard" ? 
+        " md:grid-cols-4 md:grid-rows-3" : difficulty === "Middle" ?
+        " md:grid-cols-8 md:grid-rows-2 pt-20" : " md:grid-cols-5 md:grid-rows-4"}`}>
               {cards.map(card => (
               <SingleCards 
               key={card.id} 
@@ -140,11 +143,12 @@ console.log(theme)
               backCard={backCard}
               handleChoice={handleChoice}
               flipped={card === choiceOne || card === choiceTwo || card.matched}
-              disabled={disabled}/>
+              disabled={disabled}
+              difficulty={difficulty}/>
               ) )}
         </div>
         
-                <p className='text-xl font-bold text-center'>Turns : {turns}</p>
+                <p className='text-xl font-bold text-center mt-3'>Turns : {turns}</p>
       </section>
 
     
