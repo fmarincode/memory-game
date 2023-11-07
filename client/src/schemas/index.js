@@ -20,7 +20,7 @@ export const loginSchema = yup.object().shape({
 
 })
 
-export const createImageSchema = yup.object().shape({
+/* export const createImageSchema = yup.object().shape({
     name:yup
     .string()
     .required("Requis"),
@@ -39,4 +39,16 @@ export const createImageSchema = yup.object().shape({
     imageAuthor:yup
     .string()
     .required("Requis")
+}) */
+
+export const createThemeSchema = yup.object().shape({
+    name:yup
+    .string()
+    .required("Requis"),
+    media:yup
+    .string()
+    .required("Requis"),
+    userOwner:yup
+    .string()
+    .required("Requis"),
 })

@@ -1,224 +1,187 @@
-import React from 'react';
-import { useFormik } from "formik";
-import { createImageSchema } from '../schemas';
+import React, {useState} from 'react';
 import axios from 'axios';
+import BackImg from "../components/BackImg"
+
 
 export default function PostImg() {
 
+  const [imageAdded, setImageAdded] = useState(false)
+    const [postImage, setPostImage] = useState( {
+        name : "",
+        titleFrom : "", 
+        image : "",
+        userOwner : "",
+        imageSrc : "",
+        imageAuthor : "",
+    })
 
-    const onSubmit = async (values, actions) => {
-        const normalizedTitleFrom = values.titleFrom.toLowerCase().replace(/[\s-]/g, ''); //tout en minuscule, sans espace ni tiret.
-        try {
-          const formData = new FormData();
-          formData.append('name', values.name);
-          formData.append('titleFrom', normalizedTitleFrom);
-          formData.append('userOwner', values.userOwner);
-          formData.append('imageSrc', values.imageSrc);
-          formData.append('imageAuthor', values.imageAuthor);
-          formData.append('image', values.image); // Le champ "image" est maintenant un FormData
-      
-          await axios.post("http://localhost:8000/images/add", formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data', // Définissez le type de contenu comme multipart/form-data
-            },
-          });
-      
-          console.log("tu as ajouté une image");
-          actions.resetForm();
-        } catch (err) {
-          console.error(err);
-        }
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            resolve(fileReader.result)
+          };
+          fileReader.onerror = (error) => {
+            reject(error)
+          }
+        })
+      }
+
+    const createPost = async () => {
+      const normalizedTheme = postImage.titleFrom.toLowerCase().replace(/[\s-]/g, '');
+      try{
+        const newImage = {
+            name: postImage.name,
+            titleFrom: normalizedTheme,
+            image: postImage.image,
+            userOwner: postImage.userOwner,
+            imageSrc: postImage.imageSrc,
+            imageAuthor: postImage.imageAuthor,
+          };
+
+        await axios.post("http://localhost:8000/images/add", newImage)
+        setImageAdded(true)
+      }catch(error){
+        console.log(error)
+      }
+    }
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      createPost()
+      console.log("Uploaded")
+    }
+  
+    const handleFileUpload = async (e) => {
+      const file = e.target.files[0];
+      const base64 = await convertToBase64(file);
+      console.log(base64)
+      setPostImage({ ...postImage, image : base64 })
+    }
+
+  
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setPostImage({ ...postImage, [name]: value });
       };
       
-
-  const handleImageChange = (event, setFieldValue) => {
-    const file = event.currentTarget.files[0];
-    setFieldValue('image', file);
-  
-    // Créez un objet FormData pour envoyer le fichier
-    const formData = new FormData();
-    formData.append('image', file);
-  
-    // Mettez à jour les valeurs de Formik avec FormData (sauf le champ "image")
-    formik.setValues((values) => {
-      const { image, ...otherValues } = values;
-      return otherValues;
-    });
-  
-    // Mettez à jour la valeur du champ "image" dans Formik
-    formik.setFieldValue('image', formData.get('image'));
-  };
-  
-
-
-  const formik = useFormik({
-    initialValues:{
-        name: "",
-        titleFrom: "",
-        image:"",
-        userOwner: "",
-        imageSrc: "",
-        imageAuthor: "",
-    },
-    validationSchema: createImageSchema,
-    onSubmit,
-})
-
   return (
-    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
-        <article className='flex flex-col items-center'>
-            <h1 className='mb-5'>Ajouter des images dans la base de données</h1>
-            <form
-            onSubmit={formik.handleSubmit}
-            encType='multipart/form-data'
-            className='flex flex-col justify-center items-center'>
+    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)] md:flex-row'>
+        <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
+        <h2>Aperçu de l'image</h2>
+        {postImage.image && <img src={postImage.image} alt="image uploaded" />}
+        </article>
+        <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
+            <h1 className='mb-5'>Ajouter une image dans la base de données</h1>
+            <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
+           <form onSubmit={handleSubmit}
+           className='flex flex-col justify-center items-start'>
             <div className='py-2'>
 
-                <label htmlFor='name'
-                className='pr-5' >
-                    Nom de l'image
-                </label>
-                <input 
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+            <label htmlFor='name'
+                className='md:inline-block md:text-right md:w-40' >
+                    Nom de l'image :
+            </label>
+            <input 
+                value={postImage.name}
+                onChange={handleChange}
                 name='name'
                 type='name'
+                onMouseEnter={(e) => setImageAdded(false)}
                 placeholder="Le nom de l'image"
-                className={`border-2 rounded-md text-black ${formik.errors.name && formik.touched.name ? "border-[#bd5c5c]" : ""}`}
-                />
-        </div>
-        {formik.errors.name && formik.touched.name && ( 
-            <p
-            className='text-[#bd5c5c]'>
-                {formik.errors.name}
-            </p>)
-        }
+                className="border-2 rounded-md text-black ml-5"
+            />
+            </div>
 
-        <div className='py-2'>
+            <div className='py-2'>
                 <label htmlFor='titleFrom'
-                    className='pr-5' >
-                        Titre de l'oeuvre
+                    className='md:inline-block md:text-right md:w-40' >
+                        Titre de l'oeuvre :
                 </label>
                 <input 
-                    value={formik.values.titleFrom}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                    value={postImage.titleFrom}
+                    onChange={handleChange}
                     name='titleFrom'
                     type='text'
                     placeholder="Le nom de l'oeuvre"
-                    className={`border-2 rounded-md text-black ${formik.errors.titleFrom && formik.touched.titleFrom ? "border-[#bd5c5c]" : ""}`}
+                    className="border-2 rounded-md text-black ml-5"
                 />
-        </div>
-            {formik.errors.titleFrom && formik.touched.titleFrom && ( 
-                <p
-                className='text-[#bd5c5c]'>
-                {formik.errors.titleFrom}
-                </p>)
-            }
+            </div>
 
-        <div className='py-2'>
+            <div className='py-2'>
                     <label htmlFor='userOwner'
-                    className='pr-7'>
-                        Votre pseudo
+                    className='md:inline-block md:text-right md:w-40'>
+                        Votre pseudo :
                     </label>
                     <input 
-                    value={formik.values.userOwner}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                    value={postImage.userOwner}
+                    onChange={handleChange}
                     name='userOwner'
                     type='text'
                     placeholder='Votre pseudo'
-                    className={`border-2 rounded-md text-black ${formik.errors.userOwner && formik.touched.userOwner ? "border-[#bd5c5c]" : ""}`}
+                    className="border-2 rounded-md text-black ml-5"
                     />
-        </div>
-            {formik.errors.userOwner && formik.touched.userOwner && ( 
-                <p
-                className='text-[#bd5c5c]'>
-                {formik.errors.userOwner}
-                </p>)
-            }
-             <div className='py-2'>
+            </div>
 
-                <label htmlFor='image'
-                className='pr-5' >
-                    Votre image
+            <div className='py-2'>
+                <label htmlFor="file-upload" className='md:inline-block md:text-right md:w-40'>
+                Votre image :
+                </label>
+                
+                <input 
+                type="file"
+                lable="Image"
+                name="image"
+                accept='.jpeg, .png, .jpg, .webp'
+                onChange={(e) => handleFileUpload(e)}
+                className="border-2 rounded-md text-white ml-5"
+                />
+
+            </div>
+            <div className='py-2'>
+
+                <label htmlFor='imageSrc'
+                className='md:inline-block md:text-right md:w-40' >
+                Lien URL de la source de l'image :
                 </label>
                 <input 
-                
-                onBlur={formik.handleBlur}
-                onChange={(e) => handleImageChange(e, formik.setFieldValue)}
-                name='image'
-                type='file'
-                accept='image/*'
-                className={`border-2 rounded-md text-white${formik.errors.image && formik.touched.image ? "border-[#bd5c5c]" : ""}`}
+                value={postImage.imageSrc}
+                onChange={handleChange}
+                name='imageSrc'
+                type='text'
+                placeholder="Lien du site de l'image"
+                className="border-2 rounded-md text-black ml-5"
                 />
-        </div>
-        {formik.errors.image && formik.touched.image && ( 
-            <p
-            className='text-[#bd5c5c]'>
-                {formik.errors.image}
-            </p>)
-        }
+            </div>
 
-        <div className='py-2'>
+            <div className='py-2'>
 
-            <label htmlFor='imageSrc'
-            className='pr-5' >
-            Lien URL de la source de l'image
-            </label>
-            <input 
-            value={formik.values.imageSrc}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name='imageSrc'
-            type='text'
-            placeholder="Lien du site de l'image"
-            className={`border-2 rounded-md text-black ${formik.errors.imageSrc && formik.touched.imageSrc ? "border-[#bd5c5c]" : ""}`}
-            />
-        </div>
-        {formik.errors.imageSrc && formik.touched.imageSrc && ( 
-            <p
-            className='text-[#bd5c5c]'>
-            {formik.errors.imageSrc}
-            </p>)
-        }
+                <label htmlFor='imageAuthor'
+                className='md:inline-block md:text-right md:w-40'>
+                    Nom de l'auteur à créditer :
+                </label>
+                <input 
+                value={postImage.imageAuthor}
+                onChange={handleChange}
+                name='imageAuthor'
+                type='text'
+                placeholder="Le nom de l'auteur/ site"
+                className="border-2 rounded-md text-black ml-5"
+                />
+            </div>
 
-        <div className='py-2'>
-
-            <label htmlFor='imageAuthor'
-            className='pr-5' >
-                Nom de l'auteur à créditer
-            </label>
-            <input 
-            value={formik.values.imageAuthor}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name='imageAuthor'
-            type='text'
-            placeholder="Le nom de l'auteur/ site"
-            className={`border-2 rounded-md text-black ${formik.errors.imageAuthor && formik.touched.imageAuthor ? "border-[#bd5c5c]" : ""}`}
-            />
-        </div>
-        {formik.errors.imageAuthor && formik.touched.imageAuthor && ( 
-            <p
-            className='text-[#bd5c5c]'>
-            {formik.errors.imageAuthor}
-            </p>)
-        }
-
-        <div className='flex justify-center mt-5 space-x-5'>
-            <button
-            id='submitImg'
-            type='submit'
-            disabled={formik.isSubmitting}
-            className='border-2 rounded-md px-4 py-2 cursor-pointer'>
-            Soumettre
-            </button>
-        </div>
-            </form>
-
+           
+            <div className='flex self-center mt-2'>
+                <button type='submit'
+                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
+            </div>
+            {imageAdded && <p className='flex self-center mt-1'>Image ajoutée !</p>}
+                </form>
+            </div>
+            <BackImg />
         </article>
+
     </section>
   )
 }

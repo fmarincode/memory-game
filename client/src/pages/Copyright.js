@@ -81,6 +81,16 @@ function Copyright() {
                 </ul>
             </details>
 
+            <details className='cursor-pointer'>
+
+                <summary>Autres</summary>
+
+                <ul className='list-disc pl-10 bg-[--secondColor] text-[--firstColor] font-semibold text-md rounded-xl py-5'>
+                    <li>Image par défaut : <a href="https://fr.freepik.com/auteur/pikisuperstar" target='blank'>pikisuperstar</a></li>
+                    
+                </ul>
+            </details>
+
 
            {/*  <p>Si vous êtes l'auteur d'une image utilisée sur ce site et que vous souhaitez que nous retirions votre image ou que nous modifions son crédit, veuillez nous contacter à [votre adresse e-mail de contact].</p> */}
 
