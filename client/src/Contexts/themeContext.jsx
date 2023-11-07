@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const themeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('dbz');
+  const [theme, setTheme] = useState('Dragon Ball');
   const [difficulty, setDifficulty] = useState('Standard');
 
   const contextValue = useMemo(

@@ -13,7 +13,6 @@ function Navbar() {
     const fetchThemeData = async () => {
       try {
         const response = await axios.get("http://localhost:8000/themes/")
-        console.log(response.data)
         setThemeData(response.data)
       } catch (error) {
         
@@ -23,6 +22,7 @@ function Navbar() {
     fetchThemeData()
 
   },[])
+  
   
   useEffect(() => {
     if (themeData) {
@@ -36,7 +36,7 @@ function Navbar() {
     <nav className='w-[100%] h-14 fixed top-0 left-0 bg-[--firstColor] text-[--secondColor] flex justify-center items-center z-50 md:mr-[17px]'>
           <div className='flex space-x-5'>
 
-            <Link to="/" onClick={() => setTheme("dbz")}>Home</Link>         
+            <Link to="/" onClick={() => setTheme("dragonball")}>Home</Link>         
             
             <form>
               <label for="theme" className='pr-1'>Theme :</label>

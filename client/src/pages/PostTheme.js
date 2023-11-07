@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { createThemeSchema } from '../schemas';
 import axios from 'axios';
 import {Link} from "react-router-dom"
+import BackImg from '../components/BackImg';
 
 export default function PostTheme() {
 
@@ -10,7 +11,7 @@ export default function PostTheme() {
     const [themeData, setThemeData] = useState([])
     const [themeList, setThemeList] = useState([])
     const [alreadyInList, setAlreadyInList] = useState(false)
-
+    const [newThemeName, setNewThemeName] = useState("")
 
   useEffect(() => {
     const fetchThemeData = async () => {
@@ -39,14 +40,18 @@ export default function PostTheme() {
  
     const onSubmit = async (values, actions) => {
         try {
-            if (themeList.includes(removeAccent(values.name).toLowerCase().replace(/[\s-]/g, ''))) {
+            const normalizedName = values.name.toLowerCase().replace(/[\s-]/g, '');
+
+            if (themeList.includes(removeAccent(normalizedName))) {
               
                 setAlreadyInList(true)
             return; 
       }
+
           await axios
           .post("http://localhost:8000/themes/", values)
           setThemeCreation(true)
+          setNewThemeName(values.name)
           console.log("its ok, theme created")
           actions.resetForm()
           
@@ -117,6 +122,9 @@ const handleBool = () => {
                     className={`border-2 rounded-md text-black ${formik.errors.media && formik.touched.media ? "border-[#bd5c5c]" : ""}`}
                 >
                     <option
+                    value=""
+                    label='Select'></option>
+                    <option
                     value="Série"
                     label='Série'></option>
                     <option
@@ -162,6 +170,7 @@ const handleBool = () => {
                 </p>)
             }
 
+
         <div className='flex justify-center mt-5 space-x-5'>
             <button
             id='submitImg'
@@ -179,6 +188,10 @@ const handleBool = () => {
             {alreadyInList && <p className='mt-3'>Cette oeuvre existe déjà dans notre liste de thèmes, tu peux y ajouter des images ou refaire le thème à ton goût mais en modifiant le nom.</p>}
 
         </article>
+        <hr className='mt-10 mb-10 bg'/>
+
+        {themeCreation && <div><BackImg 
+        newThemeName={newThemeName}/></div>}
     </section>
   )
 }

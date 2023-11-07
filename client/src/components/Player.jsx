@@ -11,7 +11,7 @@ function Player({theme, difficulty}) {
   const [disabled, setDisabled] = useState(false)
   const [backCard, setBackCard]= useState()
   const [dataImgs, setDataImgs] = useState()
-
+console.log(theme)
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
@@ -27,19 +27,18 @@ function Player({theme, difficulty}) {
   }, [theme]);
 
  
-  
+  const fetchBackImg = async (theme) => {
+    try {
+      const response = await axios.get("http://localhost:8000/themes/", theme);
+      const filteredThemes = response.data.filter(data => data.name === theme);      
+      setBackCard(filteredThemes[0].backImg[0].backImage)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     if (dataImgs) {
-      const fetchBackImg = async () => {
-        try {
-          const normalizedTheme = theme.toLowerCase().replace(/[\s-]/g, '');
-          const response = await axios.get(`http://localhost:8000/backImages/${normalizedTheme}`);
-          setBackCard(response.data);
-
-        } catch (err) {
-          console.log(err);
-        }
-      };
       fetchBackImg()
       mixCards();
     }
@@ -75,9 +74,7 @@ function Player({theme, difficulty}) {
   
 
   useEffect(() => {
-    const themeLowerCase = theme.toLowerCase().replace(/[-\s]/g, '');
-    const backCardTheme = require(`../themes/backCards/${themeLowerCase}Back.json`);  
-    setBackCard(backCardTheme) 
+    fetchBackImg(theme)  
     mixCards() 
   }, [theme, difficulty])
 
@@ -127,7 +124,7 @@ function Player({theme, difficulty}) {
     }
   }, [choiceOne, choiceTwo])
 
-console.log(backCard)
+
   return (
       <section className='flex flex-col w-full items-center'>
         <button

@@ -7,8 +7,8 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled}) {
     const [backCardSrc, setBackCardSrc] = useState(null);
 
     useEffect(() => {
-        if (backCard && backCard.length > 0) {
-          setBackCardSrc(backCard[0].src);
+        if (backCard) {
+          setBackCardSrc(backCard);
         }
       }, [backCard]);
 
@@ -22,8 +22,7 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled}) {
         }
     }
 
-console.log("backCard c'est ", backCard)
-console.log("backCardSrc c'est ", backCardSrc)
+
 
   return (
 
@@ -39,7 +38,7 @@ console.log("backCardSrc c'est ", backCardSrc)
         (
             <>
                 <img src={backCardSrc} alt='card front' className='[transform:rotateY(90deg) scale-50] ease-in duration-500 rounded-lg filter blur-2xl'/>
-                <img src={backCardSrc} alt='card back' className='[transform:rotateY(0deg)] delay-200 ease-in duration-200 absolute h-full w-full' onClick={handleClick}/>
+                <img src={backCardSrc} alt='card back' className='[transform:rotateY(0deg)] delay-200 ease-in duration-200 absolute h-full w-full rounded-lg' onClick={handleClick}/>
             </>
         )}
 

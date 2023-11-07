@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import BackImg from '../components/BackImg';
+
 
 
 export default function PostImg() {
 
+  const [imageAdded, setImageAdded] = useState(false)
     const [postImage, setPostImage] = useState( {
         name : "",
         titleFrom : "", 
@@ -40,6 +41,7 @@ export default function PostImg() {
           };
 
         await axios.post("http://localhost:8000/images/add", newImage)
+        setImageAdded(true)
       }catch(error){
         console.log(error)
       }
@@ -67,7 +69,7 @@ export default function PostImg() {
   return (
     <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
         <article className='flex flex-col items-center'>
-            <h1 className='mb-5'>Ajouter des images dans la base de données</h1>
+            <h1 className='mb-5'>Ajouter une image dans la base de données</h1>
 
            <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-center'>
@@ -82,6 +84,7 @@ export default function PostImg() {
                 onChange={handleChange}
                 name='name'
                 type='name'
+                onMouseUp={(e) => setImageAdded(false)}
                 placeholder="Le nom de l'image"
                 className={`border-2 rounded-md text-black`}
             />
@@ -170,11 +173,10 @@ export default function PostImg() {
                 <button type='submit'
                 className='border-2 rounded-md px-4 py-2 cursor-pointer'>Soumettre</button>
             </div>
-
+            {imageAdded && <p>Image ajoutée !</p>}
                 </form>
         </article>
-        <hr className='mt-10 mb-10'/>
-        <BackImg />
+
     </section>
   )
 }

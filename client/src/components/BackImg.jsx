@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-export default function BackImg() {
+export default function BackImg({ newThemeName }) {
+    const [imageAdded, setImageAdded] = useState(false)
 
     const [postBackImage, setPostBackImage] = useState( {
         backImageName: "",
-        backImageTitleFrom: "",
         backImage: "",
+        backImageSrc: "",
+        backImageAuthor: "",
     })
 
     const convertToBase64 = (file) => {
@@ -22,16 +24,18 @@ export default function BackImg() {
         })
       }
 
+
     const createPost = async () => {
-      const normalizedTheme = postBackImage.backImageTitleFrom.toLowerCase().replace(/[\s-]/g, '');
       try{
         const newBackImage = {
             backImageName: postBackImage.backImageName,
-            backImageTitleFrom: normalizedTheme,
-            backImage: postBackImage.backImage
+            backImage: postBackImage.backImage,
+            backImageSrc: postBackImage.backImageSrc,
+            backImageAuthor: postBackImage.backImageAuthor
           };
 
-        await axios.post("http://localhost:8000/backImages/add", newBackImage)
+        await axios.post(`http://localhost:8000/themes/${newThemeName}/backImages/add`, newBackImage)
+        setImageAdded(true)
       }catch(error){
         console.log(error)
       }
@@ -76,20 +80,6 @@ export default function BackImg() {
           />
           </div>
 
-          <div className='py-2'>
-              <label htmlFor='backImageTitleFrom'
-                  className='pr-5' >
-                      Titre de l'oeuvre
-              </label>
-              <input 
-                  value={postBackImage.backImageTitleFrom}
-                  onChange={handleChange}
-                  name='backImageTitleFrom'
-                  type='text'
-                  placeholder="Le nom de l'oeuvre"
-                  className={`border-2 rounded-md text-black `}
-              />
-          </div>
         <div className='py-2'>
 
           <label htmlFor='backImage'
@@ -105,10 +95,42 @@ export default function BackImg() {
           className={`border-2 rounded-md text-white`}
           />
           </div>
+
+          <div className='py-2'>
+              <label htmlFor='backImageSrc'
+                  className='pr-5' >
+                      Lien URL de l'image
+              </label>
+              <input 
+                  value={postBackImage.backImageSrc}
+                  onChange={handleChange}
+                  name='backImageSrc'
+                  type='text'
+                  placeholder="Le lien de l'oeuvre"
+                  className={`border-2 rounded-md text-black `}
+              />
+          </div>
+
+          <div className='py-2'>
+              <label htmlFor='backImageAuthor'
+                  className='pr-5' >
+                      Auteur de l'image
+              </label>
+              <input 
+                  value={postBackImage.backImageAuthor}
+                  onChange={handleChange}
+                  name='backImageAuthor'
+                  type='text'
+                  placeholder="Le nom de l'auteur"
+                  className={`border-2 rounded-md text-black `}
+              />
+          </div>
+
           <div className='flex justify-center mt-5 space-x-5'>
                 <button type='submit'
                 className='border-2 rounded-md px-4 py-2 cursor-pointer'>Soumettre</button>
             </div>
+            {imageAdded && <p> Ton image a bien été ajoutée pour {newThemeName}</p>}
           </form>
         </article>
     
