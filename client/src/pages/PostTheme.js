@@ -81,13 +81,14 @@ const handleBool = () => {
         <article className='flex flex-col items-center'>
             <h1 className='mb-5'>Ajouter un nouveau thème de jeu</h1>
             {themeCreation && <p>Ton thème a été ajouté ! N'oublie pas d'y ajouter des images</p>}
+            <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
             <form
             onSubmit={formik.handleSubmit}
-            className='flex flex-col justify-center items-center'>
+            className='flex flex-col justify-center items-start'>
             <div className='py-2'>
 
                 <label htmlFor='name'
-                className='pr-5' >
+                className='md:inline-block md:text-right md:w-40'>
                     Nom de l'oeuvre
                 </label>
                 <input 
@@ -98,7 +99,7 @@ const handleBool = () => {
                 name='name'
                 type='name'
                 placeholder="Le nom de l'oeuvre"
-                className={`border-2 rounded-md text-black ${formik.errors.name && formik.touched.name ? "border-[#bd5c5c]" : ""}`}
+                className={`border-2 rounded-md text-black ml-5 ${formik.errors.name && formik.touched.name ? "border-[#bd5c5c]" : ""}`}
                 />
         </div>
         {formik.errors.name && formik.touched.name && ( 
@@ -107,10 +108,11 @@ const handleBool = () => {
                 {formik.errors.name}
             </p>)
         }
+        {alreadyInList && <p className='mt-3'>Cette oeuvre existe déjà dans notre liste de thèmes, tu peux y ajouter des images ou refaire le thème à ton goût mais en modifiant le nom.</p>}
 
         <div className='py-2'>
                 <label htmlFor='media'
-                    className='pr-5' >
+                    className='md:inline-block md:text-right md:w-40' >
                         Type d'oeuvre
                 </label>
                 <select 
@@ -119,7 +121,7 @@ const handleBool = () => {
                     onBlur={formik.handleBlur}
                     name='media'
                     type='text'
-                    className={`border-2 rounded-md text-black ${formik.errors.media && formik.touched.media ? "border-[#bd5c5c]" : ""}`}
+                    className={`border-2 rounded-md text-black ml-5 ${formik.errors.media && formik.touched.media ? "border-[#bd5c5c]" : ""}`}
                 >
                     <option
                     value=""
@@ -150,7 +152,7 @@ const handleBool = () => {
 
         <div className='py-2'>
                     <label htmlFor='userOwner'
-                    className='pr-7'>
+                    className='md:inline-block md:text-right md:w-40'>
                         Votre pseudo
                     </label>
                     <input 
@@ -160,7 +162,7 @@ const handleBool = () => {
                     name='userOwner'
                     type='text'
                     placeholder='Votre pseudo'
-                    className={`border-2 rounded-md text-black ${formik.errors.userOwner && formik.touched.userOwner ? "border-[#bd5c5c]" : ""}`}
+                    className={`border-2 rounded-md text-black ml-5 ${formik.errors.userOwner && formik.touched.userOwner ? "border-[#bd5c5c]" : ""}`}
                     />
         </div>
             {formik.errors.userOwner && formik.touched.userOwner && ( 
@@ -171,27 +173,29 @@ const handleBool = () => {
             }
 
 
-        <div className='flex justify-center mt-5 space-x-5'>
+        <div className='flex self-center mt-5 space-x-5'>
             <button
             id='submitImg'
             type='submit'
             disabled={formik.isSubmitting}
-            className='border-2 rounded-md px-4 py-2 cursor-pointer'>
+            className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>
             Soumettre
             </button>
         </div>
             </form>
+            </div>
+            <p className='mt-5'>Le thème existe déjà ? Ajoutes-y des images</p>
         <Link to={"/addContent"}
-        className='border-2 bg-green-300 text-black font-semibold rounded-md px-4 py-2 cursor-pointer mt-5'>
+        className='border-2 bg-blue-300 hover:bg-green-500 text-black font-semibold rounded-md px-4 py-2 cursor-pointer mt-5'>
         Ajouter des images
         </Link>
-            {alreadyInList && <p className='mt-3'>Cette oeuvre existe déjà dans notre liste de thèmes, tu peux y ajouter des images ou refaire le thème à ton goût mais en modifiant le nom.</p>}
-
         </article>
-        <hr className='mt-10 mb-10 bg'/>
+        <article>
 
-        {themeCreation && <div><BackImg 
-        newThemeName={newThemeName}/></div>}
+          {themeCreation && <div><BackImg 
+          newThemeName={newThemeName}/></div>}
+        </article>
+
     </section>
   )
 }

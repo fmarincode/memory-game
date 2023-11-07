@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-
+import BackImg from "../components/BackImg"
 
 
 export default function PostImg() {
@@ -67,33 +67,37 @@ export default function PostImg() {
       };
       
   return (
-    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
-        <article className='flex flex-col items-center'>
+    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)] md:flex-row'>
+        <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
+        <h2>Aperçu de l'image</h2>
+        {postImage.image && <img src={postImage.image} alt="image uploaded" />}
+        </article>
+        <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
             <h1 className='mb-5'>Ajouter une image dans la base de données</h1>
-
+            <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
            <form onSubmit={handleSubmit}
-           className='flex flex-col justify-center items-center'>
+           className='flex flex-col justify-center items-start'>
             <div className='py-2'>
 
             <label htmlFor='name'
-                className='pr-5' >
-                    Nom de l'image
+                className='md:inline-block md:text-right md:w-40' >
+                    Nom de l'image :
             </label>
             <input 
                 value={postImage.name}
                 onChange={handleChange}
                 name='name'
                 type='name'
-                onMouseUp={(e) => setImageAdded(false)}
+                onMouseEnter={(e) => setImageAdded(false)}
                 placeholder="Le nom de l'image"
-                className={`border-2 rounded-md text-black`}
+                className="border-2 rounded-md text-black ml-5"
             />
             </div>
 
             <div className='py-2'>
                 <label htmlFor='titleFrom'
-                    className='pr-5' >
-                        Titre de l'oeuvre
+                    className='md:inline-block md:text-right md:w-40' >
+                        Titre de l'oeuvre :
                 </label>
                 <input 
                     value={postImage.titleFrom}
@@ -101,14 +105,14 @@ export default function PostImg() {
                     name='titleFrom'
                     type='text'
                     placeholder="Le nom de l'oeuvre"
-                    className={`border-2 rounded-md text-black `}
+                    className="border-2 rounded-md text-black ml-5"
                 />
             </div>
 
             <div className='py-2'>
                     <label htmlFor='userOwner'
-                    className='pr-7'>
-                        Votre pseudo
+                    className='md:inline-block md:text-right md:w-40'>
+                        Votre pseudo :
                     </label>
                     <input 
                     value={postImage.userOwner}
@@ -116,14 +120,13 @@ export default function PostImg() {
                     name='userOwner'
                     type='text'
                     placeholder='Votre pseudo'
-                    className={`border-2 rounded-md text-black`}
+                    className="border-2 rounded-md text-black ml-5"
                     />
             </div>
 
             <div className='py-2'>
-                <label htmlFor="file-upload" className='custom-file-upload'>
-                <img src={postImage.image} alt="" />
-                Votre image
+                <label htmlFor="file-upload" className='md:inline-block md:text-right md:w-40'>
+                Votre image :
                 </label>
                 
                 <input 
@@ -132,15 +135,15 @@ export default function PostImg() {
                 name="image"
                 accept='.jpeg, .png, .jpg, .webp'
                 onChange={(e) => handleFileUpload(e)}
-                className={`border-2 rounded-md text-white`}
+                className="border-2 rounded-md text-white ml-5"
                 />
 
             </div>
             <div className='py-2'>
 
                 <label htmlFor='imageSrc'
-                className='pr-5' >
-                Lien URL de la source de l'image
+                className='md:inline-block md:text-right md:w-40' >
+                Lien URL de la source de l'image :
                 </label>
                 <input 
                 value={postImage.imageSrc}
@@ -148,15 +151,15 @@ export default function PostImg() {
                 name='imageSrc'
                 type='text'
                 placeholder="Lien du site de l'image"
-                className={`border-2 rounded-md text-black`}
+                className="border-2 rounded-md text-black ml-5"
                 />
             </div>
 
             <div className='py-2'>
 
                 <label htmlFor='imageAuthor'
-                className='pr-5'>
-                    Nom de l'auteur à créditer
+                className='md:inline-block md:text-right md:w-40'>
+                    Nom de l'auteur à créditer :
                 </label>
                 <input 
                 value={postImage.imageAuthor}
@@ -164,17 +167,19 @@ export default function PostImg() {
                 name='imageAuthor'
                 type='text'
                 placeholder="Le nom de l'auteur/ site"
-                className={`border-2 rounded-md text-black `}
+                className="border-2 rounded-md text-black ml-5"
                 />
             </div>
 
            
-            <div className='flex justify-center mt-5 space-x-5'>
+            <div className='flex self-center mt-2'>
                 <button type='submit'
-                className='border-2 rounded-md px-4 py-2 cursor-pointer'>Soumettre</button>
+                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
             </div>
-            {imageAdded && <p>Image ajoutée !</p>}
+            {imageAdded && <p className='flex self-center mt-1'>Image ajoutée !</p>}
                 </form>
+            </div>
+            <BackImg />
         </article>
 
     </section>

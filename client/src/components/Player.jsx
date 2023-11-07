@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import SingleCards from './SingleCards'
 import axios from "axios"
+import defaultImg from "../default/backdefault.webp"
+
 
 function Player({theme, difficulty}) {
 
@@ -11,7 +13,7 @@ function Player({theme, difficulty}) {
   const [disabled, setDisabled] = useState(false)
   const [backCard, setBackCard]= useState()
   const [dataImgs, setDataImgs] = useState()
-console.log(theme)
+
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
@@ -30,8 +32,13 @@ console.log(theme)
   const fetchBackImg = async (theme) => {
     try {
       const response = await axios.get("http://localhost:8000/themes/", theme);
-      const filteredThemes = response.data.filter(data => data.name === theme);      
-      setBackCard(filteredThemes[0].backImg[0].backImage)
+      const filteredThemes = response.data.filter(data => data.name === theme);     
+      if (filteredThemes.length > 0){
+        setBackCard(filteredThemes[0].backImg[0].backImage)
+      } else {
+        
+        setBackCard(defaultImg)
+      }
     } catch (err) {
       console.log(err);
     }

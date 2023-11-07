@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
+
 export default function BackImg({ newThemeName }) {
     const [imageAdded, setImageAdded] = useState(false)
 
@@ -63,11 +64,13 @@ export default function BackImg({ newThemeName }) {
 
         <article className='flex flex-col items-center'>
           <h2>Ajouter l'image au dos des cartes (optionnel)</h2>
+          <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
+
         <form onSubmit={handleSubmit}
-           className='flex flex-col justify-center items-center'>
-        <div className='py-2 mt-5'>
+           className='flex flex-col justify-center items-start'>
+        <div className='py-2'>
           <label htmlFor='backImageName'
-              className='pr-5' >
+              className='md:inline-block md:text-right md:w-40' >
                   Nom de l'image
           </label>
           <input 
@@ -76,14 +79,29 @@ export default function BackImg({ newThemeName }) {
               name='backImageName'
               type='text'
               placeholder="Le nom de l'image"
-              className={`border-2 rounded-md text-black`}
+              className="border-2 rounded-md text-black ml-5"
+          />
+          </div>
+
+          <div className='py-2'>
+          <label htmlFor='name'
+              className='md:inline-block md:text-right md:w-40' >
+                  Titre de l'oeuvre
+          </label>
+          <input 
+              value={postBackImage.name}
+              onChange={handleChange}
+              name='name'
+              type='text'
+              placeholder="Le nom de l'oeuvre"
+              className="border-2 rounded-md text-black ml-5"
           />
           </div>
 
         <div className='py-2'>
 
           <label htmlFor='backImage'
-          className='pr-5'>
+          className='md:inline-block md:text-right md:w-40'>
               Votre image
           </label>
           <input 
@@ -92,13 +110,13 @@ export default function BackImg({ newThemeName }) {
           name="backImage"
           accept='.jpeg, .png, .jpg, .webp'
           onChange={(e) => handleFileUploadBackImg(e)}
-          className={`border-2 rounded-md text-white`}
+          className="border-2 rounded-md text-white ml-5"
           />
           </div>
 
           <div className='py-2'>
               <label htmlFor='backImageSrc'
-                  className='pr-5' >
+                  className='md:inline-block md:text-right md:w-40' >
                       Lien URL de l'image
               </label>
               <input 
@@ -106,14 +124,14 @@ export default function BackImg({ newThemeName }) {
                   onChange={handleChange}
                   name='backImageSrc'
                   type='text'
-                  placeholder="Le lien de l'oeuvre"
-                  className={`border-2 rounded-md text-black `}
+                  placeholder="Le lien de l'image"
+                  className="border-2 rounded-md text-black ml-5"
               />
           </div>
 
           <div className='py-2'>
               <label htmlFor='backImageAuthor'
-                  className='pr-5' >
+                  className='md:inline-block md:text-right md:w-40' >
                       Auteur de l'image
               </label>
               <input 
@@ -122,16 +140,17 @@ export default function BackImg({ newThemeName }) {
                   name='backImageAuthor'
                   type='text'
                   placeholder="Le nom de l'auteur"
-                  className={`border-2 rounded-md text-black `}
+                  className="border-2 rounded-md text-black ml-5"
               />
           </div>
 
-          <div className='flex justify-center mt-5 space-x-5'>
+          <div className='flex self-center mt-5 space-x-5'>
                 <button type='submit'
-                className='border-2 rounded-md px-4 py-2 cursor-pointer'>Soumettre</button>
+                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
             </div>
             {imageAdded && <p> Ton image a bien été ajoutée pour {newThemeName}</p>}
           </form>
+          </div>
         </article>
     
   )
