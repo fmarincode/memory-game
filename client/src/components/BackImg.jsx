@@ -6,6 +6,7 @@ export default function BackImg({ newThemeName }) {
     const [imageAdded, setImageAdded] = useState(false)
 
     const [postBackImage, setPostBackImage] = useState( {
+        name:"",
         backImageName: "",
         backImage: "",
         backImageSrc: "",
@@ -35,7 +36,7 @@ export default function BackImg({ newThemeName }) {
             backImageAuthor: postBackImage.backImageAuthor
           };
 
-        await axios.post(`http://localhost:8000/themes/${newThemeName}/backImages/add`, newBackImage)
+        await axios.post(`http://localhost:8000/themes/${newThemeName || postBackImage.name}/backImages/add`, newBackImage)
         setImageAdded(true)
       }catch(error){
         console.log(error)
@@ -148,7 +149,7 @@ export default function BackImg({ newThemeName }) {
                 <button type='submit'
                 className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
             </div>
-            {imageAdded && <p> Ton image a bien été ajoutée pour {newThemeName}</p>}
+            {imageAdded && <p> Ton image a bien été ajoutée pour {newThemeName || postBackImage.name}</p>}
           </form>
           </div>
         </article>

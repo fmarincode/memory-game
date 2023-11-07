@@ -19,18 +19,18 @@ router.get("/img", async (req, res) => {
 
 
 router.post("/add", async (req, res) => {
-  const { name, titleFrom, userOwner, imageSrc, imageAuthor } = req.body;
-  const image = new ImagesModel({
+  const { name, titleFrom, image, userOwner, imageSrc, imageAuthor } = req.body;
+  const imagePost = new ImagesModel({
       name,
       titleFrom,
-      image: req.file.filename,
+      image,
       userOwner,
       imageSrc,
       imageAuthor,
   });
 
   try {
-      const response = await image.save();
+      const response = await imagePost.save();
       res.json(response);
   } catch (err) {
       res.status(400).json(err);

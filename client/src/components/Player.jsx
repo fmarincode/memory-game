@@ -34,15 +34,15 @@ function Player({theme, difficulty}) {
       const response = await axios.get("http://localhost:8000/themes/", theme);
       const filteredThemes = response.data.filter(data => data.name === theme); 
       setBackCard(filteredThemes[0].backImg[0].backImage)
-
     } catch (err) {
+      setBackCard(defaultImg)
       console.log(err);
     }
   };
 
   useEffect(() => {
     if (dataImgs) {
-      fetchBackImg()
+      fetchBackImg(theme)
       mixCards();
     }
   }, [theme, difficulty, dataImgs]);

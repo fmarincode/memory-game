@@ -47,7 +47,7 @@ router.post("/", async(req, res) => {
     res.json({message: "Theme Registered Successfully !"})
 })
 
-
+// add a backImg
 router.post("/:themeName/backImages/add", async (req, res) => {
     const themeName = req.params.themeName;
     const { backImageName, backImage, backImageSrc, backImageAuthor } = req.body;
@@ -76,5 +76,7 @@ router.post("/:themeName/backImages/add", async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
 
 export {router as themesRouter}
