@@ -63,6 +63,9 @@ function Navbar() {
                 <option className="text-red-500" value="Hard">Hard</option>
               </select>
             </form>
+
+            <Link to="/userconnect">Se connecter</Link> 
+
           </div>
     </nav>
   )

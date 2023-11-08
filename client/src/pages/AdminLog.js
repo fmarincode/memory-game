@@ -9,15 +9,15 @@ function AdminLog() {
 
 
 
-  const [cookies, setCookies] = useCookies(["access_token"])
+  const [cookies, setCookies, removeCookie] = useCookies(["access_token"])
 
     const onSubmit = async (values, actions) => {
       try {
         const response = await axios
-        .post("http://localhost:8000/adminlogin", values)
+        .post("http://localhost:8000/user/userlogin", values)
         console.log("you're logged")
 
-        setCookies("access_token", response.data.token)
+        setCookies("access_token", response.data.token, { expires: new Date(Date.now() + 7200000) });
         window.localStorage.setItem("userID", response.data.userID)
         actions.resetForm()
         
@@ -35,6 +35,12 @@ function AdminLog() {
         validationSchema: loginSchema,
         onSubmit,
     })
+
+        
+  const handleLogout = () => {
+    // Supprime le cookie "access_token" pour se déconnecter
+    removeCookie('access_token');
+  };
 
 
     return (
@@ -116,14 +122,21 @@ function AdminLog() {
                     className='border-2 rounded-md px-4 py-2 cursor-pointer'>
                         Se connecter
                     </button>
-                    {cookies && 
-
-                        <Link
-                        to={"/addContent"}
-                        className='border-2 bg-green-300 text-black font-semibold rounded-md px-4 py-2 cursor-pointer'>
-                            Ajouter du contenu
-                        </Link>
-                    }
+                    {cookies.access_token ? (
+                                <button
+                                onClick={handleLogout}
+                                className="border-2 bg-red-300 text-black font-semibold rounded-md px-4 py-2 cursor-pointer"
+                                >
+                                Se déconnecter
+                                </button>
+                            ) : (
+                                <Link
+                                to="/addContent"
+                                className="border-2 bg-green-300 text-black font-semibold rounded-md px-4 py-2 cursor-pointer"
+                                >
+                                Ajouter du contenu
+                                </Link>
+                            )}
                 </div>
         </form>
         </article>

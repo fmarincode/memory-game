@@ -20,26 +20,17 @@ export const loginSchema = yup.object().shape({
 
 })
 
-/* export const createImageSchema = yup.object().shape({
-    name:yup
+export const registerSchema = yup.object().shape({
+    username:yup
     .string()
     .required("Requis"),
-    titleFrom:yup
+    password:yup
     .string()
-    .required("Requis"),
-    image:yup
-    .string()
-    .required("Requis"),
-    userOwner:yup
-    .string()
-    .required("Requis"),
-    imageSrc:yup
-    .string()
-    .required("Requis"),
-    imageAuthor:yup
-    .string()
+    .min(8)
+    .matches(passwordRules, {message: "Utilisez un mot de passe plus robuste"})
     .required("Requis")
-}) */
+})
+
 
 export const createThemeSchema = yup.object().shape({
     name:yup

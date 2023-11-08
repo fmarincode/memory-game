@@ -8,6 +8,7 @@ import Copyright from './pages/Copyright';
 import AdminLog from './pages/AdminLog';
 import PostImg from './pages/PostImg';
 import PostTheme from './pages/PostTheme';
+import UserConnect from './pages/UserConnect';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Route path='/adminauth' element={<AdminLog />} />
             <Route path='/addContent' element={<PostImg />} />
             <Route path='/addTheme' element={<PostTheme />} />
+            <Route path='/userconnect' element={<UserConnect />} />
           </Routes>
         </ThemeProvider>
       <Footer />
