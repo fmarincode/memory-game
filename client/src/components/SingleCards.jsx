@@ -22,7 +22,7 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled, difficult
         }
     }
 
-console.log(card)
+
 
   return (
 
@@ -44,7 +44,7 @@ console.log(card)
         (
             <>
                 <img src={backCardSrc} alt='card front' className='[transform:rotateY(90deg) scale-50] ease-in duration-500 rounded-lg filter blur-2xl'/>
-                <img src={backCardSrc} alt='card back' className='[transform:rotateY(0deg)] delay-200 ease-in duration-200 absolute h-full w-full rounded-lg' onClick={handleClick}/>
+                <img src={backCardSrc} alt='card back' className='[transform:rotateY(0deg)] delay-200 ease-in duration-200 absolute h-full w-full rounded-lg ' onClick={handleClick}/>
             </>
         )}
 

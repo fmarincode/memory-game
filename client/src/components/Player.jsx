@@ -33,7 +33,10 @@ function Player({theme, difficulty}) {
     try {
       const response = await axios.get("http://localhost:8000/themes/", theme);
       const filteredThemes = response.data.filter(data => data.name === theme); 
-      setBackCard(filteredThemes[0].backImg[0].backImage)
+      if (filteredThemes.length > 0) {
+        const lastBackImage = filteredThemes[0].backImg[filteredThemes[0].backImg.length - 1].backImage; // tjr select la derniere ajoutée
+        setBackCard(lastBackImage);
+      }
     } catch (err) {
       setBackCard(defaultImg)
       console.log(err);

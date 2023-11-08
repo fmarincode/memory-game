@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
 
-export default function BackImg({ newThemeName }) {
+export default function BackImg({ newThemeName, themeList }) {
     const [imageAdded, setImageAdded] = useState(false)
 
     const [postBackImage, setPostBackImage] = useState( {
@@ -12,6 +12,7 @@ export default function BackImg({ newThemeName }) {
         backImageSrc: "",
         backImageAuthor: "",
     })
+
 
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -63,8 +64,8 @@ export default function BackImg({ newThemeName }) {
       
   return (
 
-        <article className='flex flex-col items-center'>
-          <h2>Ajouter l'image au dos des cartes (optionnel)</h2>
+        <article className='flex flex-col items-center md:space-y-5'>
+          <h2 className='mb-5'>Ajouter l'image au dos des cartes (optionnel)</h2>
           <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
 
         <form onSubmit={handleSubmit}
@@ -89,14 +90,24 @@ export default function BackImg({ newThemeName }) {
               className='md:inline-block md:text-right md:w-40' >
                   Titre de l'oeuvre
           </label>
-          <input 
-              value={postBackImage.name}
-              onChange={handleChange}
-              name='name'
-              type='text'
-              placeholder="Le nom de l'oeuvre"
-              className="border-2 rounded-md text-black ml-5"
-          />
+          <select 
+          id='name' 
+          name='name'
+          className='bg-[--firstColor] w-auto cursor-pointer ml-5 border-2 border-[--secondColor] rounded-md'
+          value={postBackImage.name}
+          onChange={handleChange}>
+                    <option
+                    value=""
+                    label='Select'>
+                      
+                    </option>
+            {themeList.map((themeName, index) => (
+                  <option key={index} value={themeName}>
+                      {themeName}
+                  </option>
+              ))} 
+          </select>
+          
           </div>
 
         <div className='py-2'>
@@ -152,6 +163,8 @@ export default function BackImg({ newThemeName }) {
             {imageAdded && <p> Ton image a bien été ajoutée pour {newThemeName || postBackImage.name}</p>}
           </form>
           </div>
+          <h2>Aperçu de l'image choisie</h2>
+        {postBackImage.backImage && <img src={postBackImage.backImage} alt="image uploaded" className='md:max-h-40 md:max-w-40'/>}
         </article>
     
   )

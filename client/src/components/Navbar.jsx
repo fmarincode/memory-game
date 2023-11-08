@@ -23,6 +23,7 @@ function Navbar() {
 
   },[])
   
+
   
   useEffect(() => {
     if (themeData) {

@@ -1,9 +1,33 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import BackImg from "../components/BackImg"
 
 
 export default function PostImg() {
+
+  const [themeData, setThemeData] = useState([])
+  const [themeList, setThemeList] = useState([])
+  
+  useEffect(() => {
+    const fetchThemeData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/themes/")
+        setThemeData(response.data)
+      } catch (error) {
+        
+      }
+    }
+    fetchThemeData()
+  },[])
+  
+
+  useEffect(() => {
+    if (themeData) {
+      const names = themeData.map(theme => theme.name); // Extract names from themeData
+      setThemeList(names); // Set themeList to the extracted names
+    }
+  }, [themeData]);
+
 
   const [imageAdded, setImageAdded] = useState(false)
     const [postImage, setPostImage] = useState( {
@@ -68,10 +92,7 @@ export default function PostImg() {
       
   return (
     <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)] md:flex-row'>
-        <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
-        <h2>Aperçu de l'image</h2>
-        {postImage.image && <img src={postImage.image} alt="image uploaded" />}
-        </article>
+        
         <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
             <h1 className='mb-5'>Ajouter une image dans la base de données</h1>
             <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
@@ -99,14 +120,27 @@ export default function PostImg() {
                     className='md:inline-block md:text-right md:w-40' >
                         Titre de l'oeuvre :
                 </label>
-                <input 
-                    value={postImage.titleFrom}
-                    onChange={handleChange}
-                    name='titleFrom'
-                    type='text'
-                    placeholder="Le nom de l'oeuvre"
-                    className="border-2 rounded-md text-black ml-5"
-                />
+                <select
+                id='titleFrom'
+                name='titleFrom'
+                className='bg-[--firstColor] w-auto cursor-pointer ml-5 border-2 border-[--secondColor] rounded-md'
+                value={postImage.titleFrom}
+                onChange={handleChange}>
+
+                    <option
+                    value=""
+                    label='Select'>
+                    </option>
+
+                {themeList.map((themeName, index) => (
+                  <option key={index} value={themeName}>
+                      {themeName}
+                  </option>
+              ))} 
+
+                </select>
+
+                
             </div>
 
             <div className='py-2'>
@@ -179,7 +213,12 @@ export default function PostImg() {
             {imageAdded && <p className='flex self-center mt-1'>Image ajoutée !</p>}
                 </form>
             </div>
-            <BackImg />
+            <h2>Aperçu de l'image choisie</h2>
+        {postImage.image && <img src={postImage.image} alt="image uploaded" className='md:max-h-40 md:max-w-40'/>}
+        </article>
+        <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
+            <BackImg 
+            themeList = {themeList}/>
         </article>
 
     </section>
