@@ -4,11 +4,28 @@ import { ThemeModel } from '../models/Theme.js';
 
 const router = express.Router()
 
-
+//get all themes
 router.get("/", async (req, res) => {
     try {
         const response = await ThemeModel.find({})
         res.json(response)
+    } catch (err) {
+        res.json(err)
+    }
+})
+
+router.get("/:userOwner", async (req, res) => {
+    const userOwner = req.params.userOwner
+    try {
+        const response = await ThemeModel.find({})
+        const filteredResults = results.filter(item => item.userOwner === userOwner) // filter les résultats par userOwner
+
+        if (filteredResults.length > 0) {
+            res.status(200).json(filteredResults);
+        } else {
+            res.status(404).json({ message: "Aucun thème trouvé avec ce pseudo." });
+        }
+
     } catch (err) {
         res.json(err)
     }

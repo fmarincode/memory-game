@@ -17,7 +17,6 @@ export default function PostTheme() {
     const fetchThemeData = async () => {
       try {
         const response = await axios.get("http://localhost:8000/themes/")
-        console.log(response.data)
         setThemeData(response.data)
       } catch (error) {
         console.err(error)
@@ -193,7 +192,8 @@ const handleBool = () => {
         <article>
 
           {themeCreation && <div><BackImg 
-          newThemeName={newThemeName}/></div>}
+          newThemeName={newThemeName}
+          themeList={themeList}/></div>}
         </article>
 
     </section>

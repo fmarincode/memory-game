@@ -1,28 +1,50 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import { useFormik } from "formik";
 import { loginSchema } from '../schemas';
 import axios from 'axios';
 import { useCookies } from "react-cookie";
 import {Link} from "react-router-dom"
+import AuthContext from '../Contexts/auth/AuthProvider';
+
 
 function UserLogin() {
 
     const [cookies, setCookies, removeCookie] = useCookies(["access_token"])
 
+    const {auth, setAuth} = useContext(AuthContext)
+
     const onSubmit = async (values, actions) => {
+        
       try {
         const response = await axios
         .post("http://localhost:8000/user/userlogin", values)
         console.log("you're logged")
-
         setCookies("access_token", response.data.token, { expires: new Date(Date.now() + 7200000) });
-        window.localStorage.setItem("userID", response.data.userID)
+        window.localStorage.setItem("access_token", response.data.token);
+        window.localStorage.setItem("userID", response.data.userID);
+        window.localStorage.setItem("role", response.data.role);
+
+       
+        setAuth({ userID: response.data.userID, role: response.data.role, token: response.data.token, username: values.username });
         actions.resetForm()
         
     } catch (err){
         console.error(err)
     }
-}
+    }
+    useEffect(() => {
+        // Lors du chargement de la page, vérifiez le stockage local
+        const storedToken = window.localStorage.getItem("access_token");
+        const storedUserID = window.localStorage.getItem("userID");
+        const storedRole = window.localStorage.getItem("role");
+    
+        if (storedToken && storedUserID && storedRole) {
+          setAuth({ userID: storedUserID, role: storedRole, token: storedToken });
+        }
+      }, []);
+
+    console.log(auth)
+
     
     const formik = useFormik({
         initialValues:{
@@ -35,10 +57,13 @@ function UserLogin() {
     })
 
     
-  const handleLogout = () => {
-    // Supprime le cookie "access_token" pour se déconnecter
-    removeCookie('access_token');
-  };
+const handleLogout = () => {
+  removeCookie("access_token");
+  window.localStorage.removeItem("access_token");
+  window.localStorage.removeItem("userID");
+  window.localStorage.removeItem("role");
+  setAuth({});
+};
 
     return (
         <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
@@ -135,7 +160,13 @@ function UserLogin() {
                                 to="/addContent"
                                 className="border-2 bg-green-300 text-black font-semibold rounded-md px-4 py-2 cursor-pointer"
                                 >
-                                Ajouter du contenu
+                                Ajouter des images
+                                </Link>
+                                <Link
+                                to="/addTheme"
+                                className="border-2 bg-green-300 text-black font-semibold rounded-md px-4 py-2 cursor-pointer"
+                                >
+                                Ajouter un theme
                                 </Link>
                             </div>
                             }

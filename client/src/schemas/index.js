@@ -28,6 +28,9 @@ export const registerSchema = yup.object().shape({
     .string()
     .min(8)
     .matches(passwordRules, {message: "Utilisez un mot de passe plus robuste"})
+    .required("Requis"),
+    role:yup
+    .string()
     .required("Requis")
 })
 

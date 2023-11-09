@@ -8,7 +8,7 @@ import { UserModel } from "../models/User.js";
 const router = express.Router()
 
 router.post("/userregister", async(req, res) => {
-    const {username, password} = req.body;
+    const {username, password, role} = req.body;
 
     const user = await UserModel.findOne({username: username})
 
@@ -18,7 +18,7 @@ router.post("/userregister", async(req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    const newUser = new UserModel({username, password: hashedPassword})
+    const newUser = new UserModel({username, password: hashedPassword, role})
     await newUser.save()
 
     res.json({message: "User Registered Successfully !"})
@@ -40,7 +40,7 @@ router.post("/userlogin", async(req, res) => {
     }
 
     const token = jwt.sign({id:user._id}, "secret")
-    res.json({token, userID:user._id })
+    res.json({token, userID:user._id, role:user.role })
 })
 
 

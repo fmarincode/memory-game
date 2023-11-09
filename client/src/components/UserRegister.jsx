@@ -24,6 +24,7 @@ function UserRegister() {
         initialValues:{
             username: "",
             password: "",
+            role: "User"
         },
         validationSchema: registerSchema,
         onSubmit,
