@@ -2,9 +2,10 @@ import React, { useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 import BackImg from "../components/BackImg"
 import AuthContext from '../Contexts/auth/AuthProvider';
+import themeContext from '../Contexts/themeContext';
 
 export default function PostImg() {
-
+  const {updateThemes} = useContext(themeContext)
   const [themeData, setThemeData] = useState([])
   const [themeList, setThemeList] = useState([])
   const {auth} = useContext(AuthContext)
@@ -67,6 +68,7 @@ export default function PostImg() {
 
         await axios.post("http://localhost:8000/images/add", newImage)
         setImageAdded(true)
+        
       }catch(error){
         console.log(error)
       }
@@ -75,6 +77,7 @@ export default function PostImg() {
     const handleSubmit = (e) => {
       e.preventDefault();
       createPost()
+      updateThemes()
       console.log("Uploaded")
     }
   

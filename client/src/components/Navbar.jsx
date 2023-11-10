@@ -1,18 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react'
 import themeContext from '../Contexts/themeContext'
 import {Link, useNavigate} from "react-router-dom"
-import axios from 'axios';
 import AuthContext from '../Contexts/auth/AuthProvider';
 import { useCookies } from "react-cookie";
 
 function Navbar({}) {
-  const {theme, setTheme, difficulty, setDifficulty } = useContext(themeContext);
+  const {theme, setTheme, difficulty, setDifficulty, themeCatalog, updateThemes} = useContext(themeContext);
   const [cookies, setCookies, removeCookie] = useCookies(["access_token"])
   const {auth, setAuth} = useContext(AuthContext)
-  const [themeData, setThemeData] = useState([])
-  const [themeList, setThemeList] = useState([])
 
 
+  useEffect(() => {
+    updateThemes()
+  },[])
+
+  console.log(themeCatalog)
   const navigate = useNavigate()
 
     useEffect(() => {
@@ -44,60 +46,16 @@ function Navbar({}) {
       checkLocalStorage();
     }, [cookies]);
 
-const handleClickHome = async (e) => {
+const handleClickHome =  (e) => {
   e.preventDefault()
   setTheme("Dragon Ball")
-  await fetchThemesUser()
+  updateThemes()
   console.log("fetch themes user chargé !")
   navigate("/")
 }
 
-const fetchThemeData = async () => {
-  try {
-    const response = await axios.get("http://localhost:8000/themes/Bascom3000")
-    setThemeData(response.data)
-  } catch (error) {
-    console.err(error)
-  }
-}
-  useEffect(() => {
-    fetchThemeData()
-  },[])
 
 
-  const fetchThemesUser = async () => {
-    if (auth.username && auth.username !== "Bascom3000") {
-      try {
-        const response = await axios.get(`http://localhost:8000/themes/${auth.username}`);
-        
-        // Check if the received data already exists in themeData
-        const newData = response.data.filter((newTheme) => {
-          return !themeData.some((existingTheme) => existingTheme._id === newTheme._id);
-        });
-
-        if (newData.length > 0) {
-          setThemeData((prevThemeData) => [...prevThemeData, ...newData]);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (auth.username){
-      fetchThemesUser();
-    }
-  }, [auth.username]);
-  
-  useEffect(() => {
-    if (themeData) {
-      const names = themeData.map(theme => theme.name); // Extract names from themeData
-      setThemeList(names); // Set themeList to the extracted names
-    }
-  }, [themeData, auth]);
-  
-  
   const handleLogout = () => {
     removeCookie("access_token");
     window.localStorage.removeItem("access_token");
@@ -105,7 +63,6 @@ const fetchThemeData = async () => {
     window.localStorage.removeItem("role");
     window.localStorage.removeItem("username");
     window.localStorage.removeItem("expirationDate");
-    fetchThemeData()
     navigate("/")
     setAuth({});
   };
@@ -123,7 +80,7 @@ const fetchThemeData = async () => {
               value={theme} 
               onChange={(e) => setTheme(e.target.value)}>
                 
-              {themeList.map((themeName, index) => (
+              {themeCatalog.map((themeName, index) => (
                   <option key={index} value={themeName}>
                       {themeName}
                   </option>

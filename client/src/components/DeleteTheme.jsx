@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from "react-router-dom"
 import axios from "axios";
 
 
 function DeleteTheme({auth}) {
+
     const [themeDeleted, setThemeDeleted] = useState(false)
     const [themeData, setThemeData] = useState([])
     const [themeList, setThemeList] = useState([])
@@ -53,8 +53,6 @@ function DeleteTheme({auth}) {
         console.error(error)
       }
     } 
-
-
 
   return (
     <section className='flex flex-col justify-center items-center'>

@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Link} from "react-router-dom"
 import axios from "axios";
-
+import themeContext from '../Contexts/themeContext';
 
 
 function DeleteImg({auth}) {
+  const { updateThemes } = useContext(themeContext);
     const [imageDeleted, setImageDeleted] = useState(false)
     const [userImgList, setUserImgList] = useState([])
     const [themeData, setThemeData] = useState([])
@@ -48,12 +49,14 @@ function DeleteImg({auth}) {
 
       try {
         await axios.delete(`http://localhost:8000/images/${normalizedTheme}/${formDelete.imageName}/delete`)
-        setImageDeleted(true)
+        setImageDeleted(true)       
         setUserImgList((prevImgList) => prevImgList.filter(imageName => imageName !== formDelete.imageName));// regarde la liste precedente, filtre, pour chaque imageName il renvoie imageName tant qu'elle est différente de celle qui vient d'ê delete
+        updateThemes();
       } catch (error) {
         console.error(error)
       }
     }
+
 
     //fetch user's imgs
     const fetchUserImgs = async () => {

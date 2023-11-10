@@ -5,8 +5,9 @@ import axios from 'axios';
 import {Link} from "react-router-dom"
 import BackImg from '../components/BackImg';
 import AuthContext from '../Contexts/auth/AuthProvider';
-export default function PostTheme() {
 
+
+export default function PostTheme() {
     const [themeCreation, setThemeCreation] = useState(false)
     const [themeData, setThemeData] = useState([])
     const [themeList, setThemeList] = useState([])
@@ -75,6 +76,8 @@ const handleBool = () => {
     setThemeCreation(false) 
     setAlreadyInList(false)
 }
+
+
 
   return (
     <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
