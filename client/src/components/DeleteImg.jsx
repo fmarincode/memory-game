@@ -14,7 +14,7 @@ function DeleteImg({auth}) {
       titleFrom : "",
       imageName: "",
     })
-
+    const [image, setImage] = useState()
 
     //fetch User's Theme
     useEffect(() => {
@@ -64,13 +64,14 @@ function DeleteImg({auth}) {
         const normalizedTheme = formDelete.titleFrom.toLowerCase().replace(/[\s-]/g, '');
         
         const response = await axios.get(`http://localhost:8000/images/img/${auth.username}/${normalizedTheme}`)
-        console.log(response.data)
          // Filtrer les images en fonction du thème
         const filteredImages = response.data.filter(element => element.titleFrom === normalizedTheme);
         // Extraire les noms des images filtrées
         const namesArray = filteredImages.map(img => img.name);
-
         setUserImgList(namesArray);
+
+        const imagesArray = filteredImages.map(img => ({ image: img.image, name: img.name }));
+        setImage(imagesArray);
 
       } catch (error) {
         console.error(error)
@@ -84,7 +85,7 @@ function DeleteImg({auth}) {
     },[formDelete.titleFrom])
     
 
-
+    console.log(image)
   return (
     <section className='flex flex-col justify-center items-center'>
 
@@ -116,6 +117,12 @@ function DeleteImg({auth}) {
 
             </select>
             </form>
+            </article>
+            <article>
+              <p>Aperçu : </p>
+              {image && (
+                <img src={image.find(img => img.name === formDelete.imageName)?.image} alt={formDelete.imageName} className='md:max-h-40 md:max-w-40'/>
+              )}
             </article>
             <article>
 

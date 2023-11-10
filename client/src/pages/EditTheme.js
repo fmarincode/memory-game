@@ -34,11 +34,13 @@ function EditTheme() {
                 <p> Que souhaites-tu faire ?</p>
                 <p> <span className='font-bold text-xl'>Choix 1</span> : Si tu veux changer l'image sur la face au dos des cartes tu peux le faire en <Link to="/addContent" className='underline'>cliquant ici</Link>, ta nouvelle image sera utilisée.<span className='text-xl text-green-500'> OK</span></p>
                 <p> <span className='font-bold text-xl'>Choix 2</span> : Si tu veux ajouter des images faces cachées tu peux le faire en <Link to="/addContent" className='underline'>cliquant ici</Link>, ta nouvelle image sera aléatoirement utilisée.<span className='text-xl text-green-500'> OK</span></p>
-                <p> <span className='font-bold text-xl'>Choix 3</span> : Si tu veux supprimer une des images faces cachées tu peux le faire en <Link to="" className='underline'>cliquant ici</Link>, l'action est irréversible. <span className='text-xl text-green-500'> OK mais afficher l'aperçu de l'image ?</span></p>
-                <p> <span className='font-bold text-xl'>Choix 4</span> : Si tu veux supprimer un thème entièrement tu peux le faire en <Link to="" className='underline'>cliquant ici</Link>, les images de ce thème disparaitront également, l'action est irréversible.</p>
+                <p> <span className='font-bold text-xl'>Choix 3</span> : Si tu veux supprimer une des images faces cachées tu peux le faire en <Link to="" className='underline'>cliquant ici</Link>, l'action est irréversible. <span className='text-xl text-green-500'> OK </span></p>
+                <p> <span className='font-bold text-xl'>Choix 4</span> : Si tu veux supprimer un thème entièrement tu peux le faire en <Link to="" className='underline'>cliquant ici</Link>, les images de ce thème disparaitront également, l'action est irréversible. <span className='text-xl text-green-500'> OK </span></p>
                 
             </article>
                     <DeleteTheme
+                    auth={auth}/>
+                    <DeleteImg 
                     auth={auth}/>
         </section>
   )
