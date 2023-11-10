@@ -6,10 +6,11 @@ const themeContext = createContext(null);
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('Dragon Ball');
   const [difficulty, setDifficulty] = useState('Standard');
+  const [themeCatalog, setThemeCatalog] = useState([])
 
   const contextValue = useMemo(
     () => ({
-        theme, setTheme, difficulty, setDifficulty
+        theme, setTheme, difficulty, setDifficulty, 
     }),
     [
         theme, setTheme, difficulty, setDifficulty

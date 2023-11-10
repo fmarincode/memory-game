@@ -10,6 +10,7 @@ import PostTheme from './pages/PostTheme';
 import UserConnect from './pages/UserConnect';
 import RequireAuth from './components/RequireAuth';
 import "./App.css";
+import EditTheme from './pages/EditTheme';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                {/* routes à protéger */}
               <Route path="/addContent" element={<RequireAuth requiredRole={["Admin", "User"]}><PostImg /></RequireAuth>} />
               <Route path="/addTheme" element={<RequireAuth requiredRole={["Admin", "User"]}><PostTheme /></RequireAuth>} />
+              <Route path="/editTheme" element={<RequireAuth requiredRole={["Admin", "User"]}><EditTheme /></RequireAuth>} />
               
         </Routes>
         </ThemeProvider>

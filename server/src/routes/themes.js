@@ -14,10 +14,11 @@ router.get("/", async (req, res) => {
     }
 })
 
+//get theme's user
 router.get("/:userOwner", async (req, res) => {
     const userOwner = req.params.userOwner
     try {
-        const response = await ThemeModel.find({})
+        const results = await ThemeModel.find({})
         const filteredResults = results.filter(item => item.userOwner === userOwner) // filter les résultats par userOwner
 
         if (filteredResults.length > 0) {
@@ -30,7 +31,7 @@ router.get("/:userOwner", async (req, res) => {
         res.json(err)
     }
 })
-
+//get theme by title
 router.get("/:theme", async (req, res) => {
     const theme = req.params.theme;
 
@@ -48,7 +49,7 @@ router.get("/:theme", async (req, res) => {
     }
 });
 
-
+//post a theme
 router.post("/", async(req, res) => {
     const {name, media, userOwner} = req.body;
 
@@ -64,7 +65,7 @@ router.post("/", async(req, res) => {
     res.json({message: "Theme Registered Successfully !"})
 })
 
-// add a backImg
+// add a backImg to a theme
 router.post("/:themeName/backImages/add", async (req, res) => {
     const themeName = req.params.themeName;
     const { backImageName, backImage, backImageSrc, backImageAuthor } = req.body;
@@ -94,6 +95,23 @@ router.post("/:themeName/backImages/add", async (req, res) => {
     }
 });
 
+//delete a theme
 
+router.delete("/:themeName/delete", async (req, res) => {
+    const themeName = req.params.themeName;
+
+    try {
+        const theme = await ThemeModel.findOneAndDelete({ name: themeName });
+
+        if (!theme) {
+            return res.status(404).json({ message: "Thème non trouvé." });
+        }
+
+        res.status(200).json({ message: "Thème supprimé avec succès." });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Une erreur s'est produite lors de la suppression du thème." });
+    }
+});
 
 export {router as themesRouter}

@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useFormik } from "formik";
 import { createThemeSchema } from '../schemas';
 import axios from 'axios';
 import {Link} from "react-router-dom"
 import BackImg from '../components/BackImg';
-
+import AuthContext from '../Contexts/auth/AuthProvider';
 export default function PostTheme() {
 
     const [themeCreation, setThemeCreation] = useState(false)
@@ -12,6 +12,7 @@ export default function PostTheme() {
     const [themeList, setThemeList] = useState([])
     const [alreadyInList, setAlreadyInList] = useState(false)
     const [newThemeName, setNewThemeName] = useState("")
+    const {auth} = useContext(AuthContext)
 
   useEffect(() => {
     const fetchThemeData = async () => {
@@ -64,7 +65,7 @@ export default function PostTheme() {
     initialValues:{
         name: "",
         media: "",
-        userOwner: "",
+        userOwner: auth.username,
     },
     validationSchema: createThemeSchema,
     onSubmit,
@@ -149,28 +150,7 @@ const handleBool = () => {
                 </p>)
             }
 
-        <div className='py-2'>
-                    <label htmlFor='userOwner'
-                    className='md:inline-block md:text-right md:w-40'>
-                        Votre pseudo
-                    </label>
-                    <input 
-                    value={formik.values.userOwner}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    name='userOwner'
-                    type='text'
-                    placeholder='Votre pseudo'
-                    className={`border-2 rounded-md text-black ml-5 ${formik.errors.userOwner && formik.touched.userOwner ? "border-[#bd5c5c]" : ""}`}
-                    />
-        </div>
-            {formik.errors.userOwner && formik.touched.userOwner && ( 
-                <p
-                className='text-[#bd5c5c]'>
-                {formik.errors.userOwner}
-                </p>)
-            }
-
+        
 
         <div className='flex self-center mt-5 space-x-5'>
             <button

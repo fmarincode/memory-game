@@ -1,17 +1,18 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 import BackImg from "../components/BackImg"
-
+import AuthContext from '../Contexts/auth/AuthProvider';
 
 export default function PostImg() {
 
   const [themeData, setThemeData] = useState([])
   const [themeList, setThemeList] = useState([])
-  
+  const {auth} = useContext(AuthContext)
+
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/themes/")
+        const response = await axios.get(`http://localhost:8000/themes/${auth.username}`)
         setThemeData(response.data)
       } catch (error) {
         
@@ -59,7 +60,7 @@ export default function PostImg() {
             name: postImage.name,
             titleFrom: normalizedTheme,
             image: postImage.image,
-            userOwner: postImage.userOwner,
+            userOwner: auth.username,
             imageSrc: postImage.imageSrc,
             imageAuthor: postImage.imageAuthor,
           };
@@ -141,21 +142,6 @@ export default function PostImg() {
                 </select>
 
                 
-            </div>
-
-            <div className='py-2'>
-                    <label htmlFor='userOwner'
-                    className='md:inline-block md:text-right md:w-40'>
-                        Votre pseudo :
-                    </label>
-                    <input 
-                    value={postImage.userOwner}
-                    onChange={handleChange}
-                    name='userOwner'
-                    type='text'
-                    placeholder='Votre pseudo'
-                    className="border-2 rounded-md text-black ml-5"
-                    />
             </div>
 
             <div className='py-2'>

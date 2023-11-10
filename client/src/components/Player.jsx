@@ -28,7 +28,7 @@ function Player({theme, difficulty}) {
     fetchThemeData();
   }, [theme]);
 
- 
+
   const fetchBackImg = async (theme) => {
     try {
       const response = await axios.get("http://localhost:8000/themes/", theme);

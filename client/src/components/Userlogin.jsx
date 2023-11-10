@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { loginSchema } from '../schemas';
 import axios from 'axios';
 import { useCookies } from "react-cookie";
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import AuthContext from '../Contexts/auth/AuthProvider';
 
 
@@ -12,6 +12,7 @@ function UserLogin() {
     const [cookies, setCookies, removeCookie] = useCookies(["access_token"])
 
     const {auth, setAuth} = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const onSubmit = async (values, actions) => {
         
@@ -19,14 +20,18 @@ function UserLogin() {
         const response = await axios
         .post("http://localhost:8000/user/userlogin", values)
         console.log("you're logged")
-        setCookies("access_token", response.data.token, { expires: new Date(Date.now() + 7200000) });
+        const expirationDate = new Date(Date.now() + 7200000);
+        setCookies("access_token", response.data.token, { expires: expirationDate });
         window.localStorage.setItem("access_token", response.data.token);
         window.localStorage.setItem("userID", response.data.userID);
         window.localStorage.setItem("role", response.data.role);
+        window.localStorage.setItem("username", response.data.username);
+        window.localStorage.setItem("expirationDate", expirationDate.toISOString());
 
        
-        setAuth({ userID: response.data.userID, role: response.data.role, token: response.data.token, username: values.username });
+        setAuth({ userID: response.data.userID, role: response.data.role, token: response.data.token, username: response.data.username, expirationDate: expirationDate });
         actions.resetForm()
+        navigate("/")
         
     } catch (err){
         console.error(err)
@@ -34,16 +39,35 @@ function UserLogin() {
     }
     useEffect(() => {
         // Lors du chargement de la page, vérifiez le stockage local
-        const storedToken = window.localStorage.getItem("access_token");
-        const storedUserID = window.localStorage.getItem("userID");
-        const storedRole = window.localStorage.getItem("role");
-    
-        if (storedToken && storedUserID && storedRole) {
-          setAuth({ userID: storedUserID, role: storedRole, token: storedToken });
-        }
-      }, []);
+        const checkLocalStorage = () => {
+            const storedToken = window.localStorage.getItem("access_token");
+            const storedUserID = window.localStorage.getItem("userID");
+            const storedRole = window.localStorage.getItem("role");
+            const storedUsername = window.localStorage.getItem("username");
+            const expirationDate = window.localStorage.getItem("expirationDate");
+      
+            if (storedToken && storedUserID && storedRole && storedUsername && expirationDate) {
+              const currentDateTime = new Date();
+              const storedExpirationDate = new Date(expirationDate);
+      
+              if (currentDateTime < storedExpirationDate) {
+                setAuth({ userID: storedUserID, role: storedRole, token: storedToken, username: storedUsername, expirationDate: expirationDate });
+              } else {
+                // Clear localStorage if the token has expired
+                window.localStorage.removeItem("access_token");
+                window.localStorage.removeItem("userID");
+                window.localStorage.removeItem("role");
+                window.localStorage.removeItem("username");
+                window.localStorage.removeItem("expirationDate");
+                setAuth({})
+              }
+            }
+          };
+      
+          checkLocalStorage();
+        }, []);
 
-    console.log(auth)
+
 
     
     const formik = useFormik({
@@ -62,6 +86,8 @@ const handleLogout = () => {
   window.localStorage.removeItem("access_token");
   window.localStorage.removeItem("userID");
   window.localStorage.removeItem("role");
+  window.localStorage.removeItem("username");
+  window.localStorage.removeItem("expirationDate");
   setAuth({});
 };
 
