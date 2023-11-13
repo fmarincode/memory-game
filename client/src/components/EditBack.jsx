@@ -1,10 +1,12 @@
-import React, { useState} from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import axios from 'axios';
+import AuthContext from '../Contexts/auth/AuthProvider';
 
+export default function EditBack() {
 
-export default function EditBack({ newThemeName, themeList }) {
+  const {auth} = useContext(AuthContext);
+  const [userThemes, setUserThemes] = useState([])
     const [imageAdded, setImageAdded] = useState(false)
-
     const [postBackImage, setPostBackImage] = useState( {
         name:"",
         backImageName: "",
@@ -13,6 +15,20 @@ export default function EditBack({ newThemeName, themeList }) {
         backImageAuthor: "",
     })
 
+    useEffect(() => {
+      const fetchThemesUser = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8000/themes/${auth.username}`);
+
+          const names = response.data.map(theme => theme.name);
+          setUserThemes(names);
+        } catch (error) {
+          console.error(error);
+          return [];
+        }
+      };
+      fetchThemesUser()
+    },[])
 
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -37,7 +53,7 @@ export default function EditBack({ newThemeName, themeList }) {
             backImageAuthor: postBackImage.backImageAuthor
           };
 
-        await axios.post(`http://localhost:8000/themes/${newThemeName || postBackImage.name}/backImages/add`, newBackImage)
+        await axios.post(`http://localhost:8000/themes/${userThemes || postBackImage.name}/backImages/add`, newBackImage)
         setImageAdded(true)
       }catch(error){
         console.log(error)
@@ -101,7 +117,7 @@ export default function EditBack({ newThemeName, themeList }) {
                     label='Select'>
                       
                     </option>
-            {themeList.map((themeName, index) => (
+            {userThemes.map((themeName, index) => (
                   <option key={index} value={themeName}>
                       {themeName}
                   </option>
@@ -160,7 +176,7 @@ export default function EditBack({ newThemeName, themeList }) {
                 <button type='submit'
                 className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
             </div>
-            {imageAdded && <p> Ton image a bien été ajoutée pour {newThemeName || postBackImage.name}</p>}
+            {imageAdded && <p> Ton image a bien été ajoutée pour {userThemes || postBackImage.name}</p>}
           </form>
           </div>
           <h2>Aperçu de l'image choisie</h2>

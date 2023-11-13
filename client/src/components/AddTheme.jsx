@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import { createThemeSchema } from '../schemas';
 import axios from 'axios';
 import {Link} from "react-router-dom"
-/* import EditBack from '../components/EditBack'; */
 import AuthContext from '../Contexts/auth/AuthProvider';
 
 
@@ -142,6 +141,9 @@ const handleBool = () => {
                     value="BD"
                     label='BD'></option>
                     <option
+                    value="Musique"
+                    label='Musique'></option>
+                    <option
                     value="Autre"
                     label='Autre'></option>
                     </select>
@@ -172,12 +174,7 @@ const handleBool = () => {
         Ajouter des images
         </Link>
         </article>
-        <article>
-{/* 
-          {themeCreation && <div><EditBack 
-          newThemeName={newThemeName}
-          themeList={themeList}/></div>} */}
-        </article>
+
 
     </section>
   )
