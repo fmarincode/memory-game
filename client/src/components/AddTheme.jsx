@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import { createThemeSchema } from '../schemas';
 import axios from 'axios';
 import {Link} from "react-router-dom"
-/* import EditBack from '../components/EditBack'; */
 import AuthContext from '../Contexts/auth/AuthProvider';
 
 
@@ -80,7 +79,7 @@ const handleBool = () => {
 
 
   return (
-    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
+    
         <article className='flex flex-col items-center'>
             <h1 className='mb-5'>Ajouter un nouveau thème de jeu</h1>
             {themeCreation && <p>Ton thème a été ajouté ! N'oublie pas d'y ajouter des images</p>}
@@ -142,6 +141,9 @@ const handleBool = () => {
                     value="BD"
                     label='BD'></option>
                     <option
+                    value="Musique"
+                    label='Musique'></option>
+                    <option
                     value="Autre"
                     label='Autre'></option>
                     </select>
@@ -172,13 +174,8 @@ const handleBool = () => {
         Ajouter des images
         </Link>
         </article>
-        <article>
-{/* 
-          {themeCreation && <div><EditBack 
-          newThemeName={newThemeName}
-          themeList={themeList}/></div>} */}
-        </article>
 
-    </section>
+
+  
   )
 }

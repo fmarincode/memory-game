@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect} from 'react'
 import themeContext from '../Contexts/themeContext'
 import {Link, useNavigate} from "react-router-dom"
 import AuthContext from '../Contexts/auth/AuthProvider';
@@ -103,9 +103,7 @@ const handleClickHome =  (e) => {
            {auth.userID ?
             (
               <ul className='flex space-x-5'>
-                <li><Link to="/dashboard">Dashboard</Link> </li>              
-                <li><Link to="/addContent">add img</Link> </li>              
-                <li><Link to="/addTheme">add theme</Link> </li>              
+                <li><Link to="/dashboard">Dashboard</Link> </li>                        
                 <li><button type='button' onClick={handleLogout}>Déconnecter <span className='text-orange-500 font-semibold'>{auth.username}</span></button> </li>
               </ul>             
             
