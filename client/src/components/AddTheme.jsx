@@ -7,7 +7,7 @@ import {Link} from "react-router-dom"
 import AuthContext from '../Contexts/auth/AuthProvider';
 
 
-export default function PostTheme() {
+export default function AddTheme() {
     const [themeCreation, setThemeCreation] = useState(false)
     const [themeData, setThemeData] = useState([])
     const [themeList, setThemeList] = useState([])
@@ -173,8 +173,8 @@ const handleBool = () => {
         </Link>
         </article>
         <article>
-
-{/*           {themeCreation && <div><EditBack 
+{/* 
+          {themeCreation && <div><EditBack 
           newThemeName={newThemeName}
           themeList={themeList}/></div>} */}
         </article>

@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from "axios";
+import AuthContext from '../Contexts/auth/AuthProvider';
 
-
-function DeleteTheme({auth}) {
+function DeleteTheme() {
 
     const [themeDeleted, setThemeDeleted] = useState(false)
     const [themeData, setThemeData] = useState([])
     const [themeList, setThemeList] = useState([])
     const [themeToDelete, setThemeToDelete] = useState("")
-
+    const {auth} = useContext(AuthContext)
+    
     //fetch User's Theme
     useEffect(() => {
       const fetchThemeData = async () => {

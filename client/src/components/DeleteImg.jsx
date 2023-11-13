@@ -2,10 +2,11 @@ import React, {useState, useEffect, useContext} from 'react'
 import {Link} from "react-router-dom"
 import axios from "axios";
 import themeContext from '../Contexts/themeContext';
+import AuthContext from '../Contexts/auth/AuthProvider';
 
-
-function DeleteImg({auth}) {
+function DeleteImg() {
   const { updateThemes } = useContext(themeContext);
+  const {auth} = useContext(AuthContext)
     const [imageDeleted, setImageDeleted] = useState(false)
     const [userImgList, setUserImgList] = useState([])
     const [themeData, setThemeData] = useState([])
