@@ -72,7 +72,7 @@ const handleClickHome =  (e) => {
     <nav className='w-[100%] h-14 fixed top-0 left-0 bg-[--firstColor] text-[--secondColor] flex justify-center items-center z-50 md:mr-[17px]'>
           <div className='flex space-x-5'>
 
-            <button type="button" onClick={handleClickHome}>Home</button>         
+            <button type="button" onClick={handleClickHome}>Jouer</button>         
             
             <form>
               <label for="theme" className='pr-1'>Theme :</label>
@@ -103,9 +103,7 @@ const handleClickHome =  (e) => {
            {auth.userID ?
             (
               <ul className='flex space-x-5'>
-                <li><Link to="/addTheme">Ajouter un thème</Link> </li>
-                <li><Link to="/editTheme">Modifier un thème</Link></li>
-                <li><Link to="/addContent">Ajouter des images</Link></li>
+                <li><Link to="/dashboard">Dashboard</Link> </li>              
                 <li><button type='button' onClick={handleLogout}>Déconnecter <span className='text-orange-500 font-semibold'>{auth.username}</span></button> </li>
               </ul>             
             

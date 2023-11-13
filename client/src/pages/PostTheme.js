@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { createThemeSchema } from '../schemas';
 import axios from 'axios';
 import {Link} from "react-router-dom"
-import BackImg from '../components/BackImg';
+import EditBack from '../components/EditBack';
 import AuthContext from '../Contexts/auth/AuthProvider';
 
 
@@ -174,7 +174,7 @@ const handleBool = () => {
         </article>
         <article>
 
-          {themeCreation && <div><BackImg 
+          {themeCreation && <div><EditBack 
           newThemeName={newThemeName}
           themeList={themeList}/></div>}
         </article>

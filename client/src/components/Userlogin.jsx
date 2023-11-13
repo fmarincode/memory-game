@@ -92,7 +92,7 @@ const handleLogout = () => {
 };
 
     return (
-        <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
+        <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20'>
             <article className='text-center flex flex-col justify-center items-center'>
 
             <div className='border-2 border-[#ccc1c1] p-5 rounded-lg md:w-96 md:h-64'>

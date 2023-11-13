@@ -23,7 +23,7 @@ function DeleteImg({auth}) {
           const response = await axios.get(`http://localhost:8000/themes/${auth.username}`)
           setThemeData(response.data)
         } catch (error) {
-          console.err(error)
+          console.error(error)
         }
       }
       fetchThemeData()

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext} from 'react';
 import axios from 'axios';
-import BackImg from "../components/BackImg"
+import EditBack from "../components/EditBack"
 import AuthContext from '../Contexts/auth/AuthProvider';
 import themeContext from '../Contexts/themeContext';
 
@@ -206,7 +206,7 @@ export default function PostImg() {
         {postImage.image && <img src={postImage.image} alt="image uploaded" className='md:max-h-40 md:max-w-40'/>}
         </article>
         <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
-            <BackImg 
+            <EditBack 
             themeList = {themeList}/>
         </article>
 

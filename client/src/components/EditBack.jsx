@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 
 
-export default function BackImg({ newThemeName, themeList }) {
+export default function EditBack({ newThemeName, themeList }) {
     const [imageAdded, setImageAdded] = useState(false)
 
     const [postBackImage, setPostBackImage] = useState( {

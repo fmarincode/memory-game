@@ -29,11 +29,11 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled, difficult
     <div key={card.id} className={`bg-[#cccccc] border-2 border-white rounded-lg shadow-md cursor-pointer hover:scale-105 hover:shadow-xl w-3/4 flex justify-center 
     ${difficulty === "Standard" ? 
     "md:w-48" : difficulty === "Middle" ?
-    "md:w-44" : "md:w-40"}`}>
+    "md:w-44" : "md:w-36"}`}>
     <div className={`relative flex justify-center items-center 
     ${difficulty === "Standard" ?
     "w-[188px] h-[188px]" : difficulty === "Middle" ?
-    "w-[172px] h-[172px]" : "w-[156px] h-[156px]"}`}>
+    "w-[172px] h-[172px]" : "w-[144px] h-[144px]"}`}>
 
         {flipped ? (
             <>

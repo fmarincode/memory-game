@@ -1,14 +1,15 @@
-import React, {useContext, useEffect } from 'react'
+import React, {useContext, useEffect, useState } from 'react'
 import AuthContext from '../Contexts/auth/AuthProvider';
 import {Link} from "react-router-dom"
 import DeleteImg from '../components/DeleteImg';
 import DeleteTheme from '../components/DeleteTheme';
-
+import {AiOutlineEdit, AiOutlinePlusSquare} from "react-icons/ai";
+import {ImBin} from "react-icons/im";
 
 function EditTheme() {
 
     const {auth, setAuth} = useContext(AuthContext)
-
+    const [chooseEditor, setChooseEditor] = useState("")
 
     useEffect(() => {
       // Lors du chargement de la page, vérifiez le stockage local
@@ -32,16 +33,41 @@ function EditTheme() {
     
               
                 <p> Que souhaites-tu faire ?</p>
-                <p> <span className='font-bold text-xl'>Choix 1</span> : Si tu veux changer l'image sur la face au dos des cartes tu peux le faire en <Link to="/addContent" className='underline'>cliquant ici</Link>, ta nouvelle image sera utilisée.<span className='text-xl text-green-500'> OK</span></p>
-                <p> <span className='font-bold text-xl'>Choix 2</span> : Si tu veux ajouter des images faces cachées tu peux le faire en <Link to="/addContent" className='underline'>cliquant ici</Link>, ta nouvelle image sera aléatoirement utilisée.<span className='text-xl text-green-500'> OK</span></p>
-                <p> <span className='font-bold text-xl'>Choix 3</span> : Si tu veux supprimer une des images faces cachées tu peux le faire en <Link to="" className='underline'>cliquant ici</Link>, l'action est irréversible. <span className='text-xl text-green-500'> OK </span></p>
-                <p> <span className='font-bold text-xl'>Choix 4</span> : Si tu veux supprimer un thème entièrement tu peux le faire en <Link to="" className='underline'>cliquant ici</Link>, les images de ce thème disparaitront également, l'action est irréversible. <span className='text-xl text-green-500'> OK </span></p>
+                <div className='md:p-8 md:border-2 md:border-white md:auto md:flex md:justify-around md:items-center md:mt-5'>
+                  <div className='flex flex-col space-y-3'>
+                      <p> 4 choix sont possibles pour toi </p>
+                    <div className='flex space-x-5'>
+                      <p>Si tu veux changer l'image sur la face au dos des cartes <Link to="/addContent" className='underline'>clique ici</Link></p> 
+                      <AiOutlineEdit className='text-2xl'/>
+                    </div>
+                    <div className='flex space-x-5'>
+                      <p>Si tu veux ajouter des images faces cachées à l'un de tes thèmes <Link to="/addContent" className='underline'>clique ici</Link></p> 
+                      <AiOutlinePlusSquare className='text-2xl'/>
+                    </div>
+                    <div className='flex space-x-5'>
+                      <p>Si tu veux supprimer une des images faces cachées <button type="button" onClick={() => setChooseEditor("DeleteImg")} className='underline'>clique ici</button></p> 
+                      <ImBin className='text-2xl'/>
+                    </div>
+                    <div className='flex space-x-5'>
+                      <p>Si tu veux supprimer un thème entièrement <button type="button" onClick={() => setChooseEditor("DeleteTheme")} className='underline'>clique ici</button></p> 
+                      <ImBin className='text-2xl'/>
+                    </div>
+                  </div>
+                </div>
+
+           
                 
             </article>
-                    <DeleteTheme
-                    auth={auth}/>
-                    <DeleteImg 
-                    auth={auth}/>
+            <article className='mt-5'>
+              {chooseEditor === "DeleteTheme" ?( 
+              <DeleteTheme auth={auth}/>)
+              : chooseEditor === "DeleteImg" ? (
+                <DeleteImg auth={auth}/>
+              ) : ""
+              }
+            </article>
+                    
+                    
         </section>
   )
 }
