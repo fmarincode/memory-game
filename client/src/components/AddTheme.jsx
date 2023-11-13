@@ -79,7 +79,7 @@ const handleBool = () => {
 
 
   return (
-    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
+    
         <article className='flex flex-col items-center'>
             <h1 className='mb-5'>Ajouter un nouveau thème de jeu</h1>
             {themeCreation && <p>Ton thème a été ajouté ! N'oublie pas d'y ajouter des images</p>}
@@ -176,6 +176,6 @@ const handleBool = () => {
         </article>
 
 
-    </section>
+  
   )
 }
