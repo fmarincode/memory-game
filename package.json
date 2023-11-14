@@ -5,7 +5,8 @@
     "react-scripts": "^5.0.1"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build:client": "cd client && npm install && npm run build",
+    "build": "npm run build:client",
     "dev": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
     "start:client": "cd client && npm start",
     "start:server": "cd server && npm start"
