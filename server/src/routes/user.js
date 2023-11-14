@@ -1,16 +1,16 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { AdminModel } from "../models/Admin.js";
+import { UserModel } from "../models/User.js";
 
 
 
 const router = express.Router()
 
-router.post("/Adminregister", async(req, res) => {
-    const {username, password} = req.body;
+router.post("/userregister", async(req, res) => {
+    const {username, password, role} = req.body;
 
-    const user = await AdminModel.findOne({username: username})
+    const user = await UserModel.findOne({username: username})
 
     if (user){
         return res.json({message: "User already exists !"})
@@ -18,16 +18,16 @@ router.post("/Adminregister", async(req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    const newUser = new AdminModel({username, password: hashedPassword})
+    const newUser = new UserModel({username, password: hashedPassword, role})
     await newUser.save()
 
     res.json({message: "User Registered Successfully !"})
 })
 
-router.post("/Adminlogin", async(req, res) => {
+router.post("/userlogin", async(req, res) => {
     const {username, password} = req.body;
 
-    const user = await AdminModel.findOne({username: username})
+    const user = await UserModel.findOne({username: username})
 
     if (!user){
         return res.json({message: "User doesn't exist !"})
@@ -40,8 +40,8 @@ router.post("/Adminlogin", async(req, res) => {
     }
 
     const token = jwt.sign({id:user._id}, "secret")
-    res.json({token, userID:user._id })
+    res.json({token, userID:user._id, role:user.role, username: username })
 })
 
 
-export {router as adminRouter};
+export {router as userRouter};

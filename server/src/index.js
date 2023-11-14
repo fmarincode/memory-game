@@ -3,7 +3,7 @@ import cors from "cors"; // allowed communication between front & back
 import mongoose from "mongoose" // for mongoDB 
 import dotenv from 'dotenv';
 import {imgsRouter} from './routes/images.js'
-import {adminRouter} from './routes/admin.js'
+import {userRouter} from './routes/user.js'
 import {themesRouter} from './routes/themes.js'
 
 dotenv.config();
@@ -16,9 +16,10 @@ app.use(cors())
 
 
 
-app.use("/", adminRouter)
+app.use("/user", userRouter)
 app.use("/images", imgsRouter)
 app.use("/themes", themesRouter)
+
 
 mongoose.connect(process.env.MONGODB_URI);
 

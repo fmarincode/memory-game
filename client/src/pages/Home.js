@@ -3,8 +3,7 @@ import themeContext from '../Contexts/themeContext'
 import Player from '../components/Player';
 
 function Home() {
-    const {theme, difficulty} = useContext(themeContext);
-
+  const {theme, difficulty} = useContext(themeContext);
   return (
     <body className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
       <main className='flex flex-col w-full items-center'>
