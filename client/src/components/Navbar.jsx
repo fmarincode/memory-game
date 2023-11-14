@@ -12,9 +12,9 @@ function Navbar({}) {
 
   useEffect(() => {
     updateThemes()
-  },[])
+  },[auth])
 
-  console.log(themeCatalog)
+
   const navigate = useNavigate()
 
     useEffect(() => {

@@ -60,7 +60,7 @@ function DeleteTheme() {
 
     <article >
         <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
-            <h2 className='text-center'>CHOIX 4 : Supprimer un thème</h2>
+            <h2 className='text-center'>Supprimer un thème</h2>
             <p>Toutes les données du thèmes, dont les images, seront également supprimées.</p>
                 <form 
                 onSubmit={handleSubmit}
