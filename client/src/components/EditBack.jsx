@@ -53,7 +53,7 @@ export default function EditBack() {
             backImageAuthor: postBackImage.backImageAuthor
           };
 
-        await axios.post(`http://localhost:8000/themes/${userThemes || postBackImage.name}/backImages/add`, newBackImage)
+        await axios.post(`http://localhost:8000/themes/${postBackImage.name}/backImages/add`, newBackImage)
         setImageAdded(true)
       }catch(error){
         console.log(error)
@@ -176,7 +176,7 @@ export default function EditBack() {
                 <button type='submit'
                 className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
             </div>
-            {imageAdded && <p> Ton image a bien été ajoutée pour {userThemes || postBackImage.name}</p>}
+            {imageAdded && <p> Ton image a bien été ajoutée pour {postBackImage.name}</p>}
           </form>
           </div>
           <h2>Aperçu de l'image choisie</h2>
