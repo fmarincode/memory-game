@@ -28,7 +28,7 @@ function Dashboard() {
       <h3 className='text-center font-semibold text-lg mb-2'>Que veux-tu faire ?</h3>
       <h2 className='text-center font-semibold text-lg mb-5'>Selon ton choix, il te suffit de retourner la carte !</h2>
       <h2 className='text-center font-semibold text-lg mb-5'>Note : chaque utilisateur ne peut agir que sur ses propres thèmes.</h2>
-    <article className={`${selectedOption !== null ? "flex flex-row justify-around md:w-full h-96" : "text-center flex flex-col justify-center items-center md:w-full"}`}>
+    <article className={`${selectedOption !== null ? "flex flex-row justify-around md:w-full h-[50%]" : "text-center flex flex-col justify-center items-center md:w-full"}`}>
 
     <div className='flex flex-row flex-wrap w-1/2 justify-evenly mt-5 '>
         <div className={`border-2 border-white rounded-lg cursor-pointer w-3/4 flex justify-center md:w-48 md:h-48 m-6 ${selectedOption === "addTheme" ? "" : "shadow-4xl-green" }`} onClick={() => handleClick('addTheme')}>
@@ -45,7 +45,7 @@ function Dashboard() {
         <div className={`border-2 border-white rounded-lg cursor-pointer w-3/4 flex justify-center md:w-48 md:h-48 m-6 ${selectedOption === "editBack" ? "" : "shadow-4xl-green" }`}
         onClick={() => handleClick('editBack')}>
              <div className='flex justify-center items-center px-2'>
-                <p className=''>Ajouter / changer l'image au dos des cartes</p>
+                <p className='text-center'>Ajouter / changer l'image au dos des cartes</p>
              </div>
         </div>
         <div className={`border-2 border-white rounded-lg cursor-pointer w-3/4 flex justify-center md:w-48 md:h-48 m-6 ${selectedOption === "deleteTheme" ? "" : "shadow-4xl-red" }`}
