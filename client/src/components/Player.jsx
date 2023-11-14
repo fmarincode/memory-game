@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import SingleCards from './SingleCards'
 import axios from "axios"
 import defaultImg from "../default/backdefault.webp"
-
+import {Link} from "react-router-dom"
 
 function Player({theme, difficulty}) {
 
@@ -13,6 +13,7 @@ function Player({theme, difficulty}) {
   const [disabled, setDisabled] = useState(false)
   const [backCard, setBackCard]= useState()
   const [dataImgs, setDataImgs] = useState()
+  const [errorLoading, setErrorLoading] = useState(false)
 
   useEffect(() => {
     const fetchThemeData = async () => {
@@ -20,7 +21,9 @@ function Player({theme, difficulty}) {
         const normalizedTheme = theme.toLowerCase().replace(/[\s-]/g, '');
         const response = await axios.get(`http://localhost:8000/images/${normalizedTheme}`);
         setDataImgs(response.data);
+        setErrorLoading(false)
       } catch (err) {
+        setErrorLoading(true)
         console.log(err);
       }
     };
@@ -138,23 +141,31 @@ function Player({theme, difficulty}) {
             className='border-2 w-32 rounded-md px-4 py-1 hover:bg-green-500 mt-2'
             onClick={mixCards}>NEW GAME
           </button>
-        <div className={`flex mt-5 md:grid md:gap-5
-        ${difficulty === "Standard" ? 
-        " md:grid-cols-4 md:grid-rows-3" : difficulty === "Middle" ?
-        " md:grid-cols-8 md:grid-rows-2 pt-20" : " md:grid-cols-5 md:grid-rows-4"}`}>
-              {cards.map(card => (
-              <SingleCards 
-              key={card.id} 
-              card={card}
-              backCard={backCard}
-              handleChoice={handleChoice}
-              flipped={card === choiceOne || card === choiceTwo || card.matched}
-              disabled={disabled}
-              difficulty={difficulty}/>
-              ) )}
-        </div>
-        
-                <p className='text-xl font-bold text-center mt-3'>Turns : {turns}</p>
+          {errorLoading ? (
+            <p className='mt-10'>Tu n'as pas encore ajouté d'images à ton thème ! Rends-toi dans ton <Link to="/dashboard">dashboard</Link></p>
+
+          ) : (
+            <>
+            
+              <div className={`flex mt-5 md:grid md:gap-5
+              ${difficulty === "Standard" ? 
+              " md:grid-cols-4 md:grid-rows-3" : difficulty === "Middle" ?
+              " md:grid-cols-8 md:grid-rows-2 pt-20" : " md:grid-cols-5 md:grid-rows-4"}`}>
+                    {cards.map(card => (
+                    <SingleCards 
+                    key={card.id} 
+                    card={card}
+                    backCard={backCard}
+                    handleChoice={handleChoice}
+                    flipped={card === choiceOne || card === choiceTwo || card.matched}
+                    disabled={disabled}
+                    difficulty={difficulty}/>
+                    ) )}
+              </div>
+              
+                      <p className='text-xl font-bold text-center mt-3'>Turns : {turns}</p>
+            </>
+          )} 
       </section>
 
     

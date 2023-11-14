@@ -89,8 +89,13 @@ const imagesByTheme = themeList.reduce((acc, theme) => {
               {image.name} : <a href={image.imageSrc} target='blank' className='font-bold tracking-widest hover:border-b-2 border-red-500'>{image.imageAuthor} <AiOutlinePaperClip className='inline-block'/></a> 
             </li>
           ))}
-          
-          <li>Image d'illustration du thème au dos des cartes : {lastBackImage.backImageName} : <a href={lastBackImage.backImageSrc} target='blank' className='font-bold tracking-widest hover:border-b-2 border-red-500'>{lastBackImage.backImageAuthor} <AiOutlinePaperClip className='inline-block'/></a></li>
+
+          {lastBackImage && lastBackImage.backImageName ? (
+
+            <li>Image d'illustration du thème au dos des cartes : {lastBackImage.backImageName} : <a href={lastBackImage.backImageSrc} target='blank' className='font-bold tracking-widest hover:border-b-2 border-red-500'>{lastBackImage.backImageAuthor} <AiOutlinePaperClip className='inline-block'/></a></li>
+          ) : (
+            <li>Image d'illustration du thème au dos des cartes : Image du jeu par défaut </li>
+          )}
         </ul>
       </details>
     );
