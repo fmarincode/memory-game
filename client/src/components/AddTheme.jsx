@@ -111,7 +111,7 @@ const handleBool = () => {
                 {formik.errors.name}
             </p>)
         }
-        {alreadyInList && <p className='mt-3'>Cette oeuvre existe déjà dans notre liste de thèmes, tu peux y ajouter des images ou refaire le thème à ton goût mais en modifiant le nom.</p>}
+        
 
         <div className='py-2'>
                 <label htmlFor='media'
@@ -169,6 +169,11 @@ const handleBool = () => {
         </div>
             </form>
             </div>
+            {alreadyInList && <>
+              <p className='mt-3 text-center w-96'>Cette oeuvre existe déjà dans notre liste de thèmes. </p>
+              <p className='mt-3 text-center w-96'>Pour refaire le thème à ton goût, tu dois en créer un nouveau en modifiant le nom.</p>
+              </>}
+            
         </article>
 
 </>
