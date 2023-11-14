@@ -95,11 +95,11 @@ export default function AddImgs() {
       };
       
   return (
-    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)] md:flex-row'>
-        
-        <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
-            <h1 className='mb-5'>Ajouter une image dans la base de données</h1>
+    
+        <>
+          <article className='md:flex md:flex-col md:items-center md:space-y-5'>
             <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
+            <h1 className='mb-5 text-center'>Ajouter une image dans la base de données</h1>
            <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-start'>
             <div className='py-2'>
@@ -209,7 +209,7 @@ export default function AddImgs() {
 {/*             <EditBack 
             themeList = {themeList}/> */}
         </article>
+        </>
 
-    </section>
   )
 }

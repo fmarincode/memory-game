@@ -80,10 +80,11 @@ const handleBool = () => {
 
   return (
     
-        <article className='flex flex-col items-center'>
-            <h1 className='mb-5'>Ajouter un nouveau thème de jeu</h1>
+    <>
+    <article className='md:flex md:flex-col md:items-center md:space-y-5'>
             {themeCreation && <p>Ton thème a été ajouté ! N'oublie pas d'y ajouter des images</p>}
             <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
+            <h1 className='mb-5 text-center'>Ajouter un nouveau thème de jeu</h1>
             <form
             onSubmit={formik.handleSubmit}
             className='flex flex-col justify-center items-start'>
@@ -168,14 +169,9 @@ const handleBool = () => {
         </div>
             </form>
             </div>
-            <p className='mt-5'>Le thème existe déjà ? Ajoutes-y des images</p>
-        <Link to={"/addContent"}
-        className='border-2 bg-blue-300 hover:bg-green-500 text-black font-semibold rounded-md px-4 py-2 cursor-pointer mt-5'>
-        Ajouter des images
-        </Link>
         </article>
 
-
+</>
   
   )
 }

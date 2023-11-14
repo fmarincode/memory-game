@@ -81,8 +81,8 @@ export default function EditBack() {
   return (
 
         <article className='flex flex-col items-center md:space-y-5'>
-          <h2 className='mb-5'>Ajouter l'image au dos des cartes (optionnel)</h2>
           <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
+          <h2 className='mb-5 text-center'>Ajouter l'image au dos des cartes </h2>
 
         <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-start'>

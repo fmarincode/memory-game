@@ -89,7 +89,9 @@ function DeleteImg() {
     console.log(image)
   return (
     <section className='flex flex-col justify-center items-center'>
-
+           <article>
+      <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
+      <h2 className='text-center'>Supprimer une image du thème</h2>
       <article className=" mt-5 flex justify-center">
           <h3 className='text-center font-semibold text-lg mb-5'>Choix du thème</h3>
             
@@ -119,17 +121,6 @@ function DeleteImg() {
             </select>
             </form>
             </article>
-            <article>
-              <p>Aperçu : </p>
-              {image && (
-                <img src={image.find(img => img.name === formDelete.imageName)?.image} alt={formDelete.imageName} className='md:max-h-40 md:max-w-40'/>
-              )}
-            </article>
-            <article>
-
-            
-      <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
-      <h2 className='text-center'>CHOIX 3 : Supprimer une image du thème</h2>
             <form onSubmit={handleSubmit}
             className='flex flex-col justify-center items-start mt-2'>
               <div className='py-2'>
@@ -161,12 +152,6 @@ function DeleteImg() {
                   </select>
 
               </div>
-
-            <p>Tu peux retrouver le nom de l'image dans la page copyright en <Link to="/copyright">cliquant ici</Link></p>
-
-            
-
-            
               <div className='flex self-center mt-2'>
                   <button type='submit'
                   className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Supprimer</button>
@@ -174,7 +159,14 @@ function DeleteImg() {
               {imageDeleted && <p className='flex self-center mt-1'>Image supprimée !</p>}
                   </form>
               </div>
+              <article className='flex flex-col justify-center items-center space-y-5'>
+              <p>Aperçu de l'image à supprimer </p>
+              {image && (
+                <img src={image.find(img => img.name === formDelete.imageName)?.image} alt={formDelete.imageName} className='md:max-h-40 md:max-w-40'/>
+              )}
+            </article>
       </article>
+      
     </section>
   )
 }
