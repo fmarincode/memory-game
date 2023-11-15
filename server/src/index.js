@@ -21,7 +21,9 @@ app.use("/images", imgsRouter)
 app.use("/themes", themesRouter)
 
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI).then (() => {
+    const PORT = process.env.PORT || 8000
+    app.listen(PORT, () => console.log("SERVER STARTED!"))
+    
+}).catch(err => {console.error(err)});
 
-
-app.listen(8000, () => console.log("SERVER STARTED!"))
