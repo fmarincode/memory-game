@@ -18,7 +18,7 @@ export default function EditBack() {
     useEffect(() => {
       const fetchThemesUser = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/themes/${auth.username}`);
+          const response = await axios.get(`https://memorycardgame.onrender.com/themes/${auth.username}`);
 
           const names = response.data.map(theme => theme.name);
           setUserThemes(names);
@@ -53,7 +53,7 @@ export default function EditBack() {
             backImageAuthor: postBackImage.backImageAuthor
           };
 
-        await axios.post(`http://localhost:8000/themes/${postBackImage.name}/backImages/add`, newBackImage)
+        await axios.post(`https://memorycardgame.onrender.com/themes/${postBackImage.name}/backImages/add`, newBackImage)
         setImageAdded(true)
       }catch(error){
         console.log(error)

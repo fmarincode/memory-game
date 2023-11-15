@@ -2,7 +2,6 @@ import React, {useState, useEffect, useContext} from 'react';
 import { useFormik } from "formik";
 import { createThemeSchema } from '../schemas';
 import axios from 'axios';
-import {Link} from "react-router-dom"
 import AuthContext from '../Contexts/auth/AuthProvider';
 
 
@@ -17,7 +16,7 @@ export default function AddTheme() {
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/themes/")
+        const response = await axios.get("https://memorycardgame.onrender.com/themes/")
         setThemeData(response.data)
       } catch (error) {
         console.err(error)
@@ -49,7 +48,7 @@ export default function AddTheme() {
       }
 
           await axios
-          .post("http://localhost:8000/themes/", values)
+          .post("https://memorycardgame.onrender.com/themes/", values)
           setThemeCreation(true)
           setNewThemeName(values.name)
           console.log("its ok, theme created")

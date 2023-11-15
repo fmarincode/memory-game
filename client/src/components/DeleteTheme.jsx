@@ -14,7 +14,7 @@ function DeleteTheme() {
     useEffect(() => {
       const fetchThemeData = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/themes/${auth.username}`)
+          const response = await axios.get(`https://memorycardgame.onrender.com/themes/${auth.username}`)
           setThemeData(response.data)
         } catch (error) {
           console.error(error)
@@ -35,7 +35,7 @@ function DeleteTheme() {
       const normalizedTheme = themeToDelete.toLowerCase().replace(/[\s-]/g, '');
       try {
         console.log(normalizedTheme)
-        await axios.delete(`http://localhost:8000/images/img/delete/${normalizedTheme}`)
+        await axios.delete(`https://memorycardgame.onrender.com/images/img/delete/${normalizedTheme}`)
         console.log("imgs deleted")
       } catch (error) {
         console.error(error)
@@ -46,7 +46,7 @@ function DeleteTheme() {
     const handleSubmit = async (e) => {
       e.preventDefault()
       try {
-        await axios.delete(`http://localhost:8000/themes/${themeToDelete}/delete`)
+        await axios.delete(`https://memorycardgame.onrender.com/themes/${themeToDelete}/delete`)
         setThemeDeleted(true)
         setThemeList((prevImgList) => prevImgList.filter(theme => theme !== themeToDelete));// regarde la liste precedente, filtre, pour chaque theme il renvoie le themeName tant qu'il est différent de celui qui vient d'ê delete.
         deleteThemesImg()

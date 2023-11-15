@@ -11,7 +11,7 @@ function UserRegister() {
     const onSubmit = async (values, actions) => {
       try {
         await axios
-        .post("http://localhost:8000/user/userregister", values)
+        .post("https://memorycardgame.onrender.com/user/userregister", values)
         actions.resetForm()
         setRegistered(true)
         

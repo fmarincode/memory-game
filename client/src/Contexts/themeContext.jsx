@@ -14,7 +14,7 @@ export function ThemeProvider({ children }) {
   // Fonction pour récupérer les thèmes de l'admin
   const fetchThemeData = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/themes/Bascom3000");
+      const response = await axios.get("https://memorycardgame.onrender.com/themes/Bascom3000");
       return response.data;
     } catch (error) {
       console.error(error);
@@ -25,7 +25,7 @@ export function ThemeProvider({ children }) {
     // Fonction pour récupérer les thèmes de l'utilisateur
     const fetchThemesUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/themes/${auth.username}`);
+      const response = await axios.get(`https://memorycardgame.onrender.com/themes/${auth.username}`);
       return response.data;
     } catch (error) {
       console.error(error);

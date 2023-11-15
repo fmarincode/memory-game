@@ -13,7 +13,7 @@ export default function AddImgs() {
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/themes/${auth.username}`)
+        const response = await axios.get(`https://memorycardgame.onrender.com/themes/${auth.username}`)
         setThemeData(response.data)
       } catch (error) {
         
@@ -66,7 +66,7 @@ export default function AddImgs() {
             imageAuthor: postImage.imageAuthor,
           };
 
-        await axios.post("http://localhost:8000/images/add", newImage)
+        await axios.post("https://memorycardgame.onrender.com/images/add", newImage)
         setImageAdded(true)
         
       }catch(error){
