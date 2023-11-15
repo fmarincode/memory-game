@@ -9,11 +9,12 @@ export default function AddImgs() {
   const [themeData, setThemeData] = useState([])
   const [themeList, setThemeList] = useState([])
   const {auth} = useContext(AuthContext)
+  const url = "https://memorycardgame.onrender.com"
 
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
-        const response = await axios.get(`https://memorycardgame.onrender.com/themes/${auth.username}`)
+        const response = await axios.get(`${url}/themes/${auth.username}`)
         setThemeData(response.data)
       } catch (error) {
         
@@ -66,11 +67,11 @@ export default function AddImgs() {
             imageAuthor: postImage.imageAuthor,
           };
 
-        await axios.post("https://memorycardgame.onrender.com/images/add", newImage)
+        await axios.post(`${url}/images/add`, newImage)
         setImageAdded(true)
         
       }catch(error){
-        console.log(error)
+        console.error(error)
       }
     }
   
@@ -78,13 +79,12 @@ export default function AddImgs() {
       e.preventDefault();
       createPost()
       updateThemes()
-      console.log("Uploaded")
+
     }
   
     const handleFileUpload = async (e) => {
       const file = e.target.files[0];
       const base64 = await convertToBase64(file);
-      console.log(base64)
       setPostImage({ ...postImage, image : base64 })
     }
 

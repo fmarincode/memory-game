@@ -13,13 +13,13 @@ function UserLogin() {
 
     const {auth, setAuth} = useContext(AuthContext)
     const navigate = useNavigate()
+    const url = "https://memorycardgame.onrender.com"
 
     const onSubmit = async (values, actions) => {
         
       try {
         const response = await axios
-        .post("https://memorycardgame.onrender.com/user/userlogin", values)
-        console.log("you're logged")
+        .post(`${url}/user/userlogin`, values)
         const expirationDate = new Date(Date.now() + 7200000);
         setCookies("access_token", response.data.token, { expires: expirationDate });
         window.localStorage.setItem("access_token", response.data.token);

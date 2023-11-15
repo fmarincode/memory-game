@@ -3,7 +3,7 @@ import axios from "axios"
 import {AiOutlinePaperClip} from "react-icons/ai"
 
 function Copyright() {
-
+const url = "https://memorycardgame.onrender.com"
 const [imagesData, setImagesData] = useState([])
 const [themeData, setThemeData] = useState([])
 const [themeList, setThemeList] = useState([])
@@ -12,7 +12,7 @@ const [themeList, setThemeList] = useState([])
         // fetch full data in images collection
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/images/img")
+                const response = await axios.get(`${url}/images/img`)
                 
                 setImagesData(response.data)
             } catch (error) {
@@ -27,7 +27,7 @@ const [themeList, setThemeList] = useState([])
     useEffect(() => {
     const fetchThemeData = async () => {
         try {
-        const response = await axios.get("http://localhost:8000/themes/")
+        const response = await axios.get(`${url}/themes/`)
         setThemeData(response.data)
         } catch (error) {
         
@@ -36,7 +36,7 @@ const [themeList, setThemeList] = useState([])
     fetchThemeData()
     },[])
 
-    console.log(themeData)
+
 
     useEffect(() => {
     if (themeData) {

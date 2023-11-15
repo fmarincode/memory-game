@@ -24,7 +24,7 @@ function Dashboard() {
    }
 
   return (
-    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
+    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-70px)]'>
       <h3 className='text-center font-semibold text-lg mb-2'>Que veux-tu faire ?</h3>
       <h2 className='text-center font-semibold text-lg mb-5'>Selon ton choix, il te suffit de retourner la carte !</h2>
       <h2 className='text-center font-semibold text-lg mb-5'>Note : chaque utilisateur ne peut agir que sur ses propres thèmes.</h2>

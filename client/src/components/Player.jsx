@@ -14,17 +14,18 @@ function Player({theme, difficulty}) {
   const [backCard, setBackCard]= useState()
   const [dataImgs, setDataImgs] = useState()
   const [errorLoading, setErrorLoading] = useState(false)
+  const url = "https://memorycardgame.onrender.com"
 
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
         const normalizedTheme = theme.toLowerCase().replace(/[\s-]/g, '');
-        const response = await axios.get(`https://memorycardgame.onrender.com/images/${normalizedTheme}`);
+        const response = await axios.get(`${url}/images/${normalizedTheme}`);
         setDataImgs(response.data);
         setErrorLoading(false)
       } catch (err) {
         setErrorLoading(true)
-        console.log(err);
+        console.error(err);
       }
     };
 
@@ -34,7 +35,7 @@ function Player({theme, difficulty}) {
 
   const fetchBackImg = async (theme) => {
     try {
-      const response = await axios.get("https://memorycardgame.onrender.com/themes/", theme);
+      const response = await axios.get(`${url}/themes/`, theme);
       const filteredThemes = response.data.filter(data => data.name === theme); 
       if (filteredThemes.length > 0) {
         const lastBackImage = filteredThemes[0].backImg[filteredThemes[0].backImg.length - 1].backImage; // tjr select la derniere ajoutée
@@ -42,7 +43,7 @@ function Player({theme, difficulty}) {
       }
     } catch (err) {
       setBackCard(defaultImg)
-      console.log(err);
+      console.error(err);
     }
   };
 

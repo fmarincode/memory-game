@@ -15,12 +15,13 @@ function DeleteImg() {
       imageName: "",
     })
     const [image, setImage] = useState()
+    const url = "https://memorycardgame.onrender.com"
 
     //fetch User's Theme
     useEffect(() => {
       const fetchThemeData = async () => {
         try {
-          const response = await axios.get(`https://memorycardgame.onrender.com/themes/${auth.username}`)
+          const response = await axios.get(`${url}/themes/${auth.username}`)
           setThemeData(response.data)
         } catch (error) {
           console.error(error)
@@ -48,7 +49,7 @@ function DeleteImg() {
       const normalizedTheme = formDelete.titleFrom.toLowerCase().replace(/[\s-]/g, '');
 
       try {
-        await axios.delete(`https://memorycardgame.onrender.com/images/${normalizedTheme}/${formDelete.imageName}/delete`)
+        await axios.delete(`${url}/images/${normalizedTheme}/${formDelete.imageName}/delete`)
         setImageDeleted(true)       
         setUserImgList((prevImgList) => prevImgList.filter(imageName => imageName !== formDelete.imageName));// regarde la liste precedente, filtre, pour chaque imageName il renvoie imageName tant qu'elle est différente de celle qui vient d'ê delete
         updateThemes();
@@ -63,7 +64,7 @@ function DeleteImg() {
       try {
         const normalizedTheme = formDelete.titleFrom.toLowerCase().replace(/[\s-]/g, '');
         
-        const response = await axios.get(`https://memorycardgame.onrender.com/images/img/${auth.username}/${normalizedTheme}`)
+        const response = await axios.get(`${url}/images/img/${auth.username}/${normalizedTheme}`)
          // Filtrer les images en fonction du thème
         const filteredImages = response.data.filter(element => element.titleFrom === normalizedTheme);
         // Extraire les noms des images filtrées
@@ -85,7 +86,7 @@ function DeleteImg() {
     },[formDelete.titleFrom])
     
 
-    console.log(image)
+
   return (
     <section className='flex flex-col justify-center items-center'>
            <article>

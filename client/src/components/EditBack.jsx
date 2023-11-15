@@ -14,11 +14,12 @@ export default function EditBack() {
         backImageSrc: "",
         backImageAuthor: "",
     })
+    const url = "https://memorycardgame.onrender.com"
 
     useEffect(() => {
       const fetchThemesUser = async () => {
         try {
-          const response = await axios.get(`https://memorycardgame.onrender.com/themes/${auth.username}`);
+          const response = await axios.get(`${url}/themes/${auth.username}`);
 
           const names = response.data.map(theme => theme.name);
           setUserThemes(names);
@@ -53,23 +54,22 @@ export default function EditBack() {
             backImageAuthor: postBackImage.backImageAuthor
           };
 
-        await axios.post(`https://memorycardgame.onrender.com/themes/${postBackImage.name}/backImages/add`, newBackImage)
+        await axios.post(`${url}/themes/${postBackImage.name}/backImages/add`, newBackImage)
         setImageAdded(true)
       }catch(error){
-        console.log(error)
+        console.error(error)
       }
     }
   
     const handleSubmit = (e) => {
       e.preventDefault();
       createPost()
-      console.log("Uploaded")
+
     }
   
     const handleFileUploadBackImg = async (e) => {
       const file = e.target.files[0];
       const base64 = await convertToBase64(file);
-      console.log(base64)
       setPostBackImage({ ...postBackImage, backImage : base64 })
     }
   

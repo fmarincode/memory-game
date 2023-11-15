@@ -12,11 +12,12 @@ export default function AddTheme() {
     const [alreadyInList, setAlreadyInList] = useState(false)
     const [newThemeName, setNewThemeName] = useState("")
     const {auth} = useContext(AuthContext)
+    const url = "https://memorycardgame.onrender.com"
 
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
-        const response = await axios.get("https://memorycardgame.onrender.com/themes/")
+        const response = await axios.get(`${url}/themes/`)
         setThemeData(response.data)
       } catch (error) {
         console.err(error)
@@ -48,10 +49,9 @@ export default function AddTheme() {
       }
 
           await axios
-          .post("https://memorycardgame.onrender.com/themes/", values)
+          .post(`${url}/themes/`, values)
           setThemeCreation(true)
           setNewThemeName(values.name)
-          console.log("its ok, theme created")
           actions.resetForm()
           
       } catch (err){

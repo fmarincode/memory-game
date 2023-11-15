@@ -50,7 +50,6 @@ const handleClickHome =  (e) => {
   e.preventDefault()
   setTheme("Dragon Ball")
   updateThemes()
-  console.log("fetch themes user chargé !")
   navigate("/")
 }
 
