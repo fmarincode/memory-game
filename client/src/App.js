@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -15,10 +15,17 @@ import Dashboard from './pages/Dashboard';
 
 
 function App() {
+  const [message, setMessage] = useState("");
+   // Fetching message from backend on mount
+   useEffect(() => {
+    fetch("http://localhost:8000")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message));
+  }, []);
 
   return (
     <>  
-
+        <h1>{message}</h1>
         <ThemeProvider>
           <Navbar />
           <Routes>

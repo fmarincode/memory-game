@@ -22,8 +22,12 @@ app.use("/themes", themesRouter)
 
 
 mongoose.connect(process.env.MONGODB_URI).then (() => {
-    const PORT = process.env.PORT || 8000
+    const PORT = process.env.PORT || 8001
     app.listen(PORT, () => console.log("SERVER STARTED!"))
     
 }).catch(err => {console.error(err)});
 
+// route
+app.get("/", (req, res) => {
+    res.status(201).json({message: "Connected to Backend!"});
+});
