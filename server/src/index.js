@@ -9,7 +9,7 @@ import {themesRouter} from './routes/themes.js'
 dotenv.config();
 
 const corsOptions = {
-    origin: "https://memocardgame.onrender.com/", // frontend URI (ReactJS)
+    origin: "https://memocardgame.onrender.com", // frontend URI (ReactJS)
 }
 
 const app = express()
