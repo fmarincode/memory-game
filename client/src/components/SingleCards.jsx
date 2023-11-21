@@ -18,7 +18,7 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled, difficult
         if (!disabled){
             setCardSrc(card.src); // Chargez l'image au moment du clic
             handleChoice(card);
-            handleChoice(card)
+            
         }
     }
 
@@ -27,13 +27,13 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled, difficult
   return (
 
     <div key={card.id} className={`bg-[#cccccc] border-2 border-white rounded-lg shadow-md cursor-pointer hover:scale-105 hover:shadow-xl w-3/4 flex justify-center 
-    ${difficulty === "Standard" ? 
-    "md:w-48" : difficulty === "Middle" ?
-    "md:w-44" : "md:w-36"}`}>
+    ${difficulty === "Facile" ? 
+    "md:w-48" : difficulty === "Moyen" ?
+    "md:w-36" : "md:w-36"}`}>
     <div className={`relative flex justify-center items-center 
-    ${difficulty === "Standard" ?
-    "w-[188px] h-[188px]" : difficulty === "Middle" ?
-    "w-[172px] h-[172px]" : "w-[144px] h-[144px]"}`}>
+    ${difficulty === "Facile" ?
+    "w-[188px] h-[188px]" : difficulty === "Moyen" ?
+    "w-[144px] h-[144px]" : "w-[144px] h-[144px]"}`}>
 
         {flipped ? (
             <>
