@@ -6,7 +6,7 @@ import AuthContext from "./auth/AuthProvider";
 const themeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('Dragon Ball');
+  const [theme, setTheme] = useState('House of the Dragons');
   const [difficulty, setDifficulty] = useState('Facile');
   const [themeCatalog, setThemeCatalog] = useState([]);
   const url = "https://memorycardgame.onrender.com"

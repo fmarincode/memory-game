@@ -88,13 +88,13 @@ const imagesByTheme = themeList.reduce((acc, theme) => {
                     <ul className='list-disc pl-10 bg-[--secondColor] text-[--firstColor] font-semibold text-md rounded-xl py-5'>
                       {matchingImages.map((image) => (
                         <li key={image.imageSrc}>
-                          {image.name} : <a href={image.imageSrc} target='blank' className='font-bold tracking-widest hover:border-b-2 border-red-500'>{image.imageAuthor} <AiOutlinePaperClip className='inline-block'/></a> 
+                          {image.name} : <a href={image.imageSrc} target='blank' className='font-bold tracking-widest hover:border-b-2 border-[--fourthColor]'>{image.imageAuthor} <AiOutlinePaperClip className='inline-block'/></a> 
                         </li>
                       ))}
 
           {lastBackImage && lastBackImage.backImageName ? (
 
-            <li>Image d'illustration du thème au dos des cartes : {lastBackImage.backImageName} : <a href={lastBackImage.backImageSrc} target='blank' className='font-bold tracking-widest hover:border-b-2 border-red-500'>{lastBackImage.backImageAuthor} <AiOutlinePaperClip className='inline-block'/></a></li>
+            <li>Image d'illustration du thème au dos des cartes : {lastBackImage.backImageName} : <a href={lastBackImage.backImageSrc} target='blank' className='font-bold tracking-widest hover:border-b-2 border-[--fourthColor]'>{lastBackImage.backImageAuthor} <AiOutlinePaperClip className='inline-block'/></a></li>
           ) : (
             <li>Image d'illustration du thème au dos des cartes : Image du jeu par défaut </li>
           )}

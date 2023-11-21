@@ -48,7 +48,7 @@ function Navbar() {
 
 const handleClickHome =  (e) => {
   e.preventDefault()
-  setTheme("Dragon Ball")
+  setTheme("House of the Dragons")
   updateThemes()
   navigate("/")
 }
@@ -107,7 +107,7 @@ const handleClickHome =  (e) => {
             (
               <ul className='flex space-x-5'>
                 <li className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]'><Link to="/dashboard">Dashboard</Link> </li>                        
-                <li><button type='button' className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]' onClick={handleLogout}>Déconnecter <span className='text-orange-500 font-semibold'>{auth.username}</span></button> </li>
+                <li><button type='button' className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]' onClick={handleLogout}>Déconnecter <span className='text-[--fourthColor] font-semibold'>{auth.username}</span></button> </li>
               </ul>             
             
             ) : (
