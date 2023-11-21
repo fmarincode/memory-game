@@ -14,9 +14,9 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled, difficult
 
 
     const handleClick = () => {
-        // dès qu'on clique sur une carte, on va keep la card et l'utiliser pour lancer la fonction handleChoice de app.js
+
         if (!disabled){
-            setCardSrc(card.src); // Chargez l'image au moment du clic
+            setCardSrc(card.src); 
             handleChoice(card);
             
         }

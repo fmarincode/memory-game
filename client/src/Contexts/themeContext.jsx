@@ -13,7 +13,6 @@ export function ThemeProvider({ children }) {
   
   const {auth} = useContext(AuthContext)
 
-  // Fonction pour récupérer les thèmes de l'admin
   const fetchThemeData = async () => {
     try {
       const response = await axios.get(`${url}/themes/Bascom3000`);
@@ -23,8 +22,7 @@ export function ThemeProvider({ children }) {
       return [];
     }
   };
-  
-    // Fonction pour récupérer les thèmes de l'utilisateur
+
     const fetchThemesUser = async () => {
       if (auth.username !== undefined){
         try {

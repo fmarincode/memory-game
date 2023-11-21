@@ -1,6 +1,6 @@
-import express from "express"; // create a api mech
-import cors from "cors"; // allowed communication between front & back
-import mongoose from "mongoose" // for mongoDB 
+import express from "express"; 
+import cors from "cors"; 
+import mongoose from "mongoose"  
 import dotenv from 'dotenv';
 import {imgsRouter} from './routes/images.js'
 import {userRouter} from './routes/user.js'
@@ -9,7 +9,7 @@ import {themesRouter} from './routes/themes.js'
 dotenv.config();
 
 const corsOptions = {
-    origin: "https://memocardgame.onrender.com", // frontend URI (ReactJS)
+    origin: "https://memocardgame.onrender.com", 
 }
 
 const app = express()
@@ -30,7 +30,6 @@ mongoose.connect(process.env.MONGODB_URI).then (() => {
     
 }).catch(err => {console.error(err)});
 
-// route
 app.get("/", (req, res) => {
     res.status(201).json({message: "Connected to Backend!"});
 });

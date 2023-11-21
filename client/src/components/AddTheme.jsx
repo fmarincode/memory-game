@@ -32,8 +32,8 @@ export default function AddTheme() {
 
   useEffect(() => {
     if (themeData) {
-      const names = themeData.map(theme => removeAccent(theme.name).toLowerCase().replace(/[\s-]/g, '')) // no accent, no space, no -
-      setThemeList(names); // Set themeList to the extracted names from themeData
+      const names = themeData.map(theme => removeAccent(theme.name).toLowerCase().replace(/[\s-]/g, ''))
+      setThemeList(names); 
     }
   }, [themeData]);
 

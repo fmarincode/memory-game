@@ -10,7 +10,7 @@ function DeleteTheme() {
     const [themeToDelete, setThemeToDelete] = useState("")
     const {auth} = useContext(AuthContext)
     const url = "https://memorycardgame.onrender.com"
-    //fetch User's Theme
+
     useEffect(() => {
       const fetchThemeData = async () => {
         try {
@@ -25,8 +25,8 @@ function DeleteTheme() {
 
     useEffect(() => {
       if (themeData) {
-        const names = themeData.map(theme => theme.name); // Extract names from themeData
-        setThemeList(names); // Set themeList to the extracted names
+        const names = themeData.map(theme => theme.name);
+        setThemeList(names); 
       }
     }, [themeData, auth]);
 
@@ -42,13 +42,12 @@ function DeleteTheme() {
       }
     }
 
-    //HandleSubmit theme delete
     const handleSubmit = async (e) => {
       e.preventDefault()
       try {
         await axios.delete(`${url}/themes/${themeToDelete}/delete`)
         setThemeDeleted(true)
-        setThemeList((prevImgList) => prevImgList.filter(theme => theme !== themeToDelete));// regarde la liste precedente, filtre, pour chaque theme il renvoie le themeName tant qu'il est différent de celui qui vient d'ê delete.
+        setThemeList((prevImgList) => prevImgList.filter(theme => theme !== themeToDelete));
         deleteThemesImg()
       } catch (error) {
         console.error(error)

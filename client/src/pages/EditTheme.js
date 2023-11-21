@@ -12,7 +12,6 @@ function EditTheme() {
     const [chooseEditor, setChooseEditor] = useState("")
 
     useEffect(() => {
-      // Lors du chargement de la page, vérifiez le stockage local
       const storedToken = window.localStorage.getItem("access_token");
       const storedUserID = window.localStorage.getItem("userID");
       const storedRole = window.localStorage.getItem("role");
