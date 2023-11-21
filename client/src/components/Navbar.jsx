@@ -92,9 +92,9 @@ const handleClickHome =  (e) => {
               value={difficulty}
               onChange={(e) => setDifficulty(e.target.value)}
               >
-                <option className="text-green-500" value="Standard">Standard</option>
-                <option value="Middle">Middle</option>
-                <option className="text-red-500" value="Hard">Hard</option>
+                <option className="text-green-500" value="Facile">Facile</option>
+                <option value="Moyen">Moyen</option>
+                <option className="text-red-500" value="Difficile">Difficile</option>
               </select>
             </form>
 

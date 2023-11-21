@@ -1,19 +1,17 @@
 import React from 'react'
 import UserLogin from '../components/Userlogin'
-import UserRegister from '../components/UserRegister'
 
 function UserConnect() {
 
 
     return (
-        <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
+        <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-70px)]'>
             <article className='text-center flex flex-col justify-center items-center md:w-full'>
     
-            <h3 className='text-center font-semibold text-lg mb-5'>Page de connexion</h3>
+            <h1 className='text-center font-semibold text-xl mb-5'>S'inscrire / Se connecter</h1>
             <p>Pourquoi créer un compte et s'y connecter ?</p>
             <p>Ce compte vous permettra de créer votre propre thème de jeu et de le conserver.</p>
             <div className='flex'>
-                <UserRegister />
                 <UserLogin />
             </div>
             </article>

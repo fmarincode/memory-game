@@ -7,7 +7,7 @@ const themeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('Dragon Ball');
-  const [difficulty, setDifficulty] = useState('Standard');
+  const [difficulty, setDifficulty] = useState('Facile');
   const [themeCatalog, setThemeCatalog] = useState([]);
   const url = "https://memorycardgame.onrender.com"
   
