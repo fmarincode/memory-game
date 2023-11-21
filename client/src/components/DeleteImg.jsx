@@ -154,7 +154,7 @@ function DeleteImg() {
               </div>
               <div className='flex self-center mt-2'>
                   <button type='submit'
-                  className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Supprimer</button>
+                  className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold '>Supprimer</button>
               </div>
               {imageDeleted && <p className='flex self-center mt-1'>Image supprimée !</p>}
                   </form>
