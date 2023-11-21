@@ -162,7 +162,7 @@ const handleBool = () => {
             id='submitImg'
             type='submit'
             disabled={formik.isSubmitting}
-            className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>
+            className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold '>
             Soumettre
             </button>
         </div>

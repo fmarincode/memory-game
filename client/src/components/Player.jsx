@@ -140,7 +140,7 @@ function Player({theme, difficulty}) {
       <section className='flex flex-col w-full items-center'>
         <button
             type='button'
-            className='border-2 w-44 rounded-md px-4 py-1 hover:bg-green-500 mt-5'
+            className='border-2 w-44 rounded-md px-4 py-1 hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold mt-5'
             onClick={mixCards}>NOUVELLE PARTIE
           </button>
           {errorLoading ? (

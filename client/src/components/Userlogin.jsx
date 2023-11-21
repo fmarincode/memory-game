@@ -3,14 +3,14 @@ import { useFormik } from "formik";
 import { loginSchema } from '../schemas';
 import axios from 'axios';
 import { useCookies } from "react-cookie";
-import {Link, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import AuthContext from '../Contexts/auth/AuthProvider';
 import UserRegister from './UserRegister';
 
 function UserLogin() {
 
     const [cookies, setCookies, removeCookie] = useCookies(["access_token"])
-    const {auth, setAuth} = useContext(AuthContext)
+    const {setAuth} = useContext(AuthContext)
     const navigate = useNavigate()
     const url = "https://memorycardgame.onrender.com"
     const [registerForm, setRegisterForm] = useState(false)
@@ -163,13 +163,13 @@ function UserLogin() {
                             id='submitAdminLogBtn'
                             type='submit'
                             disabled={formik.isSubmitting}
-                            className='border-2 rounded-md px-4 py-2 cursor-pointer'>
+                            className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold '>
                                 Se connecter
                             </button>
                         </div>
                 </form>
             </div>
-                <article className='pt-1'> <p>Pas encore inscris ? Rejoins nous en <span onClick={handleRegisterForm} className='underline cursor-pointer'>cliquant ici</span></p></article>
+                <article className='pt-1 text-orange-500 font-semibold'> <p>Pas encore inscris ? Rejoins nous en <span onClick={handleRegisterForm} className='underline cursor-pointer'>cliquant ici</span></p></article>
                            
             </article>
     

@@ -92,7 +92,7 @@ function UserRegister() {
                             <button
                             type='submit'
                             disabled={formik.isSubmitting}
-                            className='border-2 rounded-md px-4 py-2 cursor-pointer'>
+                            className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold '>
                                 Créer un compte
                             </button>
                            
@@ -100,7 +100,7 @@ function UserRegister() {
                         {registered && <p className='mt-2'>Tu es bien enregistré ! Tu peux maintenant te connecter en <span onClick={handleLoginForm} className='underline cursor-pointer'>cliquant ici</span></p>}
                 </form>
             </div>
-                <article className='pt-5'> <p>Déjà inscris ? Connectes-toi en <span onClick={handleLoginForm} className='underline cursor-pointer'>cliquant ici</span></p></article>
+                <article className='pt-1 text-orange-500 font-semibold'> <p>Déjà inscris ? Connectes-toi en <span onClick={handleLoginForm} className='underline cursor-pointer'>cliquant ici</span></p></article>
             </article>
     
         </section>

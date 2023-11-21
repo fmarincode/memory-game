@@ -197,13 +197,13 @@ export default function AddImgs() {
            
             <div className='flex self-center mt-2'>
                 <button type='submit'
-                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
+                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold '>Ajouter</button>
             </div>
             {imageAdded && <p className='flex self-center mt-1'>Image ajoutée !</p>}
                 </form>
             </div>
             <h2>Aperçu de l'image choisie</h2>
-        {postImage.image && <img src={postImage.image} alt="image uploaded" className='md:max-h-40 md:max-w-40'/>}
+        {postImage.image && <img src={postImage.image} alt="your uploaded" className='md:max-h-40 md:max-w-40'/>}
         </article>
         <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
 {/*             <EditBack 
