@@ -9,12 +9,12 @@ function DeleteTheme() {
     const [themeList, setThemeList] = useState([])
     const [themeToDelete, setThemeToDelete] = useState("")
     const {auth} = useContext(AuthContext)
-    
+    const url = "https://memorycardgame.onrender.com"
     //fetch User's Theme
     useEffect(() => {
       const fetchThemeData = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/themes/${auth.username}`)
+          const response = await axios.get(`${url}/themes/${auth.username}`)
           setThemeData(response.data)
         } catch (error) {
           console.error(error)
@@ -34,9 +34,9 @@ function DeleteTheme() {
     const deleteThemesImg = async () => {
       const normalizedTheme = themeToDelete.toLowerCase().replace(/[\s-]/g, '');
       try {
-        console.log(normalizedTheme)
-        await axios.delete(`http://localhost:8000/images/img/delete/${normalizedTheme}`)
-        console.log("imgs deleted")
+
+        await axios.delete(`${url}/images/img/delete/${normalizedTheme}`)
+
       } catch (error) {
         console.error(error)
       }
@@ -46,7 +46,7 @@ function DeleteTheme() {
     const handleSubmit = async (e) => {
       e.preventDefault()
       try {
-        await axios.delete(`http://localhost:8000/themes/${themeToDelete}/delete`)
+        await axios.delete(`${url}/themes/${themeToDelete}/delete`)
         setThemeDeleted(true)
         setThemeList((prevImgList) => prevImgList.filter(theme => theme !== themeToDelete));// regarde la liste precedente, filtre, pour chaque theme il renvoie le themeName tant qu'il est différent de celui qui vient d'ê delete.
         deleteThemesImg()
@@ -93,7 +93,7 @@ function DeleteTheme() {
                     </div>
                     <div className='flex self-center mt-2'>
                         <button type='submit'
-                        className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Supprimer</button>
+                        className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold '>Supprimer</button>
                     </div>
                     
                     {themeDeleted && <p className='flex self-center mt-1'>Thème supprimé !</p>}

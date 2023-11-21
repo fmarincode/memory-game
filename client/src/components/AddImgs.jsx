@@ -9,11 +9,12 @@ export default function AddImgs() {
   const [themeData, setThemeData] = useState([])
   const [themeList, setThemeList] = useState([])
   const {auth} = useContext(AuthContext)
+  const url = "https://memorycardgame.onrender.com"
 
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/themes/${auth.username}`)
+        const response = await axios.get(`${url}/themes/${auth.username}`)
         setThemeData(response.data)
       } catch (error) {
         
@@ -66,11 +67,11 @@ export default function AddImgs() {
             imageAuthor: postImage.imageAuthor,
           };
 
-        await axios.post("http://localhost:8000/images/add", newImage)
+        await axios.post(`${url}/images/add`, newImage)
         setImageAdded(true)
         
       }catch(error){
-        console.log(error)
+        console.error(error)
       }
     }
   
@@ -78,13 +79,12 @@ export default function AddImgs() {
       e.preventDefault();
       createPost()
       updateThemes()
-      console.log("Uploaded")
+
     }
   
     const handleFileUpload = async (e) => {
       const file = e.target.files[0];
       const base64 = await convertToBase64(file);
-      console.log(base64)
       setPostImage({ ...postImage, image : base64 })
     }
 
@@ -99,7 +99,8 @@ export default function AddImgs() {
         <>
           <article className='md:flex md:flex-col md:items-center md:space-y-5'>
             <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
-            <h1 className='mb-5 text-center'>Ajouter une image dans la base de données</h1>
+            <h1 className='mb-1 text-center'>Ajouter une image dans la base de données</h1>
+            <h2 className='mb-3 text-center'>La taille idéale des images est de : 660px * 660px</h2>
            <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-start'>
             <div className='py-2'>
@@ -197,13 +198,13 @@ export default function AddImgs() {
            
             <div className='flex self-center mt-2'>
                 <button type='submit'
-                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
+                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold '>Ajouter</button>
             </div>
             {imageAdded && <p className='flex self-center mt-1'>Image ajoutée !</p>}
                 </form>
             </div>
             <h2>Aperçu de l'image choisie</h2>
-        {postImage.image && <img src={postImage.image} alt="image uploaded" className='md:max-h-40 md:max-w-40'/>}
+        {postImage.image && <img src={postImage.image} alt="your uploaded" className='md:max-h-40 md:max-w-40'/>}
         </article>
         <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
 {/*             <EditBack 

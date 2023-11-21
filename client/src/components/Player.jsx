@@ -14,17 +14,18 @@ function Player({theme, difficulty}) {
   const [backCard, setBackCard]= useState()
   const [dataImgs, setDataImgs] = useState()
   const [errorLoading, setErrorLoading] = useState(false)
+  const url = "https://memorycardgame.onrender.com"
 
   useEffect(() => {
     const fetchThemeData = async () => {
       try {
         const normalizedTheme = theme.toLowerCase().replace(/[\s-]/g, '');
-        const response = await axios.get(`http://localhost:8000/images/${normalizedTheme}`);
+        const response = await axios.get(`${url}/images/${normalizedTheme}`);
         setDataImgs(response.data);
         setErrorLoading(false)
       } catch (err) {
         setErrorLoading(true)
-        console.log(err);
+        console.error(err);
       }
     };
 
@@ -34,7 +35,7 @@ function Player({theme, difficulty}) {
 
   const fetchBackImg = async (theme) => {
     try {
-      const response = await axios.get("http://localhost:8000/themes/", theme);
+      const response = await axios.get(`${url}/themes/`, theme);
       const filteredThemes = response.data.filter(data => data.name === theme); 
       if (filteredThemes.length > 0) {
         const lastBackImage = filteredThemes[0].backImg[filteredThemes[0].backImg.length - 1].backImage; // tjr select la derniere ajoutée
@@ -42,7 +43,7 @@ function Player({theme, difficulty}) {
       }
     } catch (err) {
       setBackCard(defaultImg)
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -61,19 +62,20 @@ function Player({theme, difficulty}) {
   
       // Sélectionnez le nombre d'éléments en fonction de la difficulté
       let selectedData;
-      if (difficulty === "Standard") {
+      if (difficulty === "Facile") {
         selectedData = shuffledData.slice(0, 6);
-      } else if (difficulty === "Middle") {
+      } else if (difficulty === "Moyen") {
         selectedData = shuffledData.slice(0, 8);
-      } else if (difficulty === "Hard") {
+      } else if (difficulty === "Difficile") {
         selectedData = shuffledData.slice(0, 10);
       }
   
-      // Doublez les données sélectionnées (2x6) et mélangez-les
+      // Doubler les données sélectionnées (2x6) et mélangez
       const mixedCards = [...selectedData, ...selectedData]
         .sort(() => Math.random() - 0.5)
         .map((card, index) => ({ ...card, id: index }));
   
+        // initialisation à 0, new game
       setChoiceOne(null);
       setChoiceTwo(null);
       setCards(mixedCards);
@@ -89,7 +91,7 @@ function Player({theme, difficulty}) {
 
   // handle a choice
   const handleChoice = (card) => {
-    // s'active au clic sur une carte dans le coposant singleCards.jsx
+    // s'active au clic sur une carte dans le composant singleCards.jsx
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
     // si on a deja mis une carte dans le state choiceOne, on le met dans choiceTwo
     // sinon si choiceOne est null, la carte cliquée y est stockée
@@ -105,7 +107,7 @@ function Player({theme, difficulty}) {
 
   //compare 2 selected card
   useEffect(() => {
-    
+
     if (choiceOne && choiceTwo){
       setDisabled(true)
       // dès qu'on a deux cartes, on les compare :
@@ -138,8 +140,8 @@ function Player({theme, difficulty}) {
       <section className='flex flex-col w-full items-center'>
         <button
             type='button'
-            className='border-2 w-32 rounded-md px-4 py-1 hover:bg-green-500 mt-2'
-            onClick={mixCards}>NEW GAME
+            className='border-2 w-44 rounded-md px-4 py-1 hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold mt-5'
+            onClick={mixCards}>NOUVELLE PARTIE
           </button>
           {errorLoading ? (
             <p className='mt-10'>Tu n'as pas encore ajouté d'images à ton thème ! Rends-toi dans ton <Link to="/dashboard">dashboard</Link></p>
@@ -148,9 +150,9 @@ function Player({theme, difficulty}) {
             <>
             
               <div className={`flex mt-5 md:grid md:gap-5
-              ${difficulty === "Standard" ? 
-              " md:grid-cols-4 md:grid-rows-3" : difficulty === "Middle" ?
-              " md:grid-cols-8 md:grid-rows-2 pt-20" : " md:grid-cols-5 md:grid-rows-4"}`}>
+              ${difficulty === "Facile" ? 
+              " md:grid-cols-4 md:grid-rows-3" : difficulty === "Moyen" ?
+              " md:grid-cols-4 md:grid-rows-4" : " md:grid-cols-5 md:grid-rows-4"}`}>
                     {cards.map(card => (
                     <SingleCards 
                     key={card.id} 
@@ -163,7 +165,7 @@ function Player({theme, difficulty}) {
                     ) )}
               </div>
               
-                      <p className='text-xl font-bold text-center mt-3'>Turns : {turns}</p>
+                      <p className='text-xl font-bold text-center mt-3'>Nombre de tentatives : {turns}</p>
             </>
           )} 
       </section>

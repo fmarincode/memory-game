@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom"
 import AuthContext from '../Contexts/auth/AuthProvider';
 import { useCookies } from "react-cookie";
 
-function Navbar({}) {
+function Navbar() {
   const {theme, setTheme, difficulty, setDifficulty, themeCatalog, updateThemes} = useContext(themeContext);
   const [cookies, setCookies, removeCookie] = useCookies(["access_token"])
   const {auth, setAuth} = useContext(AuthContext)
@@ -48,9 +48,8 @@ function Navbar({}) {
 
 const handleClickHome =  (e) => {
   e.preventDefault()
-  setTheme("Dragon Ball")
+  setTheme("House of the Dragons")
   updateThemes()
-  console.log("fetch themes user chargé !")
   navigate("/")
 }
 
@@ -69,46 +68,50 @@ const handleClickHome =  (e) => {
 
 
   return (
-    <nav className='w-[100%] h-14 fixed top-0 left-0 bg-[--firstColor] text-[--secondColor] flex justify-center items-center z-50 md:mr-[17px]'>
-          <div className='flex space-x-5'>
+    <nav className='w-[100%] h-14 fixed top-0 left-0 bg-[--firstColor] text-[--secondColor] flex justify-center items-center z-50 md:text-xl'>
+          <div className='flex space-x-10'>
 
-            <button type="button" onClick={handleClickHome}>Jouer</button>         
+            <button type="button" onClick={handleClickHome} className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]'>Jouer</button>         
             
-            <form>
-              <label for="theme" className='pr-1'>Theme :</label>
-              <select id='theme' className='bg-[--firstColor] w-auto cursor-pointer' 
-              value={theme} 
-              onChange={(e) => setTheme(e.target.value)}>
-                
-              {themeCatalog.map((themeName, index) => (
-                  <option key={index} value={themeName}>
-                      {themeName}
-                  </option>
-              ))} 
+            <form className='flex space-x-10'>
+              <div className='space-x-5'>
+                <label for="theme" >Theme :</label>
+                <select id='theme' className='bg-[--fourthColor] w-auto cursor-pointer rounded-md text-[--firstColor] font-semibold' 
+                value={theme} 
+                onChange={(e) => setTheme(e.target.value)}>
+                  
+                {themeCatalog.map((themeName, index) => (
+                    <option key={index} value={themeName} className=''>
+                        {themeName}
+                    </option>
+                ))} 
 
-              </select>
+                </select>
+              </div>
+              <div className='space-x-5'>
+                <label for="difficulty" > Difficulté : </label>
+                <select id='difficulty' className='bg-[--fourthColor] w-auto cursor-pointer rounded-md text-[--firstColor] font-semibold' 
+                value={difficulty}
+                onChange={(e) => setDifficulty(e.target.value)}
+                >
+                  <option value="Facile">Facile</option>
+                  <option value="Moyen">Moyen</option>
+                  <option value="Difficile">Difficile</option>
+                </select>
+              </div>
 
-              <label for="difficulty" className='pl-5'> Difficulté : </label>
-              <select id='difficulty' className='bg-[--firstColor] w-auto cursor-pointer' 
-              value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value)}
-              >
-                <option className="text-green-500" value="Standard">Standard</option>
-                <option value="Middle">Middle</option>
-                <option className="text-red-500" value="Hard">Hard</option>
-              </select>
             </form>
 
             
            {auth.userID ?
             (
               <ul className='flex space-x-5'>
-                <li><Link to="/dashboard">Dashboard</Link> </li>                        
-                <li><button type='button' onClick={handleLogout}>Déconnecter <span className='text-orange-500 font-semibold'>{auth.username}</span></button> </li>
+                <li className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]'><Link to="/dashboard">Dashboard</Link> </li>                        
+                <li><button type='button' className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]' onClick={handleLogout}>Déconnecter <span className='text-[--fourthColor] font-semibold'>{auth.username}</span></button> </li>
               </ul>             
             
             ) : (
-              <Link to="/userconnect">Se connecter</Link> 
+              <Link to="/userconnect" className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]'>Se connecter</Link> 
             )
             } 
             

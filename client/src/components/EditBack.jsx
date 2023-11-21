@@ -14,11 +14,12 @@ export default function EditBack() {
         backImageSrc: "",
         backImageAuthor: "",
     })
+    const url = "https://memorycardgame.onrender.com"
 
     useEffect(() => {
       const fetchThemesUser = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/themes/${auth.username}`);
+          const response = await axios.get(`${url}/themes/${auth.username}`);
 
           const names = response.data.map(theme => theme.name);
           setUserThemes(names);
@@ -53,23 +54,22 @@ export default function EditBack() {
             backImageAuthor: postBackImage.backImageAuthor
           };
 
-        await axios.post(`http://localhost:8000/themes/${postBackImage.name}/backImages/add`, newBackImage)
+        await axios.post(`${url}/themes/${postBackImage.name}/backImages/add`, newBackImage)
         setImageAdded(true)
       }catch(error){
-        console.log(error)
+        console.error(error)
       }
     }
   
     const handleSubmit = (e) => {
       e.preventDefault();
       createPost()
-      console.log("Uploaded")
+
     }
   
     const handleFileUploadBackImg = async (e) => {
       const file = e.target.files[0];
       const base64 = await convertToBase64(file);
-      console.log(base64)
       setPostBackImage({ ...postBackImage, backImage : base64 })
     }
   
@@ -83,7 +83,7 @@ export default function EditBack() {
         <article className='flex flex-col items-center md:space-y-5'>
           <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
           <h2 className='mb-5 text-center'>Ajouter l'image au dos des cartes </h2>
-
+          <h2 className='mb-3 text-center'>La taille idéale des images est de : 660px * 660px</h2>
         <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-start'>
         <div className='py-2'>
@@ -174,7 +174,7 @@ export default function EditBack() {
 
           <div className='flex self-center mt-5 space-x-5'>
                 <button type='submit'
-                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-green-500'>Ajouter</button>
+                className='border-2 rounded-md px-4 py-2 cursor-pointer hover:bg-[--fourthColor] hover:text-[--firstColor] font-bold '>Ajouter</button>
             </div>
             {imageAdded && <p> Ton image a bien été ajoutée pour {postBackImage.name}</p>}
           </form>

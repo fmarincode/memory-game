@@ -6,15 +6,17 @@ import AuthContext from "./auth/AuthProvider";
 const themeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('Dragon Ball');
-  const [difficulty, setDifficulty] = useState('Standard');
+  const [theme, setTheme] = useState('House of the Dragons');
+  const [difficulty, setDifficulty] = useState('Facile');
   const [themeCatalog, setThemeCatalog] = useState([]);
+  const url = "https://memorycardgame.onrender.com"
   
   const {auth} = useContext(AuthContext)
+
   // Fonction pour récupérer les thèmes de l'admin
   const fetchThemeData = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/themes/Bascom3000");
+      const response = await axios.get(`${url}/themes/Bascom3000`);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -24,13 +26,15 @@ export function ThemeProvider({ children }) {
   
     // Fonction pour récupérer les thèmes de l'utilisateur
     const fetchThemesUser = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8000/themes/${auth.username}`);
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
+      if (auth.username !== undefined){
+        try {
+          const response = await axios.get(`${url}/themes/${auth.username}`);
+          return response.data;
+        } catch (error) {
+          console.error(error);
+          return [];
+        }
+      }
   };
 
 
@@ -38,9 +42,16 @@ export function ThemeProvider({ children }) {
     try {
       const userThemeData = await fetchThemesUser();
       const globalThemeData = await fetchThemeData();
-      const updatedThemeData = [ ...globalThemeData, ...userThemeData];
-      const names = updatedThemeData.map(theme => theme.name);
-      setThemeCatalog(names);
+      if (globalThemeData && userThemeData){
+
+        const updatedThemeData = [ ...globalThemeData, ...userThemeData];
+        const names = updatedThemeData.map(theme => theme.name);
+        setThemeCatalog(names);
+      }else if(globalThemeData && !userThemeData){
+        const updatedThemeData = [ ...globalThemeData];
+        const names = updatedThemeData.map(theme => theme.name);
+        setThemeCatalog(names);
+      }
     } catch (error) {
       console.error(error);
     }
