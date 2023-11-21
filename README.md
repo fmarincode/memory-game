@@ -6,7 +6,7 @@ This is a MERN project inspired by youtube tutorials.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-I've customised the CRA orders, chekc the root package json file. 
+I've customised the CRA orders, check the root package json file. 
 && to start with my project don't forget : npm install
 
 ## Available Scripts
