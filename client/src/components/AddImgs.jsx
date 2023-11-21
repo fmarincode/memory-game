@@ -99,7 +99,8 @@ export default function AddImgs() {
         <>
           <article className='md:flex md:flex-col md:items-center md:space-y-5'>
             <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
-            <h1 className='mb-5 text-center'>Ajouter une image dans la base de données</h1>
+            <h1 className='mb-1 text-center'>Ajouter une image dans la base de données</h1>
+            <h2 className='mb-3 text-center'>La taille idéale des images est de : 660px * 660px</h2>
            <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-start'>
             <div className='py-2'>

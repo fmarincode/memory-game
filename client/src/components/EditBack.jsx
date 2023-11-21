@@ -83,7 +83,7 @@ export default function EditBack() {
         <article className='flex flex-col items-center md:space-y-5'>
           <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
           <h2 className='mb-5 text-center'>Ajouter l'image au dos des cartes </h2>
-
+          <h2 className='mb-3 text-center'>La taille idéale des images est de : 660px * 660px</h2>
         <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-start'>
         <div className='py-2'>
