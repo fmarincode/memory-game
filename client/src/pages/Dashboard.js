@@ -25,7 +25,7 @@ function Dashboard() {
    }
 
   return (
-    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-70px)]'>
+    <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
       <header className='space-y-5'>
          <h1 className='text-center font-semibold text-xl'>Que veux-tu faire ?</h1>
          <div className='flex items-center justify-center space-x-5'><CiWarning className='text-red-500 text-3xl'/>

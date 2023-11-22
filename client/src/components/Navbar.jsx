@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom"
 import AuthContext from '../Contexts/auth/AuthProvider';
 import { useCookies } from "react-cookie";
 import { FaHome } from "react-icons/fa";
+import {LuMousePointerClick} from 'react-icons/lu';
 
 function Navbar() {
   const {theme, setTheme, difficulty, setDifficulty, themeCatalog, updateThemes} = useContext(themeContext);
@@ -133,9 +134,9 @@ const handleClickHome =  (e) => {
             </div> 
             <div className="drawer-side">
               <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-              <ul className="menu p-4 w-80 min-h-full bg-base-200 text-xl">
+              <ul className="menu p-4 w-80 min-h-full bg-base-200 text-xl relative">
                 {/* Sidebar content here */}
-                <li><button type="button" onClick={handleClickHome} className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]'>Jouer</button></li>
+                <li><button type="button" onClick={handleClickHome} className='border-2 border-[--fourthColor] flex justify-center'>Jouer</button></li>
                 <li>
                 <form className='space-y-10'>
                     <div className='space-y-5'>
@@ -172,17 +173,19 @@ const handleClickHome =  (e) => {
                   (
                     <div className='pt-10 space-y-5'>
                     
-                      <li className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]'><Link to="/dashboard">Dashboard</Link> </li>                        
-                      <li><button type='button' className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]' onClick={handleLogout}>Déconnecter <span className='text-[--fourthColor] font-semibold'>{auth.username}</span></button> </li>
+                      <li className='border-b-2 border-[--firstColor] hover:border-[--fourthColor] text-center'><Link to="/dashboard">Dashboard</Link> </li>                        
+                      <li><button type='button' className='border-b-2 border-[--firstColor] hover:border-[--fourthColor] text-center' onClick={handleLogout}>Déconnecter <span className='text-[--fourthColor] font-semibold'>{auth.username}</span></button> </li>
                               
                     </div>
                   
                   ) : (
                     
-                    <Link to="/userconnect" className='border-b-2 border-[--firstColor] hover:border-[--fourthColor]'>Se connecter</Link> 
+                    <Link to="/userconnect" className='border-2 border-[--fourthColor] flex justify-center rounded-md mt-10'>Se connecter</Link> 
                   )
                 } 
-                
+                <li className='absolute bottom-5 left-10 border-2 border-[--fourthColor] rounded-md'>
+                <Link to={"/copyright"} className='flex justify-center space-x-5 cursor-pointer'><p>Images Copyright </p><LuMousePointerClick className='text-xl text-[--secondColor]'/></Link>
+                </li>
               </ul>
             </div>
           </div>
