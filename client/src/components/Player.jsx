@@ -149,7 +149,7 @@ function Player({theme, difficulty}) {
           ) : (
             <>
             
-              <div className={`flex mt-5 md:grid md:gap-5
+              <div className={`flex mt-5 sm:grid-cols-2 sm:grid-rows-3 md:grid md:gap-5
               ${difficulty === "Facile" ? 
               " md:grid-cols-4 md:grid-rows-3" : difficulty === "Moyen" ?
               " md:grid-cols-4 md:grid-rows-4" : " md:grid-cols-5 md:grid-rows-4"}`}>
