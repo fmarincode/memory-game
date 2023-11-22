@@ -103,10 +103,10 @@ export default function AddImgs() {
             <h2 className='mb-3 text-center'>La taille idéale des images est de : 660px * 660px</h2>
            <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-start'>
-            <div className='py-2'>
+            <div className='py-2 flex flex-col self-center md:block md:self-start'>
 
             <label htmlFor='name'
-                className='md:inline-block md:text-right md:w-40' >
+                className='text-center md:inline-block md:text-right md:w-40' >
                     Nom de l'image :
             </label>
             <input 
@@ -116,19 +116,19 @@ export default function AddImgs() {
                 type='name'
                 onMouseEnter={(e) => setImageAdded(false)}
                 placeholder="Le nom de l'image"
-                className="border-2 rounded-md text-black ml-5"
+                className="border-2 rounded-md text-black text-center md:ml-5"
             />
             </div>
 
-            <div className='py-2'>
+            <div className='py-2 flex flex-col self-center md:block md:self-start'>
                 <label htmlFor='titleFrom'
-                    className='md:inline-block md:text-right md:w-40' >
+                    className='text-center md:inline-block md:text-right md:w-40' >
                         Titre de l'oeuvre :
                 </label>
                 <select
                 id='titleFrom'
                 name='titleFrom'
-                className='bg-[--firstColor] w-auto cursor-pointer ml-5 border-2 border-[--secondColor] rounded-md'
+                className='bg-[--firstColor] w-auto text-center cursor-pointer md:ml-5 border-2 border-[--secondColor] rounded-md'
                 value={postImage.titleFrom}
                 onChange={handleChange}>
 
@@ -148,8 +148,8 @@ export default function AddImgs() {
                 
             </div>
 
-            <div className='py-2'>
-                <label htmlFor="file-upload" className='md:inline-block md:text-right md:w-40'>
+            <div className='py-2 flex flex-col self-center md:block md:self-start'>
+                <label htmlFor="file-upload" className='text-center md:inline-block md:text-right md:w-40'>
                 Votre image :
                 </label>
                 
@@ -159,14 +159,14 @@ export default function AddImgs() {
                 name="image"
                 accept='.jpeg, .png, .jpg, .webp'
                 onChange={(e) => handleFileUpload(e)}
-                className="border-2 rounded-md text-white ml-5"
+                className="border-2 rounded-md text-white md:ml-5"
                 />
 
             </div>
-            <div className='py-2'>
+            <div className='py-2 flex flex-col self-center md:block md:self-start'>
 
                 <label htmlFor='imageSrc'
-                className='md:inline-block md:text-right md:w-40' >
+                className='text-center md:inline-block md:text-right md:w-40' >
                 Lien URL de la source de l'image :
                 </label>
                 <input 
@@ -175,14 +175,14 @@ export default function AddImgs() {
                 name='imageSrc'
                 type='text'
                 placeholder="Lien du site de l'image"
-                className="border-2 rounded-md text-black ml-5"
+                className="border-2 rounded-md text-black text-center md:ml-5"
                 />
             </div>
 
-            <div className='py-2'>
+            <div className='py-2 flex flex-col self-center md:block md:self-start'>
 
                 <label htmlFor='imageAuthor'
-                className='md:inline-block md:text-right md:w-40'>
+                className='text-center md:inline-block md:text-right md:w-40'>
                     Nom de l'auteur à créditer :
                 </label>
                 <input 
@@ -191,7 +191,7 @@ export default function AddImgs() {
                 name='imageAuthor'
                 type='text'
                 placeholder="Le nom de l'auteur/ site"
-                className="border-2 rounded-md text-black ml-5"
+                className="border-2 rounded-md text-black text-center md:ml-5"
                 />
             </div>
 
@@ -203,8 +203,8 @@ export default function AddImgs() {
             {imageAdded && <p className='flex self-center mt-1'>Image ajoutée !</p>}
                 </form>
             </div>
-            <h2>Aperçu de l'image choisie</h2>
-        {postImage.image && <img src={postImage.image} alt="your uploaded" className='md:max-h-40 md:max-w-40'/>}
+            <h2 className='text-center pb-1 '>Aperçu de l'image choisie</h2>
+        {postImage.image && <img src={postImage.image} alt="your uploaded" className='m-auto pb-1 max-h-40 max-w-40'/>}
         </article>
         <article className='md:flex md:flex-col md:w-1/2 md:items-center md:space-y-5'>
 {/*             <EditBack 

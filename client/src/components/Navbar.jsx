@@ -84,7 +84,7 @@ const handleClickHome =  (e) => {
             <form className='flex space-x-10'>
               <div className='space-x-5'>
                 <label for="theme" >Theme :</label>
-                <select id='theme' className='bg-[--fourthColor] w-auto cursor-pointer rounded-md text-[--firstColor] font-semibold' 
+                <select id='theme' className='bg-[--fourthColor] w-auto text-center cursor-pointer rounded-md text-[--firstColor] font-semibold' 
                 value={theme} 
                 onChange={(e) => setTheme(e.target.value)}>
                   
@@ -98,7 +98,7 @@ const handleClickHome =  (e) => {
               </div>
               <div className='space-x-5'>
                 <label for="difficulty" > Difficulté : </label>
-                <select id='difficulty' className='bg-[--fourthColor] w-auto cursor-pointer rounded-md text-[--firstColor] font-semibold' 
+                <select id='difficulty' className='bg-[--fourthColor] w-auto text-center cursor-pointer rounded-md text-[--firstColor] font-semibold' 
                 value={difficulty}
                 onChange={(e) => setDifficulty(e.target.value)}
                 >
