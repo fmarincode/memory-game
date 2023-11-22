@@ -13,7 +13,6 @@ import "./App.css";
 
 function App() {
   const [message, setMessage] = useState("");
-   // Fetching message from backend on mount
    useEffect(() => {
     fetch("https://memorycardgame.onrender.com/")
       .then((res) => res.json())
@@ -32,7 +31,6 @@ function App() {
               <Route path='/copyright' element={<Copyright />} />
               <Route path='/userconnect' element={<UserConnect />} />
 
-    
               <Route path="/dashboard" element={<RequireAuth requiredRole={["Admin", "User"]}><Dashboard /></RequireAuth>} />
               
         </Routes>

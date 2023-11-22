@@ -15,13 +15,12 @@ router.get("/img", async (req, res) => {
     }
 })
 
-//get images by user by theme
+
 router.get("/img/:userOwner/:theme", async (req, res) => {
   try {
       const userOwner = req.params.userOwner;
       const theme = req.params.theme;
 
-      // Utiliser la méthode find avec le filtre sur userOwner
       const images = await ImagesModel.find({ userOwner, titleFrom: theme });
 
       res.json(images);
@@ -54,17 +53,15 @@ router.post("/add", async (req, res) => {
 
 
 
-  // Get images by title
 router.get("/:title", async (req, res) => {
   const title = req.params.title;
 
   try {
     const results = await ImagesModel.find({ titleFrom: title });
     if (results.length > 0) {
-      // Transformez les résultats pour inclure l'ID et l'URL de l'image
       const transformedResults = results.map((image) => ({
-        id: image._id, // Ajoutez l'ID de l'image
-        src: image.image, // Construisez l'URL de l'image
+        id: image._id, 
+        src: image.image, 
       }));
       res.status(200).json(transformedResults);
     } else {
@@ -77,28 +74,24 @@ router.get("/:title", async (req, res) => {
 
 
 
-// delete an image
-
 router.delete("/:themeName/:imageName/delete", async (req, res) => {
   const themeName = req.params.themeName;
   const imageName = req.params.imageName;
 
   try {
-      // Recherche de toutes les images avec themeName égal à titlefrom
+    
       const images = await ImagesModel.find({ titleFrom : themeName });
 
       if (images.length === 0) {
           return res.status(404).json({ message: "Aucune image trouvée avec le themeName spécifié." });
       }
 
-      // Recherche de l'image spécifique par son nom
       const imageToDelete = images.find((image) => image.name === imageName);
 
       if (!imageToDelete) {
           return res.status(404).json({ message: "Image non trouvée avec le nom spécifié." });
       }
 
-      // Suppression de l'image spécifique
       await ImagesModel.findByIdAndDelete(imageToDelete._id);
 
       res.status(200).json({ message: "Image supprimée avec succès." });
@@ -108,12 +101,11 @@ router.delete("/:themeName/:imageName/delete", async (req, res) => {
   }
 });
 
-// delete all images by theme
 router.delete("/img/delete/:themeName", async (req, res) => {
   const themeName = req.params.themeName;
   console.log("Deleting images for theme:", themeName);
   try {
-      // Recherche de toutes les images avec themeName égal à titleFrom
+
       const images = await ImagesModel.find({ titleFrom : themeName });
       
       if (images.length === 0) {

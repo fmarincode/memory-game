@@ -4,7 +4,7 @@ import { ThemeModel } from '../models/Theme.js';
 
 const router = express.Router()
 
-//get all themes
+
 router.get("/", async (req, res) => {
     try {
         const response = await ThemeModel.find({})
@@ -14,12 +14,12 @@ router.get("/", async (req, res) => {
     }
 })
 
-//get theme's user
+
 router.get("/:userOwner", async (req, res) => {
     const userOwner = req.params.userOwner
     try {
         const results = await ThemeModel.find({})
-        const filteredResults = results.filter(item => item.userOwner === userOwner) // filter les résultats par userOwner
+        const filteredResults = results.filter(item => item.userOwner === userOwner) 
 
         if (filteredResults.length > 0) {
             res.status(200).json(filteredResults);
@@ -31,13 +31,13 @@ router.get("/:userOwner", async (req, res) => {
         res.json(err)
     }
 })
-//get theme by title
+
 router.get("/:theme", async (req, res) => {
     const theme = req.params.theme;
 
     try {
         const results = await ThemeModel.find({}); 
-        const filteredResults = results.filter(item => item.name === theme); // Filtrer les résultats par le nom
+        const filteredResults = results.filter(item => item.name === theme); 
 
         if (filteredResults.length > 0) {
             res.status(200).json(filteredResults);
@@ -49,7 +49,7 @@ router.get("/:theme", async (req, res) => {
     }
 });
 
-//post a theme
+
 router.post("/", async(req, res) => {
     const {name, media, userOwner} = req.body;
 
@@ -65,20 +65,20 @@ router.post("/", async(req, res) => {
     res.json({message: "Theme Registered Successfully !"})
 })
 
-// add a backImg to a theme
+
 router.post("/:themeName/backImages/add", async (req, res) => {
     const themeName = req.params.themeName;
     const { backImageName, backImage, backImageSrc, backImageAuthor } = req.body;
 
     try {
-        // Rechercher le thème par nom
+        
         const theme = await ThemeModel.findOne({ name: themeName });
 
         if (!theme) {
             return res.status(404).json({ message: "Thème non trouvé." });
         }
 
-        // Ajouter les données d'arrière-plan au thème
+        
 
         theme.backImg.push({
             backImageName,
@@ -95,7 +95,7 @@ router.post("/:themeName/backImages/add", async (req, res) => {
     }
 });
 
-//delete a theme
+
 
 router.delete("/:themeName/delete", async (req, res) => {
     const themeName = req.params.themeName;

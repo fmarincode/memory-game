@@ -38,7 +38,7 @@ function Player({theme, difficulty}) {
       const response = await axios.get(`${url}/themes/`, theme);
       const filteredThemes = response.data.filter(data => data.name === theme); 
       if (filteredThemes.length > 0) {
-        const lastBackImage = filteredThemes[0].backImg[filteredThemes[0].backImg.length - 1].backImage; // tjr select la derniere ajoutée
+        const lastBackImage = filteredThemes[0].backImg[filteredThemes[0].backImg.length - 1].backImage; 
         setBackCard(lastBackImage);
       }
     } catch (err) {
@@ -55,12 +55,12 @@ function Player({theme, difficulty}) {
   }, [theme, difficulty, dataImgs]);
 
 
-  // mix cards
+
   const mixCards = () => {
     if (dataImgs) {
       const shuffledData = dataImgs.sort(() => Math.random() - 0.5);
   
-      // Sélectionnez le nombre d'éléments en fonction de la difficulté
+
       let selectedData;
       if (difficulty === "Facile") {
         selectedData = shuffledData.slice(0, 6);
@@ -70,12 +70,11 @@ function Player({theme, difficulty}) {
         selectedData = shuffledData.slice(0, 10);
       }
   
-      // Doubler les données sélectionnées (2x6) et mélangez
+
       const mixedCards = [...selectedData, ...selectedData]
         .sort(() => Math.random() - 0.5)
         .map((card, index) => ({ ...card, id: index }));
-  
-        // initialisation à 0, new game
+
       setChoiceOne(null);
       setChoiceTwo(null);
       setCards(mixedCards);
@@ -89,15 +88,12 @@ function Player({theme, difficulty}) {
     mixCards() 
   }, [theme, difficulty])
 
-  // handle a choice
+
   const handleChoice = (card) => {
-    // s'active au clic sur une carte dans le composant singleCards.jsx
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
-    // si on a deja mis une carte dans le state choiceOne, on le met dans choiceTwo
-    // sinon si choiceOne est null, la carte cliquée y est stockée
   }
 
-  // reset choices & incremente turn
+
   const resetTurn = () => {
     setChoiceOne(null)
     setChoiceTwo(null)
@@ -105,12 +101,11 @@ function Player({theme, difficulty}) {
     setDisabled(false)
   }
 
-  //compare 2 selected card
+
   useEffect(() => {
 
     if (choiceOne && choiceTwo){
       setDisabled(true)
-      // dès qu'on a deux cartes, on les compare :
       if(choiceOne.src === choiceTwo.src){
 
         setCards(prevCards => {

@@ -5,11 +5,10 @@ import {AiOutlinePaperClip} from "react-icons/ai"
 function Copyright() {
 const url = "https://memorycardgame.onrender.com"
 const [imagesData, setImagesData] = useState([])
-const [themeData, setThemeData] = useState([]) //fetch all to set the theme list with only theme name info
+const [themeData, setThemeData] = useState([]) 
 const [themeList, setThemeList] = useState([])
 
     useEffect(() => {
-        // fetch full data in images collection
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${url}/images/img`)
@@ -23,7 +22,6 @@ const [themeList, setThemeList] = useState([])
     }, [])
 
 
-    //fetch themes & make a list
     useEffect(() => {
     const fetchThemeData = async () => {
         try {
@@ -40,8 +38,8 @@ const [themeList, setThemeList] = useState([])
 
     useEffect(() => {
     if (themeData) {
-        const names = themeData.map(theme => theme.name); // Extract names from themeData
-        setThemeList(names); // Set themeList to the extracted names
+        const names = themeData.map(theme => theme.name); 
+        setThemeList(names); 
     }
     }, [themeData]);
 
@@ -52,12 +50,12 @@ const normalizedText = (text) => {
     return result
 }
 
-// Regroupez les images par thème en créant un objet, chaque clé = theme name (normalized) : [tableau d'images du thème]
+
 const imagesByTheme = themeList.reduce((acc, theme) => {
   
-    const normalizedTheme = normalizedText(theme); // chaque theme passe dans le normaliseur pour être lower sans espace
+    const normalizedTheme = normalizedText(theme); 
 
-    acc[normalizedTheme] = imagesData.filter((image) => { // acc ajoute normalizedTheme comme nouvelle clé-thème ou y accède si elle existe deja dans l'objet, on filtre dans images data pour trouver toutes les images dont le image.titleFrom === le normalizedTheme. Cela permet de remplir le tableau uniquement d'images du normalizedTheme (clé).
+    acc[normalizedTheme] = imagesData.filter((image) => { 
       const normalizedImageTitle = normalizedText(image.titleFrom);
       return normalizedTheme === normalizedImageTitle;
     });
@@ -105,9 +103,6 @@ const imagesByTheme = themeList.reduce((acc, theme) => {
   return null;
 })}
 
-
-
-           {/*  <p>Si vous êtes l'auteur d'une image utilisée sur ce site et que vous souhaitez que nous retirions votre image ou que nous modifions son crédit, veuillez nous contacter à [votre adresse e-mail de contact].</p> */}
 
             <p>Nous sommes reconnaissants envers tous les artistes et créateurs dont le travail a contribué à l'aspect visuel de notre site. Nous encourageons également nos visiteurs à respecter les droits d'auteur et à utiliser les images de manière responsable.</p>
         </article>

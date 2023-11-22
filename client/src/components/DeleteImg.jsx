@@ -17,7 +17,7 @@ function DeleteImg() {
     const [image, setImage] = useState()
     const url = "https://memorycardgame.onrender.com"
 
-    //fetch User's Theme
+
     useEffect(() => {
       const fetchThemeData = async () => {
         try {
@@ -32,18 +32,18 @@ function DeleteImg() {
 
     useEffect(() => {
       if (themeData) {
-        const names = themeData.map(theme => theme.name); // Extract names from themeData
-        setThemeList(names); // Set themeList to the extracted names
+        const names = themeData.map(theme => theme.name); 
+        setThemeList(names); 
       }
     }, [themeData, auth]);
 
-    //HandleChange FormDelete
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormDeleted({ ...formDelete, [name]: value });
     };
 
-    //HandleSubmit image delete
+
     const handleSubmit = async (e) => {
       e.preventDefault()
       const normalizedTheme = formDelete.titleFrom.toLowerCase().replace(/[\s-]/g, '');
@@ -51,7 +51,7 @@ function DeleteImg() {
       try {
         await axios.delete(`${url}/images/${normalizedTheme}/${formDelete.imageName}/delete`)
         setImageDeleted(true)       
-        setUserImgList((prevImgList) => prevImgList.filter(imageName => imageName !== formDelete.imageName));// regarde la liste precedente, filtre, pour chaque imageName il renvoie imageName tant qu'elle est différente de celle qui vient d'ê delete
+        setUserImgList((prevImgList) => prevImgList.filter(imageName => imageName !== formDelete.imageName));
         updateThemes();
       } catch (error) {
         console.error(error)
@@ -59,15 +59,15 @@ function DeleteImg() {
     }
 
 
-    //fetch user's imgs
+
     const fetchUserImgs = async () => {
       try {
         const normalizedTheme = formDelete.titleFrom.toLowerCase().replace(/[\s-]/g, '');
         
         const response = await axios.get(`${url}/images/img/${auth.username}/${normalizedTheme}`)
-         // Filtrer les images en fonction du thème
+
         const filteredImages = response.data.filter(element => element.titleFrom === normalizedTheme);
-        // Extraire les noms des images filtrées
+
         const namesArray = filteredImages.map(img => img.name);
         setUserImgList(namesArray);
 

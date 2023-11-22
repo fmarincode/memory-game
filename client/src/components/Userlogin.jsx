@@ -37,7 +37,6 @@ function UserLogin() {
     }
     }
     useEffect(() => {
-        // Lors du chargement de la page, vérifiez le stockage local
         const checkLocalStorage = () => {
             const storedToken = window.localStorage.getItem("access_token");
             const storedUserID = window.localStorage.getItem("userID");
@@ -52,7 +51,7 @@ function UserLogin() {
               if (currentDateTime < storedExpirationDate) {
                 setAuth({ userID: storedUserID, role: storedRole, token: storedToken, username: storedUsername, expirationDate: expirationDate });
               } else {
-                // Clear localStorage if the token has expired
+    
                 window.localStorage.removeItem("access_token");
                 window.localStorage.removeItem("userID");
                 window.localStorage.removeItem("role");
