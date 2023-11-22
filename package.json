@@ -12,6 +12,7 @@
     "start-client": "cd client && npm run start"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.16.0",
     "@babel/core": "^7.23.3",
     "@babel/node": "^7.22.19",
     "@babel/preset-env": "^7.23.3",
