@@ -165,7 +165,7 @@ function Player({theme, difficulty}) {
                     ) )}
               </div>
               
-                      <p className='text-xl font-bold text-center md:mt-3 mb-12 md:mb-0'>Nombre de tentatives : {turns}</p>
+                      <p className='text-xl font-bold text-center md:mt-3 mb-24 md:mb-0'>Nombre de tentatives : {turns}</p>
             </>
           )} 
       </section>

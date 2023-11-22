@@ -66,7 +66,7 @@ const imagesByTheme = themeList.reduce((acc, theme) => {
 
   return (
     <section className='flex flex-col bg-[--firstColor] text-[--secondColor] px-20 pt-20 md:min-h-[calc(100vh-40px)]'>
-        <article className='space-y-5 '>
+        <article className='space-y-5 pb-32'>
             <h1 className='text-2xl font-bold'> # Copyright</h1>
             <p>Les images utilisées sur ce site ne sont pas de notre propriété, mais sont la propriété de leurs détenteurs de droits respectifs. Ces images ont été obtenues à partir de diverses sources.</p>
             <p>Ces images sont protégées par des droits d'auteur, et nous respectons pleinement ces droits. Nous croyons en la création et le partage responsables de contenu visuel sur Internet.</p>

@@ -97,7 +97,7 @@ export default function EditBack() {
               name='backImageName'
               type='text'
               placeholder="Le nom de l'image"
-              className="border-2 text-center rounded-md text-black md:ml-5"
+              className="border-2 text-center rounded-md text-white md:ml-5"
           />
           </div>
 
@@ -153,7 +153,7 @@ export default function EditBack() {
                   name='backImageSrc'
                   type='text'
                   placeholder="Le lien de l'image"
-                  className="border-2 rounded-md text-black text-center md:ml-5"
+                  className="border-2 rounded-md text-white text-center md:ml-5"
               />
           </div>
 
@@ -168,7 +168,7 @@ export default function EditBack() {
                   name='backImageAuthor'
                   type='text'
                   placeholder="Le nom de l'auteur"
-                  className="border-2 rounded-md text-black text-center md:ml-5"
+                  className="border-2 rounded-md text-white text-center md:ml-5"
               />
           </div>
 

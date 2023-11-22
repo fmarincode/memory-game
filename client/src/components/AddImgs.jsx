@@ -116,7 +116,7 @@ export default function AddImgs() {
                 type='name'
                 onMouseEnter={(e) => setImageAdded(false)}
                 placeholder="Le nom de l'image"
-                className="border-2 rounded-md text-black text-center md:ml-5"
+                className="border-2 rounded-md text-white text-center md:ml-5"
             />
             </div>
 
@@ -175,7 +175,7 @@ export default function AddImgs() {
                 name='imageSrc'
                 type='text'
                 placeholder="Lien du site de l'image"
-                className="border-2 rounded-md text-black text-center md:ml-5"
+                className="border-2 rounded-md text-white text-center md:ml-5"
                 />
             </div>
 
@@ -191,7 +191,7 @@ export default function AddImgs() {
                 name='imageAuthor'
                 type='text'
                 placeholder="Le nom de l'auteur/ site"
-                className="border-2 rounded-md text-black text-center md:ml-5"
+                className="border-2 rounded-md text-white text-center md:ml-5"
                 />
             </div>
 

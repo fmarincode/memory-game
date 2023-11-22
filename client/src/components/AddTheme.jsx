@@ -101,7 +101,7 @@ const handleBool = () => {
                 name='name'
                 type='name'
                 placeholder="Le nom de l'oeuvre"
-                className={`border-2 rounded-md text-black text-center md:ml-5 ${formik.errors.name && formik.touched.name ? "border-[#bd5c5c]" : ""}`}
+                className={`border-2 rounded-md text-white text-center md:ml-5 ${formik.errors.name && formik.touched.name ? "border-[#bd5c5c]" : ""}`}
                 />
         </div>
         {formik.errors.name && formik.touched.name && ( 
@@ -123,7 +123,7 @@ const handleBool = () => {
                     onBlur={formik.handleBlur}
                     name='media'
                     type='text'
-                    className={`border-2 rounded-md text-center text-black md:ml-5 ${formik.errors.media && formik.touched.media ? "border-[#bd5c5c]" : ""}`}
+                    className={`border-2 rounded-md text-center text-white md:ml-5 ${formik.errors.media && formik.touched.media ? "border-[#bd5c5c]" : ""}`}
                 >
                     <option
                     value=""
