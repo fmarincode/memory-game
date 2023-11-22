@@ -26,7 +26,7 @@ function SingleCards({card, backCard, handleChoice, flipped, disabled, difficult
 
   return (
 
-    <div key={card.id} className={`bg-[#cccccc] border-2 border-white rounded-lg shadow-md cursor-pointer hover:scale-105 hover:shadow-xl w-3/4 flex justify-center 
+    <div key={card.id} className={`bg-[#cccccc] border-2 border-white rounded-lg shadow-md cursor-pointer hover:scale-105 hover:shadow-xl flex justify-center 
     ${difficulty === "Facile" ? 
     "md:w-48" : difficulty === "Moyen" ?
     "md:w-36" : "md:w-36"}`}>

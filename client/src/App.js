@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>  
-        <h1>{message}</h1>
+        
         <ThemeProvider>
           <Navbar />
           <Routes>
