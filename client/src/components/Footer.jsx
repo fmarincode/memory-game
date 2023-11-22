@@ -4,7 +4,7 @@ import {LuMousePointerClick} from 'react-icons/lu';
 
 function Footer() {
   return (
-    <section className='h-10 bg-[--firstColor] text-[--fourthColor] font-bold relative bottom-0 mt-auto text-center border-t-2 border-[--secondColor] flex justify-center'><Link to={"/copyright"} className='flex justify-center space-x-5 items-center cursor-pointer'><p>Images Copyright </p><LuMousePointerClick className='text-xl text-[--secondColor]'/></Link></section>
+    <section className='hidden md:h-10 md:bg-[--firstColor] md:text-[--fourthColor] md:font-bold md:relative md:bottom-0 md:mt-auto md:text-center md:border-t-2 md:border-[--secondColor] md:flex md:justify-center'><Link to={"/copyright"} className='md:flex md:justify-center md:space-x-5 md:items-center md:cursor-pointer'><p>Images Copyright </p><LuMousePointerClick className='md:text-xl md:text-[--secondColor]'/></Link></section>
   )
 }
 

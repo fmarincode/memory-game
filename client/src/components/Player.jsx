@@ -149,7 +149,7 @@ function Player({theme, difficulty}) {
           ) : (
             <>
             
-              <div className={`flex mt-5 md:grid md:gap-5
+              <div className={`flex flex-col w-full justify-center items-center space-y-5 mt-5 md:w-auto md:grid md:space-y-0 md:gap-5
               ${difficulty === "Facile" ? 
               " md:grid-cols-4 md:grid-rows-3" : difficulty === "Moyen" ?
               " md:grid-cols-4 md:grid-rows-4" : " md:grid-cols-5 md:grid-rows-4"}`}>
@@ -165,7 +165,7 @@ function Player({theme, difficulty}) {
                     ) )}
               </div>
               
-                      <p className='text-xl font-bold text-center mt-3'>Nombre de tentatives : {turns}</p>
+                      <p className='text-xl font-bold text-center md:mt-3 mb-24 md:mb-0'>Nombre de tentatives : {turns}</p>
             </>
           )} 
       </section>
