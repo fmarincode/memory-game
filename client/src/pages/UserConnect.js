@@ -6,7 +6,7 @@ function UserConnect() {
 
 
     return (
-        <section className='h-[100vh] flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:min-h-[calc(100vh-40px)]'>
+        <section className='h-[100vh] flex flex-col bg-[--firstColor] text-[--secondColor] px-5 pt-20 md:h-[calc(100vh-40px)]'>
             <article className='text-center flex flex-col justify-center items-center md:w-full'>
     
             <h1 className='text-center font-semibold text-xl mb-5'>S'inscrire / Se connecter</h1>

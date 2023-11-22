@@ -32,10 +32,10 @@ function Dashboard() {
          <h2 className='text-center font-semibold text-lg'> <span className='font-bold text-red-500'>Important</span> : chaque utilisateur ne peut agir que sur ses propres thèmes.</h2><CiWarning className='text-red-500 text-3xl'/>
          </div>
       </header>
-    <article className={`${selectedOption !== null ? "flex flex-col-reverse mt-5 md:flex-row md:justify-around md:w-full md:h-[60vh]" : "text-center flex md:flex-col md:justify-center md:items-center md:w-full"}`}>
+    <article className={`${selectedOption !== null ? "flex flex-col-reverse mt-5 md:flex-row md:justify-around md:w-full md:h-auto" : "text-center box-border flex md:flex-col md:justify-center md:items-center md:w-full md:h-auto md:m-auto"}`}>
 
-    <div className='flex flex-col w-full h-[65vh] justify-start items-center md:flex-row md:flex-wrap md:w-1/2 md:justify-evenly text-lg'>
-        <div className={`border-2 border-white rounded-lg cursor-pointer w-3/4 flex justify-center md:w-48 md:h-48 m-6 ${selectedOption === "addTheme" ? "" : "shadow-4xl-green" }`} onClick={() => handleClick('addTheme')}>
+    <div className='flex flex-col w-full mb-24 text-lg justify-center items-center md:mb-0 md:flex-row md:flex-wrap md:w-[50%] md:justify-evenly '>
+        <div className={`border-2 border-white rounded-lg cursor-pointer  flex justify-center md:w-48 md:h-48 m-6 ${selectedOption === "addTheme" ? "" : "shadow-4xl-green" }`} onClick={() => handleClick('addTheme')}>
              <div className='flex justify-center items-center px-2'>
                 <p className='text-center hover:underline'>Ajouter un thème</p>
              </div>

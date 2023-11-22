@@ -10,16 +10,11 @@ function Navbar() {
   const {theme, setTheme, difficulty, setDifficulty, themeCatalog, updateThemes} = useContext(themeContext);
   const [cookies, setCookies, removeCookie] = useCookies(["access_token"])
   const {auth, setAuth} = useContext(AuthContext)
-  const [displayNav, setDisplayNav] = useState(false)
 
   useEffect(() => {
     updateThemes()
   },[auth])
 
-  const activeRightNav = (e) => {
-    e.preventDefault()
-    setDisplayNav(!displayNav)
-  }
 
   const navigate = useNavigate()
 

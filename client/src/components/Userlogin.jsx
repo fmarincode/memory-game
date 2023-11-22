@@ -107,7 +107,7 @@ function UserLogin() {
                         name='username'
                         type='username'
                         placeholder='Votre pseudo'
-                        className={`border-2 rounded-md text-black ml-5 ${formik.errors.username && formik.touched.username ? "border-[#bd5c5c]" : ""}`}
+                        className={`border-2 rounded-md text-white ml-5 ${formik.errors.username && formik.touched.username ? "border-[#bd5c5c]" : ""}`}
                         />
                     </div>
                     {formik.errors.username && formik.touched.username && ( 
@@ -127,7 +127,7 @@ function UserLogin() {
                             name='password'
                             type='password'
                             placeholder='Votre mot de passe'
-                            className={`border-2 rounded-md text-black ml-5 ${formik.errors.password && formik.touched.password ? "border-[#bd5c5c]" : ""}`}
+                            className={`border-2 rounded-md text-white ml-5 ${formik.errors.password && formik.touched.password ? "border-[#bd5c5c]" : ""}`}
                             />
                         </div>
                     {formik.errors.password && formik.touched.password && ( 
@@ -148,7 +148,7 @@ function UserLogin() {
                             name='confirmPassword'
                             type='password'
                             placeholder='Votre mot de passe'
-                            className={`border-2 rounded-md text-black ml-5 ${formik.errors.confirmPassword && formik.touched.confirmPassword ? "border-[#bd5c5c]" : ""}`}
+                            className={`border-2 rounded-md text-white ml-5 ${formik.errors.confirmPassword && formik.touched.confirmPassword ? "border-[#bd5c5c]" : ""}`}
                             />
                         </div>
                     {formik.errors.confirmPassword && formik.touched.confirmPassword && ( 
