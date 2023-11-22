@@ -92,18 +92,18 @@ function DeleteImg() {
            <article>
       <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
       <h2 className='text-center'>Supprimer une image du thème</h2>
-      <article className=" mt-5 flex justify-center">
+      <article className=" mt-5 flex justify-center flex-col ">
           <h3 className='text-center font-semibold text-lg mb-5'>Choix du thème</h3>
             
-            <form>
+            <form className='py-2 flex flex-col self-center md:block md:self-start'>
             <label htmlFor='titleFrom'
-                className='md:inline-block md:text-right md:w-40' >
+                className='text-center md:inline-block md:text-right md:w-40' >
                     Titre de l'oeuvre :
             </label>
             <select
             id='titleFrom'
             name='titleFrom'
-            className='bg-[--firstColor] w-auto cursor-pointer ml-5 border-2 border-[--secondColor] rounded-md'
+            className='bg-[--firstColor] w-auto text-center cursor-pointer md:ml-5 border-2 border-[--secondColor] rounded-md'
             value={formDelete.titleFrom}
             onChange={handleChange} >
 
@@ -123,10 +123,10 @@ function DeleteImg() {
             </article>
             <form onSubmit={handleSubmit}
             className='flex flex-col justify-center items-start mt-2'>
-              <div className='py-2'>
+              <div className='py-2 flex flex-col self-center md:block md:self-start'>
 
               <label htmlFor='imageName'
-                  className='md:inline-block md:text-right md:w-40' >
+                  className='text-center md:inline-block md:text-right md:w-40' >
                       Choisi ton image :
               </label>
               
@@ -135,7 +135,7 @@ function DeleteImg() {
                   value={formDelete.imageName}
                   onChange={handleChange} 
                   name='imageName'
-                  className='bg-[--firstColor] w-auto cursor-pointer ml-5 border-2 border-[--secondColor] rounded-md'
+                  className='bg-[--firstColor] w-auto text-center cursor-pointer md:ml-5 border-2 border-[--secondColor] rounded-md'
                   >
 
                       <option
@@ -162,7 +162,7 @@ function DeleteImg() {
               <article className='flex flex-col justify-center items-center space-y-5'>
               <p>Aperçu de l'image à supprimer </p>
               {image && (
-                <img src={image.find(img => img.name === formDelete.imageName)?.image} alt={formDelete.imageName} className='md:max-h-40 md:max-w-40'/>
+                <img src={image.find(img => img.name === formDelete.imageName)?.image} alt={formDelete.imageName} className='m-auto pb-1 max-h-40 max-w-40'/>
               )}
             </article>
       </article>

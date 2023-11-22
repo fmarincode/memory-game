@@ -86,9 +86,9 @@ export default function EditBack() {
           <h2 className='mb-3 text-center'>La taille idéale des images est de : 660px * 660px</h2>
         <form onSubmit={handleSubmit}
            className='flex flex-col justify-center items-start'>
-        <div className='py-2'>
+        <div className='py-2 flex flex-col self-center md:block md:self-start'>
           <label htmlFor='backImageName'
-              className='md:inline-block md:text-right md:w-40' >
+              className='text-center md:inline-block md:text-right md:w-40' >
                   Nom de l'image
           </label>
           <input 
@@ -97,19 +97,19 @@ export default function EditBack() {
               name='backImageName'
               type='text'
               placeholder="Le nom de l'image"
-              className="border-2 rounded-md text-black ml-5"
+              className="border-2 text-center rounded-md text-white md:ml-5"
           />
           </div>
 
-          <div className='py-2'>
+          <div className='py-2 flex flex-col self-center md:block md:self-start'>
           <label htmlFor='name'
-              className='md:inline-block md:text-right md:w-40' >
+              className='text-center md:inline-block md:text-right md:w-40' >
                   Titre de l'oeuvre
           </label>
           <select 
           id='name' 
           name='name'
-          className='bg-[--firstColor] w-auto cursor-pointer ml-5 border-2 border-[--secondColor] rounded-md'
+          className='bg-[--firstColor] w-auto text-center cursor-pointer md:ml-5 border-2 border-[--secondColor] rounded-md'
           value={postBackImage.name}
           onChange={handleChange}>
                     <option
@@ -126,10 +126,10 @@ export default function EditBack() {
           
           </div>
 
-        <div className='py-2'>
+        <div className='py-2 flex flex-col self-center md:block md:self-start'>
 
           <label htmlFor='backImage'
-          className='md:inline-block md:text-right md:w-40'>
+          className='text-center md:inline-block md:text-right md:w-40'>
               Votre image
           </label>
           <input 
@@ -138,13 +138,13 @@ export default function EditBack() {
           name="backImage"
           accept='.jpeg, .png, .jpg, .webp'
           onChange={(e) => handleFileUploadBackImg(e)}
-          className="border-2 rounded-md text-white ml-5"
+          className="border-2 rounded-md text-white md:ml-5"
           />
           </div>
 
-          <div className='py-2'>
+          <div className='py-2 flex flex-col self-center md:block md:self-start'>
               <label htmlFor='backImageSrc'
-                  className='md:inline-block md:text-right md:w-40' >
+                  className='text-center md:inline-block md:text-right md:w-40' >
                       Lien URL de l'image
               </label>
               <input 
@@ -153,13 +153,13 @@ export default function EditBack() {
                   name='backImageSrc'
                   type='text'
                   placeholder="Le lien de l'image"
-                  className="border-2 rounded-md text-black ml-5"
+                  className="border-2 rounded-md text-white text-center md:ml-5"
               />
           </div>
 
-          <div className='py-2'>
+          <div className='py-2 flex flex-col self-center md:block md:self-start'>
               <label htmlFor='backImageAuthor'
-                  className='md:inline-block md:text-right md:w-40' >
+                  className='text-center md:inline-block md:text-right md:w-40' >
                       Auteur de l'image
               </label>
               <input 
@@ -168,7 +168,7 @@ export default function EditBack() {
                   name='backImageAuthor'
                   type='text'
                   placeholder="Le nom de l'auteur"
-                  className="border-2 rounded-md text-black ml-5"
+                  className="border-2 rounded-md text-white text-center md:ml-5"
               />
           </div>
 
@@ -180,7 +180,7 @@ export default function EditBack() {
           </form>
           </div>
           <h2>Aperçu de l'image choisie</h2>
-        {postBackImage.backImage && <img src={postBackImage.backImage} alt="image uploaded" className='md:max-h-40 md:max-w-40'/>}
+        {postBackImage.backImage && <img src={postBackImage.backImage} alt="image uploaded" className='m-auto pb-1 max-h-40 max-w-40'/>}
         </article>
     
   )

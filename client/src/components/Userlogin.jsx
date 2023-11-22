@@ -94,11 +94,11 @@ function UserLogin() {
                 <form
                 onSubmit={formik.handleSubmit}
                 className='flex flex-col justify-center items-start'>
-                    <div className='py-2'>
+                    <div className='py-2 flex flex-col self-center md:block md:self-start'>
         
                         <label htmlFor='username'
                         className='md:inline-block md:text-right md:w-28' >
-                            Pseudo
+                            Pseudo 
                         </label>
                         <input 
                         value={formik.values.username}
@@ -115,7 +115,7 @@ function UserLogin() {
                     className='text-[#bd5c5c] self-center'>
                         {formik.errors.username}
                     </p>)}
-                        <div className='py-2'>
+                        <div className='py-2 flex flex-col self-center md:block md:self-start'>
                             <label htmlFor='password'
                             className='md:inline-block md:text-right md:w-28' >
                                 Mot de passe
@@ -136,7 +136,7 @@ function UserLogin() {
                         {formik.errors.password}
                     </p>)}
         
-                        <div className='py-2'>
+                        <div className='py-2 flex flex-col self-center md:block md:self-start'>
                             <label htmlFor='confirmPassword'
                             className='md:inline-block md:text-right md:w-28'>
                                 Confirmez le mot de passe

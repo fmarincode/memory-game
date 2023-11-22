@@ -87,10 +87,10 @@ const handleBool = () => {
             <form
             onSubmit={formik.handleSubmit}
             className='flex flex-col justify-center items-start'>
-            <div className='py-2'>
+            <div className='py-2 flex flex-col self-center md:block md:self-start'>
 
                 <label htmlFor='name'
-                className='md:inline-block md:text-right md:w-40'>
+                className='text-center md:inline-block md:text-right md:w-40'>
                     Nom de l'oeuvre
                 </label>
                 <input 
@@ -101,7 +101,7 @@ const handleBool = () => {
                 name='name'
                 type='name'
                 placeholder="Le nom de l'oeuvre"
-                className={`border-2 rounded-md text-black ml-5 ${formik.errors.name && formik.touched.name ? "border-[#bd5c5c]" : ""}`}
+                className={`border-2 rounded-md text-white text-center md:ml-5 ${formik.errors.name && formik.touched.name ? "border-[#bd5c5c]" : ""}`}
                 />
         </div>
         {formik.errors.name && formik.touched.name && ( 
@@ -112,9 +112,9 @@ const handleBool = () => {
         }
         
 
-        <div className='py-2'>
+        <div className='py-2 flex flex-col self-center md:block md:self-start'>
                 <label htmlFor='media'
-                    className='md:inline-block md:text-right md:w-40' >
+                    className='text-center md:inline-block md:text-right md:w-40' >
                         Type d'oeuvre
                 </label>
                 <select 
@@ -123,7 +123,7 @@ const handleBool = () => {
                     onBlur={formik.handleBlur}
                     name='media'
                     type='text'
-                    className={`border-2 rounded-md text-black ml-5 ${formik.errors.media && formik.touched.media ? "border-[#bd5c5c]" : ""}`}
+                    className={`border-2 rounded-md text-center text-white md:ml-5 ${formik.errors.media && formik.touched.media ? "border-[#bd5c5c]" : ""}`}
                 >
                     <option
                     value=""

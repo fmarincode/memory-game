@@ -60,20 +60,20 @@ function DeleteTheme() {
     <article >
         <div className='border-2 border-[#ccc1c1] p-5 rounded-lg'>
             <h2 className='text-center'>Supprimer un thème</h2>
-            <p>Toutes les données du thèmes, dont les images, seront également supprimées.</p>
+            <p className='text-center'>Toutes les données du thèmes, dont les images, seront également supprimées.</p>
                 <form 
                 onSubmit={handleSubmit}
                 className='flex flex-col justify-center items-center space-y-5 mt-2'>
-                    <div className='py-2'>
+                    <div className='py-2 flex flex-col self-center md:block md:self-start'>
 
                         <label htmlFor='titleFrom'
-                            className='md:inline-block md:text-right md:w-40' >
+                            className='text-center md:inline-block md:text-right md:w-40' >
                                 Thème à supprimer :
                         </label>
                             <select
                             id='titleFrom'
                             name='titleFrom'
-                            className='bg-[--firstColor] w-auto cursor-pointer ml-5 border-2 border-[--secondColor] rounded-md'
+                            className='bg-[--firstColor] w-auto text-center cursor-pointer md:ml-5 border-2 border-[--secondColor] rounded-md'
                             value={themeToDelete}
                             onChange={(e) => setThemeToDelete(e.target.value)} >
 
